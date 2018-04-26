@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import Dashboard from './Dashboard';
 import ProductBrowser from './ProductBrowser';
+import Sidebar from './Sidebar'
 
 
 
 const App = () => (
   <div>
+    <Sidebar />
     <Dashboard />
-    <ProductBrowser />
-  </div>
+    <ProductsSearchList />
+    <SingleProductSite />
+ </div>
 )
 
 
