@@ -1,10 +1,10 @@
 import React from 'react'
 
 
-const ProductBrowser = (props) => (
+const ProductsSearchList = (props) => (
 
     <div> Here will be Product browser </div>
 
 )
 
-export default ProductBrowser 
+export default ProductsSearchList

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Dashboard from './Dashboard';
-import ProductBrowser from './ProductBrowser';
+import ProductsSearchList from './ProductsSearchList';
 import Sidebar from './Sidebar'
+import SingleProductSite from './SingleProductSite';
+
 
 
 
