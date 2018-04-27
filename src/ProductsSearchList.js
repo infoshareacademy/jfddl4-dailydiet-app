@@ -1,10 +1,13 @@
 import React from 'react'
 
 
-const ProductsSearchList = (props) => (
+class ProductsSearchList extends React.Component {
+    render() {
+        return (
+            <div>ytrew</div>
+        )
+    }
 
-    <div> Here will be Product browser </div>
-
-)
+}
 
 export default ProductsSearchList

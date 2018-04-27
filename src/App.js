@@ -7,14 +7,19 @@ import SingleProductSite from './SingleProductSite';
 
 
 
-const App = () => (
-  <div>
-    <Sidebar />
-    <Dashboard />
-    <ProductsSearchList />
-    <SingleProductSite />
- </div>
-)
+class App {
+  render() {
+    return (
+      <div>
+        <Sidebar />
+
+        <Dashboard />
+        <ProductsSearchList />
+        <SingleProductSite />
+      </div>
+    )
+  }
+}
 
 
 export default App;
