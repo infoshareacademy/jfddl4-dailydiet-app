@@ -12,7 +12,7 @@ class App extends React.Component {
   state = {
     isOpen: false
   }
-
+  
   drawerStateHandler = () => this.setState({
     isOpen: !this.state.isOpen
   })
@@ -24,15 +24,15 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <AppBar
-          title='Daily Diet App'
-          onLeftIconButtonClick={this.drawerStateHandler}
-        />
+        
 
         <Router>
 
           <div>
-
+            <AppBar
+              title='Daily Diet App'
+              onLeftIconButtonClick={this.drawerStateHandler}
+            />
             <Sidebar
               open={this.state.isOpen}
               handler={this.drawerStateHandler}
