@@ -20,9 +20,7 @@ const data = [
     }
 ]
 const styles = {
-    textAlign: 'center',
-    justifyContent: 'center'
-
+    margin: 'auto'
 }
 
 
@@ -31,9 +29,9 @@ const pie_cells = data.map((entry, index) => {
 });
 
 const Chart1 = () => (
-    <div style={styles}>
-        <h2>Macronutrients in today's meals</h2>
-        <PieChart width={500} height={500}>
+    <div style={styles} >
+        <h3>Division of micronutrients</h3>
+        <PieChart  width={200} height={200} style={styles}>
             <Pie
                 data={data}
                 dataKey="value"
