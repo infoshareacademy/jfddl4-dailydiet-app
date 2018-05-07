@@ -1,6 +1,6 @@
 import React from 'react'
 import {Grid, Row, Col} from 'react-flexbox-grid'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+
 import PieChart from './Charts/PieChart'
 import Chart2 from './Charts/Chart2'
 import Paper from 'material-ui/Paper'
@@ -13,7 +13,7 @@ const styles = {
 
 const Dashboard = () => (
     <Grid fluid>
-        <MuiThemeProvider>
+
             <Row>
                 <Paper style={styles}>
                     <h2>Micronutrients in today's meals</h2>
@@ -27,7 +27,7 @@ const Dashboard = () => (
                     </Col>
                 </Row>
             </Row>
-        </MuiThemeProvider>
+
     </Grid>
 
 )
