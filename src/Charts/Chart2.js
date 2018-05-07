@@ -7,11 +7,11 @@ const styles = {
 
 const data = [
     {name: '00:00-9:00', calories: 150, amt: 2400},
-    {name: '9:00-12:00', calories: 300, amt: 2210},
-    {name: '12:00-15:00', calories: 350, amt: 2290},
-    {name: '15:00-18:00', calories: 500, amt: 2000},
-    {name: '18:00-21:00', calories: 480, amt: 2181},
-    {name: '21:00-24:00', calories: 300, amt: 2500},
+    {name: '9:00-12:00', calories: 450, amt: 2210},
+    {name: '12:00-15:00', calories: 800, amt: 2290},
+    {name: '15:00-18:00', calories: 1300, amt: 2000},
+    {name: '18:00-21:00', calories: 1780, amt: 2181},
+    {name: '21:00-24:00', calories: 2080, amt: 2500},
 ]
 
 const Chart2 = () => (
