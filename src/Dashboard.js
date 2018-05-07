@@ -13,16 +13,34 @@ const styles = {
 
 class Dashboard extends React.Component {
 
-    componentDidMount(){
+    state = {
+        LineChartPic: {
+            width: 500,
+            height: 300
+        }
+    }
+
+    componentDidMount() {
+        this.onResize()
         window.addEventListener('resize', this.onResize)
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         window.removeEventListener('resize', this.onResize)
     }
 
+
+
     onResize = () => {
-        console.log(window.innerWidth)
+        if (window.innerWidth < 540) {
+            this.setState({
+                LineChartPic: {
+                    width: 300,
+                    height: 200
+                }
+
+            })
+        }
     }
 
     render() {
@@ -38,7 +56,8 @@ class Dashboard extends React.Component {
                             <PieChart center/>
                         </Col>
                         <Col md center={"true"}>
-                            <LineChartPic/>
+                            <LineChartPic widthOfLineChart={this.state.LineChartPic.width}
+                                          heightOfLineChart={this.state.LineChartPic.height}/>
                         </Col>
                     </Row>
                 </Row>

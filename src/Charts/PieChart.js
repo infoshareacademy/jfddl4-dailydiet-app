@@ -5,17 +5,17 @@ import {PieChart, Pie, Tooltip, Cell} from 'recharts'
 const data = [
     {
         value: 30,
-        name: 'Weglowodany',
+        name: 'Carbohydrates',
         color: '#35b22a'
     },
     {
         value: 15,
-        name: 'Bialka',
+        name: 'Proteins',
         color: '#352ab2'
     },
     {
         value: 25,
-        name: 'Tluszcze',
+        name: 'Fat',
         color: '#c70d33'
     }
 ]
