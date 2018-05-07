@@ -14,11 +14,11 @@ const data = [
     {name: '21:00-24:00', calories: 2080, amt: 2500},
 ]
 
-const Chart2 = () => (
+const LineChartPic = () => (
     <div>
         <h3>Calories consumed today</h3>
-        <LineChart width={500} height={250} data={data}  style={styles}
-                   margin={{ top: 5, right: 30, left: 20, bottom: 5 }} >
+        <LineChart width={500} height={300} data={data}  style={styles}
+                   margin={{ top: 30, right: 30, left: 20, bottom: 5 }} >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" />
             <YAxis />
@@ -29,4 +29,4 @@ const Chart2 = () => (
     </div>
 )
 
-export default Chart2
+export default LineChartPic

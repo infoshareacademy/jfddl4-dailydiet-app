@@ -31,7 +31,7 @@ const pie_cells = data.map((entry, index) => {
 const Chart1 = () => (
     <div style={styles} >
         <h3>Division of micronutrients</h3>
-        <PieChart  width={200} height={200} style={styles}>
+        <PieChart  width={300} height={300} style={styles}>
             <Pie
                 data={data}
                 dataKey="value"
