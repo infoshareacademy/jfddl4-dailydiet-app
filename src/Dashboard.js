@@ -2,7 +2,7 @@ import React from 'react'
 import {Grid, Row, Col} from 'react-flexbox-grid'
 
 import PieChart from './Charts/PieChart'
-import LineChartPic from './Charts/Chart2'
+import LineChartPic from './Charts/LineChartPic'
 import Paper from 'material-ui/Paper'
 
 const styles = {
