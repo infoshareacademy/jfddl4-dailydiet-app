@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import AppBar from 'material-ui/AppBar'
 
@@ -20,6 +20,7 @@ class App extends React.Component {
   drawerClose = () => this.setState({
     isOpen: false
   })
+
 
   render() {
     return (
@@ -50,7 +51,7 @@ class App extends React.Component {
             <Route
               path={'/product/:product'}
               render={
-                () => (<SingleProductSite 
+                () => (<SingleProductSite
                   product='Potato' />)
               }
             />
