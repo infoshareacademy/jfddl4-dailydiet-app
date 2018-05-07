@@ -7,15 +7,15 @@ import SingleProductSite from './SingleProductSite';
 
 
 
-class App {
+class App extends React.Component {
   render() {
     return (
       <div>
-        <Sidebar />
-
-        <Dashboard />
+   
+     
         <ProductsSearchList />
-        <SingleProductSite />
+        
+
       </div>
     )
   }
