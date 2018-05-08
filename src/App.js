@@ -6,11 +6,15 @@ import Dashboard from './Dashboard'
 import ProductsSearchList from './ProductsSearchList'
 import Sidebar from './Sidebar'
 import SingleProductSite from './SingleProductSite'
+import {Products} from "./products";
+
 
 class App extends React.Component {
 
   state = {
-    isOpen: false
+    isOpen: false,
+      products: Products
+
   }
 
   drawerStateHandler = () => this.setState({
@@ -23,6 +27,7 @@ class App extends React.Component {
 
 
   render() {
+console.log(this.state.products)
     return (
       <div>
         <AppBar
