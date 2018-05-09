@@ -6,7 +6,7 @@ import Dashboard from './Dashboard'
 import ProductsSearchList from './ProductsSearchList'
 import Sidebar from './Sidebar'
 import SingleProductSite from './SingleProductSite'
-import {Products} from "./products";
+import Products from "./FinalProductPage";
 
 
 class App extends React.Component {
@@ -27,7 +27,7 @@ class App extends React.Component {
 
 
   render() {
-console.log(this.state.products)
+
     return (
       <div>
         <AppBar
@@ -64,6 +64,7 @@ console.log(this.state.products)
           </div>
 
         </Router>
+          <Products/>
 
       </div>
     )
