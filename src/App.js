@@ -1,11 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import AppBar from 'material-ui/AppBar'
+import { orange500 } from 'material-ui/styles/colors'
 
 import Dashboard from './Dashboard'
 import ProductsSearchList from './ProductsSearchList'
 import Sidebar from './Sidebar'
 import SingleProductSite from './SingleProductSite'
+import Favorites from './Favorites'
 
 class App extends React.Component {
 
@@ -22,12 +24,16 @@ class App extends React.Component {
   })
 
 
+
   render() {
     return (
       <div>
         <AppBar
           title='Daily Diet App'
           onLeftIconButtonClick={this.drawerStateHandler}
+          style={{
+            backgroundColor: orange500,
+          }}
         />
 
         <Router>
@@ -55,7 +61,13 @@ class App extends React.Component {
                   product='Potato' />)
               }
             />
-
+            <Route
+              path={'/favorites'}
+              render={
+                <Favorites
+                  favoritesList={this.state.favorites || {}}
+                />}
+            />
           </div>
 
         </Router>
