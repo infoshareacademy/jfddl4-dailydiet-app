@@ -10,6 +10,7 @@ const styles = {
 
 const Container = (props) => (
     <Paper style={styles.paper}>
+        <h2>{props.title}</h2>
         {props.children}
     </Paper>
 )
