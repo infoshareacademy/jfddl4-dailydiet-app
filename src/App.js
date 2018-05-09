@@ -60,11 +60,17 @@ class App extends React.Component {
                   product='Potato' />)
               }
             />
+              <Route //TEMORARY
+              path={'/product/all'}
+              render={
+                  () => (<Products/>)
+              }
+          />
 
           </div>
 
         </Router>
-          <Products/>
+
 
       </div>
     )

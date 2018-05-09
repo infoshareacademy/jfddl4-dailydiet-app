@@ -1,7 +1,11 @@
 import React from 'react'
-const SingleProductSite = () => (
 
-    <div> Here will be final product site</div>
+
+const SingleProductSite = (props) => (
+
+    <div>
+
+    </div>
 )
 
 export default SingleProductSite

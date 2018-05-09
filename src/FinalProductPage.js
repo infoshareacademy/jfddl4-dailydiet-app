@@ -1,9 +1,14 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
+import {List, ListItem} from 'material-ui/List'
+import Avatar from 'material-ui/Avatar'
+import IconButton from 'material-ui/IconButton'
+import StarBorder from 'material-ui/svg-icons/toggle/star-border'
+
 
 
 class Products extends Component {
     state = {
-        products: null
+        products: null,
     }
 
 
@@ -17,12 +22,16 @@ class Products extends Component {
                         .map(el => ({
                             key: el[0],
                             value: el[1].name
+                            // pic: el[2].picture //JAK ZROBIĆ ZEBY DZIAŁAŁO?? fixme
                         }))
                 )
-                this.setState({ products: dataInArray })
+                this.setState({products: dataInArray})
                 console.log(dataInArray)
             })
     }
+
+    redirect //fixme
+
 
     render() {
         return (
@@ -31,16 +40,21 @@ class Products extends Component {
                     !this.state.products ?
                         'loading...'
                         :
-                        <ul>
+                        <List>
                             {this.state.products.map(
                                 aProduct => (
-                                    <li key={aProduct.key}
+                                    <ListItem key={aProduct.key}
+                                              primaryText={aProduct.value}
+                                              insetChildren={true}
+                                              leftAvatar={<Avatar src={aProduct.pic}/>} //fixme
+                                              rightAvatar={<IconButton><StarBorder color="lightBlue"/></IconButton>}
+                                              onClick={this.redirect} //fixme
                                     >
-                                        {aProduct.value}
-                                    </li>)
+                                    </ListItem>
+                                )
                             )
                             }
-                        </ul>
+                        </List>
                 }
             </div>
 
