@@ -84,93 +84,93 @@ export const products =
             },
             {
                 "category": "drinks",
-                "name": 'cola',
+                "name": "cola",
                 "carbohydrates": 10.6,
                 "kcal": 42,
                 "fat": 0,
                 "protein": 0.1,
-                "picture": 'https://images.freeimages.com/images/large-previews/470/1-bottle-of-1472992.jpg'
+                "picture": "https://images.freeimages.com/images/large-previews/470/1-bottle-of-1472992.jpg"
             },
             {
-                "category": 'drinks',
-                "name": 'apple juice',
+                "category": "drinks",
+                "name": "apple juice",
                 "carbohydrates": 11,
                 "kcal": 45,
                 "fat": 0.1,
                 "protein": 0.1,
-                "picture": 'https://images.freeimages.com/images/large-previews/404/gingerlicious-1571480.jpg'
+                "picture": "https://images.freeimages.com/images/large-previews/404/gingerlicious-1571480.jpg"
             },
             {
-                "category": 'drinks',
-                "name": 'tea',
+                "category": "drinks",
+                "name": "tea",
                 "carbohydrates": 0.2,
                 "kcal": 1,
                 "fat": 0,
                 "protein": 0.1,
-                "picture": 'https://images.freeimages.com/images/large-previews/ad7/tea-1481514.jpg'
+                "picture": "https://images.freeimages.com/images/large-previews/ad7/tea-1481514.jpg"
             },
             {
-                "category": 'sweets',
-                "name": 'chocolate',
+                "category": "sweets",
+                "name": "chocolate",
                 "carbohydrates": 61,
                 "kcal": 545,
                 "fat": 31,
                 "protein": 4.9,
-                "picture": 'https://images.freeimages.com/images/large-previews/aa7/box-shaped-truffles-1329443.jpg'
+                "picture": "https://images.freeimages.com/images/large-previews/aa7/box-shaped-truffles-1329443.jpg"
             },
             {
-                "category": 'sweets',
-                "name": 'cookies',
+                "category": "sweets",
+                "name": "cookies",
                 "carbohydrates": 64,
                 "kcal": 507,
                 "fat": 25,
                 "protein": 6,
-                "picture": 'https://images.freeimages.com/images/large-previews/a09/chocolate-chip-cookies-22-1327967.jpg'
+                "picture": "https://images.freeimages.com/images/large-previews/a09/chocolate-chip-cookies-22-1327967.jpg"
             },
             {
-                "category": 'sweets',
-                "name": 'ice cream',
+                "category": "sweets",
+                "name": "ice cream",
                 "carbohydrates": 24,
                 "kcal": 207,
                 "fat": 11,
                 "protein": 3.5,
-                "picture": 'https://images.freeimages.com/images/large-previews/962/we-all-scream-for-ice-cream-1-1552331.jpg'
+                "picture": "https://images.freeimages.com/images/large-previews/962/we-all-scream-for-ice-cream-1-1552331.jpg"
             },
             {
-                "category": 'dairy',
-                "name": 'milk',
+                "category": "dairy",
+                "name": "milk",
                 "carbohydrates": 5,
                 "kcal": 42,
                 "fat": 1,
                 "protein": 3.5,
-                "picture": 'https://images.freeimages.com/images/large-previews/d99/milk-1328895.jpg'
+                "picture": "https://images.freeimages.com/images/large-previews/d99/milk-1328895.jpg"
             },
             {
-                "category": 'dairy',
-                "name": 'cheese',
+                "category": "dairy",
+                "name": "cheese",
                 "carbohydrates": 1.3,
                 "kcal": 402,
                 "fat": 33,
                 "protein": 25,
-                "picture": 'https://images.freeimages.com/images/large-previews/d4e/cheese-wedge-1329693.jpg'
+                "picture": "https://images.freeimages.com/images/large-previews/d4e/cheese-wedge-1329693.jpg"
             },
             {
-                "category": 'dairy',
-                "name": 'yoghurt',
+                "category": "dairy",
+                "name": "yoghurt",
                 "carbohydrates": 3.6,
                 "kcal": 58,
                 "fat": 0.4,
                 "protein": 10,
-                "picture": 'https://images.freeimages.com/images/large-previews/6d4/yogurt-healthy-snack-1513988.jpg'
+                "picture": "https://images.freeimages.com/images/large-previews/6d4/yogurt-healthy-snack-1513988.jpg"
             },
             {
-                "category": 'other',
-                "name": 'bread',
+                "category": "other",
+                "name": "bread",
                 "carbohydrates": 49,
                 "kcal": 264,
                 "fat": 3.2,
                 "protein": 9,
-                "picture": 'https://images.freeimages.com/images/large-previews/1c6/spelt-bread-2-1326657.jpg'
+                "picture": "https://images.freeimages.com/images/large-previews/1c6/spelt-bread-2-1326657.jpg"
             },
             {
                 "category": "other",
@@ -182,7 +182,7 @@ export const products =
                 "picture": "https://images.freeimages.com/images/large-previews/723/tomates-soup-1329671.jpg"
             },
             {
-                "category": "other\",
+                "category": "other",
                 "name": "lasagne",
                 "carbohydrates": 15,
                 "kcal": 134,
