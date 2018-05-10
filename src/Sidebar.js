@@ -46,6 +46,15 @@ const Sidebar = (props) => (
               TEMPORARY all
           </MenuItem>
       </Link>
+      <Link
+          to={'/product/one'}
+      >
+          <MenuItem
+              onClick={props.close}
+          >
+              TEMPORARY one
+          </MenuItem>
+      </Link>
   </Drawer>
 
 )

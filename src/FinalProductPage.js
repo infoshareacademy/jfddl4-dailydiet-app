@@ -26,7 +26,6 @@ class Products extends Component {
                             value: el[1].name,
                             pic: el[1].picture
                         }))
-
                 )
 
                 this.setState({
