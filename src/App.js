@@ -7,7 +7,7 @@ import Dashboard from './Dashboard'
 import ProductsSearchList from './ProductsSearchList'
 import Sidebar from './Sidebar'
 import SingleProductSite from './SingleProductSite'
-import Favorites from './Favorites'
+import FavoriteProducts from './FavoriteProducts'
 
 class App extends React.Component {
 
@@ -63,10 +63,7 @@ class App extends React.Component {
             />
             <Route
               path={'/favorites'}
-              render={
-                <Favorites
-                  favoritesList={this.state.favorites || {}}
-                />}
+              component={FavoriteProducts}
             />
           </div>
 
