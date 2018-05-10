@@ -1,9 +1,18 @@
 import React from 'react'
 
-class Favorites extends React.Component {
-  state = {
-    favorites: null || 
-  }
+const PRODUCTS_RESOURCE_PATH = `https://dailydiet-app.firebaseio.com/products`
+
+const Favorites = (props) => {
+  const url = `${PRODUCTS_RESOURCE_PATH}/${props.key}/favorite/.json`
+
+  const isFavorite = fetch(url)
+    .then(r => r.json())
+    .then(data => {
+      this.setState({
+        isFavorite: data
+      })
+    })
+  
 
 }
 
