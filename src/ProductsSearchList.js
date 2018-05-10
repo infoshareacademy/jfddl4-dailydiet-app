@@ -23,14 +23,15 @@ class ProductsSearchList extends React.Component {
 
     state = {
         slider: Math.pow(10, 4),
-        products: data,
-        lookingForProducts: null,
-        valueSelectedRadioButton: 'Category'
+        products: [],
+        lookingForProducts: [],
+        valueSelectedRadioButton: 'Category',
+        textField: ''
 
     }
 
 
-    componentDidMount() {
+    componentDidMount() { // pobranie danych i zamiana na tablice obiektów
 
         fetch('https://dailydiet-app.firebaseio.com/products/.json')
             .then((response) => response.json())
@@ -47,36 +48,33 @@ class ProductsSearchList extends React.Component {
             })
     }
 
-    // this function maps an object into array of objects
-    // and puts object keys into key property of array items
-    // mapObjectToArray = (obj) => (
-    //     Object.entries(obj || {})
-    //         .map(([key, value]) => (
-    //             typeof value === 'object' ?
-    //                 { ...value, key }
-    //                 :
-    //                 { key, value }
-    //         ))
-    // )
-
-
-
 
     handleSlider = (event, value) => {
         this.setState({ slider: transform(value) });
     }
+
+    // onChange = (stateOfRadioButtonGoup) => {
+
+
+        
+    // const lokingForProducts = this.state.products.map((el,i,arr) =>
+    //         {
+    //             if(stateOfRadioButtonGoup === el.value.category) return 
+    //         }
+    // )
+    // }
 
 
     render() {
         return (
             <Container>
                 <Container>
-
+{/*(e, v) => this.setState({ valueSelectedRadioButton: v })*/}
                     <h2>Search by</h2>
                     <RadioButtonGroup
                         name="shipSpeed"
                         defaultSelected="Name"
-                        onChange={(e, v) => this.setState({ valueSelectedRadioButton: v })}
+                        onChange={() => this.searchProductBy(this.state.valueSelectedRadioButton)}
                     >
                         <RadioButton
                             value="Category"
@@ -95,7 +93,7 @@ class ProductsSearchList extends React.Component {
                     <TextField
                         placeholder={'Type product which you want find'}
                         fullWidth={true}
-                        onChange={() => { /* setState*/
+                        onChange={(target, value) => { this.setState({textField: value })
 
                         }}
                     />
@@ -124,43 +122,17 @@ class ProductsSearchList extends React.Component {
                         <span>{this.state.slider}</span>
                     </p>
                 </Container>
-                <RaisedButton
-                    primary={true}
-
-                    label={'Chesee'}
-                />
-                <RaisedButton
-                    primary={true}
-
-                    label={'Meat'}
-                />
-                <RaisedButton
-                    primary={true}
-
-                    label={'Vegetables'}
-                />
-                <RaisedButton
-                    primary={true}
-
-                    label={'Fruits'}
-                />
-                <RaisedButton
-                    primary={true}
-
-                    label={'Pasta, rise etc'}
-                />
-                <RaisedButton
-                    primary={true}
-
-                    label={'Beverage'}
-                />
+                
                 <Container title={'Slider dziala'}>
-                    this.state.tasks.map(
-                task => (
-            <div
-                        key={task.key}
-                        onClick={}
-                    > {task.value}</div> ))
+                    {this.state.lookingForProducts.map(
+                        task => (
+                            <div>
+                                // key={task.key}
+                                // onClick={() => { }}
+                             
+                            {task.value.name}
+                            
+                            </div>))}
 
                 </Container>
 
