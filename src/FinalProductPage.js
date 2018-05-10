@@ -5,7 +5,7 @@ import IconButton from 'material-ui/IconButton'
 import StarBorder from 'material-ui/svg-icons/toggle/star-border'
 import ReactPaginate from 'react-paginate';
 
-const ITEMS_PER_PAGE = 5
+const ITEMS_PER_PAGE = 10
 
 class Products extends Component {
     state = {
