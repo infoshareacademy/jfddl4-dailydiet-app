@@ -1,8 +1,8 @@
 import React from 'react'
+import {Grid, Row, Col} from 'react-flexbox-grid'
 
 
-const exampleProduct = [
-    {
+const exampleProduct = {
         "-LC45BiLSirlJPRLEN2r":
             {
                 "carbohydrates": 15,
@@ -14,21 +14,41 @@ const exampleProduct = [
                 "protein": 7
             }
     }
-]
 
-
-   const arrayFromProduct = Object.entries(exampleProduct)
+   const arrayFromProducts = Object.entries(exampleProduct)
         .map(el => ({
             key: el[0],
             value: el[1].name,
-            pic: el[1].picture
+            pic: el[1].picture,
+            fat: el[1].fat,
+            kcal: el[1].kcal,
+            protein: el[1].protein,
+            category: el[1].category,
+            carbohydrates: el[1].carbohydrates
+
         }))
 
 
 const SingleProductSite = () => (
 
     <div>
-        {arrayFromProduct.name}
+        <h1 style={{textAlign: 'center', color: '#E65100'}}>
+            {arrayFromProducts[0].value}
+            </h1>
+        <Grid fluid>
+            <Row>
+                <Col xs={12} md={6}>
+                    <h2>category: {arrayFromProducts[0].category}</h2>
+                    <p>kcal: {arrayFromProducts[0].kcal}</p>
+                    <p>fat: {arrayFromProducts[0].fat}</p>
+                    <p>carbohydrates: {arrayFromProducts[0].carbohydrates}</p>
+                    <p>protein: {arrayFromProducts[0].protein}</p>
+                </Col>
+                <Col xs={12} md={6}>
+                    <img src={arrayFromProducts[0].pic} alt={arrayFromProducts[0].value} width={'150vw'}/>
+                </Col>
+            </Row>
+        </Grid>
     </div>
 )
 
