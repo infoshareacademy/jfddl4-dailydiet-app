@@ -37,6 +37,7 @@ const SingleProductSite = () => (
             {arrayFromProducts[0].value}
         </h1>
         <Grid fluid>
+
             <Row center="xs" middle="xs">
                 <Col xs={12} md={6}>
                     <h2>category: {arrayFromProducts[0].category}</h2>
@@ -50,8 +51,8 @@ const SingleProductSite = () => (
                     <img src={arrayFromProducts[0].pic} alt={arrayFromProducts[0].value} width={'150vw'}/>
                 </Col>
             </Row>
-            <Row center="xs" middle="xs">
 
+            <Row center="xs" middle="xs">
                 <Col xs={12} md={6}>
                     <h1>CHART</h1>
                 </Col>
@@ -59,7 +60,7 @@ const SingleProductSite = () => (
                     <RaisedButton
                         name={'addAProductToFavorites'}
                         backgroundColor={'#E65100'}
-                        label={<span style={{ color: 'white' }}>"Add to favorites"</span>}
+                        label={<span style={{color: 'white'}}>"Add to favorites"</span>}
                     />
                 </Col>
             </Row>
