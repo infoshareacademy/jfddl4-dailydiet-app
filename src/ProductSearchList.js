@@ -2,15 +2,28 @@ import React from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 import Container from './UI/Container'
+import Slider from 'material-ui/Slider';
+import Toggle from 'material-ui/Toggle';
+
 
 
 
 class ProductsSearchList extends React.Component {
 
+
+
+    handleSlider = (event, value) => {
+        this.setState({ slider: value });
+    };
+
+
+
+
     state = {
         lookingProduct: '', // część tekstu po którym jest wyszukiwany produkt
         productsList: [], // kompletna baza danych 
-        filtredListOfProduct: []
+        filtredListOfProduct: [],
+        slider: 500,
     }
 
 
@@ -63,7 +76,7 @@ class ProductsSearchList extends React.Component {
                 />
 
                 {
-                    this.state.filtredListOfProduct.map((el)=>(
+                    this.state.filtredListOfProduct.map((el) => (
 
                         <div key={el.key}> {el.value.name} </div>
 
@@ -72,6 +85,27 @@ class ProductsSearchList extends React.Component {
 
                 }
 
+                <Container>
+                    <div>
+                        <Toggle
+                            label="Simple"
+                            
+                        />
+                        <Slider
+                            min={0}
+                            max={1000}
+                            step={1}
+                            value={this.state.slider}
+                            onChange={this.handleSlider}
+                            onClick={() => alert('works')}
+                        />
+                        <p>
+                            <span>{'Value of calories: '}</span>
+                            <span>{this.state.slider}</span>
+                        </p>
+                    </div>
+
+                </Container>
             </Container>
         )
     }
