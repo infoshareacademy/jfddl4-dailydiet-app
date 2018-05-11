@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import Dashboard from './Dashboard';
-import ProductsSearchList from './ProductsSearchList';
+import React, { Component } from 'react'
+import Dashboard from './Dashboard'
 import Sidebar from './Sidebar'
-import SingleProductSite from './SingleProductSite';
-
+import SingleProductSite from './SingleProductSite'
+import ProductsSearchList from './ProductSearchList'
 
 
 
