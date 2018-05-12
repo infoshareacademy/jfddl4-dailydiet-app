@@ -4,7 +4,10 @@ import RaisedButton from 'material-ui/RaisedButton'
 import {Table, TableBody, TableRow, TableRowColumn} from 'material-ui/Table';
 import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts'
 
-
+const fontSizes = {
+    fontSize: '24px',
+    color: 'darkslategray'
+}
 
 const products = {
     "-LC45BiLSirlJPRLEN2r":
@@ -48,35 +51,34 @@ const SingleProductSite = () => (
         <Grid fluid>
 
             <Row center="xs" middle="xs">
-                <Col xs={8} md={4}>
-                    <Table>
+                <Col xs={12} md={6}>
+                    <Table >
                         <TableBody displayRowCheckbox={false}>
                             <TableRow>
-                                <TableRowColumn>category:</TableRowColumn>
-                                <TableRowColumn>{arrayFromProducts[0].category}</TableRowColumn>
+                                <TableRowColumn style={fontSizes}>category:</TableRowColumn>
+                                <TableRowColumn style={fontSizes}>{arrayFromProducts[0].category}</TableRowColumn>
                             </TableRow>
                             <TableRow>
-                                <TableRowColumn>kcal: </TableRowColumn>
-                                <TableRowColumn>{arrayFromProducts[0].kcal}</TableRowColumn>
+                                <TableRowColumn style={fontSizes}>kcal: </TableRowColumn>
+                                <TableRowColumn style={fontSizes}>{arrayFromProducts[0].kcal}</TableRowColumn>
                             </TableRow>
                             <TableRow>
-                                <TableRowColumn>fat:</TableRowColumn>
-                                <TableRowColumn>{arrayFromProducts[0].fat}</TableRowColumn>
+                                <TableRowColumn style={fontSizes}>fat:</TableRowColumn>
+                                <TableRowColumn style={fontSizes}>{arrayFromProducts[0].fat}</TableRowColumn>
                             </TableRow>
                             <TableRow>
-                                <TableRowColumn>carbohydrates:</TableRowColumn>
-                                <TableRowColumn>{arrayFromProducts[0].carbohydrates}</TableRowColumn>
+                                <TableRowColumn style={fontSizes}>carbohydrates:</TableRowColumn>
+                                <TableRowColumn style={fontSizes}>{arrayFromProducts[0].carbohydrates}</TableRowColumn>
                             </TableRow>
                             <TableRow>
-                                <TableRowColumn>protein:</TableRowColumn>
-                                <TableRowColumn>{arrayFromProducts[0].protein}</TableRowColumn>
+                                <TableRowColumn style={fontSizes}>protein:</TableRowColumn>
+                                <TableRowColumn style={fontSizes}>{arrayFromProducts[0].protein}</TableRowColumn>
                             </TableRow>
                         </TableBody>
                     </Table>
                 </Col>
 
-                <Col
-                    xs={12} md={6}>
+                <Col sxs={12} md={6}>
                     <img src={arrayFromProducts[0].pic} alt={arrayFromProducts[0].value} width={'80%'}/>
                 </Col>
             </Row>
@@ -84,9 +86,7 @@ const SingleProductSite = () => (
             <Row center="xs" middle="xs">
                 <Col xs={12} md={6}>
 
-
-                    <BarChart width={600} height={300} data={data}
-                              margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+                    <BarChart width={600} height={300} data={data}>
                         <CartesianGrid strokeDasharray="3 3"/>
                         <XAxis dataKey="name"/>
                         <YAxis/>
@@ -98,7 +98,7 @@ const SingleProductSite = () => (
 
 
                 </Col>
-                <Col xs={12} md={6}>
+                <Col xs={12} md={6}  center="xs">
                     <RaisedButton
                         name={'addAProductToFavorites'}
                         backgroundColor={'#E65100'}
