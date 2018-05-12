@@ -6,7 +6,6 @@ import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recha
 
 const fontSizes = {
     fontSize: '24px',
-    color: 'darkslategray'
 }
 
 const products = {

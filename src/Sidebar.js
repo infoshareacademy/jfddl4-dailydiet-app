@@ -38,7 +38,7 @@ const Sidebar = (props) => (
       </MenuItem>
     </Link>
       <Link
-          to={'/product/all'}
+          to={'/all'}
       >
           <MenuItem
               onClick={props.close}
@@ -47,7 +47,7 @@ const Sidebar = (props) => (
           </MenuItem>
       </Link>
       <Link
-          to={'/product/one'}
+          to={'/product/:product'}
       >
           <MenuItem
               onClick={props.close}
