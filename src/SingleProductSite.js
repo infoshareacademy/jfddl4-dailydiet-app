@@ -1,6 +1,7 @@
 import React from 'react'
 import {Grid, Row, Col} from 'react-flexbox-grid'
 import RaisedButton from 'material-ui/RaisedButton'
+import {Table, TableBody, TableRow, TableRowColumn} from 'material-ui/Table';
 
 
 const exampleProduct = {
@@ -39,16 +40,36 @@ const SingleProductSite = () => (
         <Grid fluid>
 
             <Row center="xs" middle="xs">
-                <Col xs={12} md={6}>
-                    <h2>category: {arrayFromProducts[0].category}</h2>
-                    <p>kcal: {arrayFromProducts[0].kcal}</p>
-                    <p>fat: {arrayFromProducts[0].fat}</p>
-                    <p>carbohydrates: {arrayFromProducts[0].carbohydrates}</p>
-                    <p>protein: {arrayFromProducts[0].protein}</p>
+                <Col xs={8} md={4}>
+                    <Table>
+                        <TableBody displayRowCheckbox={false}>
+                            <TableRow>
+                                <TableRowColumn>category:</TableRowColumn>
+                                <TableRowColumn>{arrayFromProducts[0].category}</TableRowColumn>
+                            </TableRow>
+                            <TableRow>
+                                <TableRowColumn>kcal: </TableRowColumn>
+                                <TableRowColumn>{arrayFromProducts[0].kcal}</TableRowColumn>
+                            </TableRow>
+                            <TableRow>
+                                <TableRowColumn>fat:</TableRowColumn>
+                                <TableRowColumn>{arrayFromProducts[0].fat}</TableRowColumn>
+                            </TableRow>
+                            <TableRow>
+                                <TableRowColumn>carbohydrates:</TableRowColumn>
+                                <TableRowColumn>{arrayFromProducts[0].carbohydrates}</TableRowColumn>
+                            </TableRow>
+                            <TableRow>
+                                <TableRowColumn>protein:</TableRowColumn>
+                                <TableRowColumn>{arrayFromProducts[0].protein}</TableRowColumn>
+                            </TableRow>
+                        </TableBody>
+                    </Table>
                 </Col>
+
                 <Col
                     xs={12} md={6}>
-                    <img src={arrayFromProducts[0].pic} alt={arrayFromProducts[0].value} width={'150vw'}/>
+                    <img src={arrayFromProducts[0].pic} alt={arrayFromProducts[0].value} width={'80%'}/>
                 </Col>
             </Row>
 
