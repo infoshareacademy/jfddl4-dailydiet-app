@@ -1,72 +1,37 @@
 import React from 'react'
 // Firebase
-import firebase from 'firebase'
+import { db } from './firebase'
 // Material-ui
-import { List, ListItem } from 'material-ui/List'
-import Avatar from 'material-ui/Avatar'
-import IconButton from 'material-ui/IconButton'
-import ActionGrade from 'material-ui/svg-icons/action/grade'
-import Dialog from 'material-ui/Dialog'
-import FlatButton from 'material-ui/FlatButton'
+import { List } from 'material-ui/List'
 
-const PRODUCTS_RESOURCE_PATH = `https://dailydiet-app.firebaseio.com/products`
+import DialogFavorites from './DialogFavorites'
+import ListElement from './ListElement'
+
+const PRODUCTS_RESOURCE_PATH = `https://dailydiet-app.firebaseio.com`
 
 class FavoriteProducts extends React.Component {
   state = {
-    products: null,
-    isDialogOpen: false
+    products: this.props.products,
+    isDialogOpen: false,
+    productName: '',
+    productKey: '',
+    productIsFavorite: null
   }
 
-  componentDidMount() {
-    this.readFromDB()
-  }
-
-  readFromDB = () => (
-    fetch(`${PRODUCTS_RESOURCE_PATH}/.json`)
-      .then(response => response.json())
-      .then(data => {
-        const dataInArray =
-          (Object.entries(data || {})
-            .map(([key, value]) => (
-              typeof value === 'object' ?
-                { ...value, key }
-                :
-                { key, value }
-            ))
-          )
-
-        this.setState({
-          products: dataInArray
-        })
-
-        console.log(dataInArray)
-      })
+  onFavoriteRequest = (name, key, isFavorite) => (
+    this.setState({ productName: name, productKey: key, productIsFavorite: isFavorite }, this.isDialogOpenToggler)
   )
 
-  toggleFavorite = (key) => {
-    const url = `${PRODUCTS_RESOURCE_PATH}/${key}/.json`
-
-    const fetchConfig = {
-      method: "PATCH",
-      body: JSON.stringify({
-        "isFavorite": false
-      })
-    }
-
-    fetch(url, fetchConfig)
-      .then(this.readFromDB)
+  toggleFavorite = () => {
+    db.ref(`/products/${this.state.productKey}/isFavorite`)
+      .set(!this.state.productIsFavorite)
   }
 
-  handleOpen = () => {
-    this.setState({ isDialogOpen: true })
-  }
-
-  handleClose = () => {
-    this.setState({ isDialogOpen: false })
+  isDialogOpenToggler = () => {
+    this.setState({ isDialogOpen: !this.state.isDialogOpen })
   }
 
   render() {
-    console.log(this.state.products)
     return (
       <div>
         <h1>Favorite products</h1>
@@ -82,49 +47,24 @@ class FavoriteProducts extends React.Component {
                   )
                   .map(
                     el => (
-                      <ListItem
-                        key={el.key}
-                        primaryText={el.name}
-                        insetChildren={true}
-                        leftAvatar={<Avatar src={el.picture} />}
-                        rightAvatar={
-                          <div>
-                            <IconButton
-                              onClick={this.handleOpen}
-                            >
-                              <ActionGrade />
-                            </IconButton>
-                            <Dialog
-                              title="Confirm"
-                              actions={[
-                                <FlatButton
-                                  label="Cancel"
-                                  primary={true}
-                                  onClick={this.handleClose}
-                                />,
-                                <FlatButton
-                                  label="Confirm"
-                                  primary={true}
-                                  keyboardFocused={true}
-                                  onClick={() => {
-                                    this.handleClose()
-                                    this.toggleFavorite(el.key)
-                                  }}
-                                />,
-                              ]}
-                              modal={false}
-                              open={this.state.isDialogOpen}
-                              onRequestClose={this.handleClose}
-                            >
-                              Remove {el.name} from favorites?
-                          </Dialog>
-                          </div>
-                        }
-                      >
-                      </ListItem>
+                      <ListElement
+                        productName={el.name}
+                        productKey={el.key}
+                        isProductFavorite={el.isFavorite}
+                        productPicture={el.picture}
+                        onFavoriteRequest={this.onFavoriteRequest}
+                      />
                     )
                   )
               }
+              <DialogFavorites
+                openToggler={this.isDialogOpenToggler}
+                favoriteToggler={this.toggleFavorite}
+                isOpen={this.state.isDialogOpen}
+                productIsFavorite={this.state.productIsFavorite}
+                productName={this.state.productName}
+              />
+              
             </List>
         }
       </div>
