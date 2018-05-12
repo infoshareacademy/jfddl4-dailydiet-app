@@ -9,7 +9,7 @@ import Dashboard from './Dashboard'
 import ProductsSearchList from './ProductsSearchList'
 import Sidebar from './Sidebar'
 import SingleProductSite from './SingleProductSite'
-import FavoriteProducts from './FavoriteProducts'
+import FavoriteProducts from './favorites'
 
 class App extends React.Component {
   state = {

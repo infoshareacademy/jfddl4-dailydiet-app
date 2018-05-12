@@ -1,11 +1,11 @@
 import React from 'react'
 // Firebase
-import { db } from './firebase'
+import { db } from './../firebase'
 // Material-ui
 import { List } from 'material-ui/List'
 
 import DialogFavorites from './DialogFavorites'
-import ListElement from './ListElement'
+import ListElement from './../ListElement'
 
 const PRODUCTS_RESOURCE_PATH = `https://dailydiet-app.firebaseio.com`
 
