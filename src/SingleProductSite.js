@@ -2,9 +2,11 @@ import React from 'react'
 import {Grid, Row, Col} from 'react-flexbox-grid'
 import RaisedButton from 'material-ui/RaisedButton'
 import {Table, TableBody, TableRow, TableRowColumn} from 'material-ui/Table';
+import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts'
 
 
-const exampleProduct = {
+
+const products = {
     "-LC45BiLSirlJPRLEN2r":
         {
             "carbohydrates": 15,
@@ -17,7 +19,7 @@ const exampleProduct = {
         }
 }
 
-const arrayFromProducts = Object.entries(exampleProduct)
+const arrayFromProducts = Object.entries(products)
     .map(el => ({
         key: el[0],
         value: el[1].name,
@@ -29,11 +31,17 @@ const arrayFromProducts = Object.entries(exampleProduct)
         carbohydrates: el[1].carbohydrates
 
     }))
+const data = [
+    {name: 'fat', dailyNorm: 56, product: arrayFromProducts[0].fat, amt: 2400},
+    {name: 'protein', dailyNorm: 63, product: arrayFromProducts[0].protein, amt: 2290},
+    {name: 'carbohydrates', dailyNorm: 282, product: arrayFromProducts[0].carbohydrates, amt: 2000},
 
+]
 
 const SingleProductSite = () => (
 
     <div>
+
         <h1 style={{textAlign: 'center', color: '#E65100'}}>
             {arrayFromProducts[0].value}
         </h1>
@@ -75,16 +83,30 @@ const SingleProductSite = () => (
 
             <Row center="xs" middle="xs">
                 <Col xs={12} md={6}>
-                    <h1>CHART</h1>
+
+
+                    <BarChart width={600} height={300} data={data}
+                              margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+                        <CartesianGrid strokeDasharray="3 3"/>
+                        <XAxis dataKey="name"/>
+                        <YAxis/>
+                        <Tooltip/>
+                        <Legend />
+                        <Bar dataKey="product" fill="#FBC02D" />
+                        <Bar dataKey="dailyNorm" fill="#EF6C00" />
+                    </BarChart>
+
+
                 </Col>
                 <Col xs={12} md={6}>
                     <RaisedButton
                         name={'addAProductToFavorites'}
                         backgroundColor={'#E65100'}
-                        label={<span style={{color: 'white'}}>"Add to favorites"</span>}
+                        label={<span style={{color: 'white'}}>Add to favorites</span>}
                     />
                 </Col>
             </Row>
+
 
         </Grid>
     </div>
