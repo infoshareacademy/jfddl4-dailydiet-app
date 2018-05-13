@@ -1,39 +1,18 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {List, ListItem} from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
 import IconButton from 'material-ui/IconButton'
 import StarBorder from 'material-ui/svg-icons/toggle/star-border'
 import ReactPaginate from 'react-paginate';
+import {Link} from 'react-router-dom'
 
 const ITEMS_PER_PAGE = 10
 
-class Products extends Component {
+class Products extends React.Component {
     state = {
-        products: null,
+        products: this.props.products,
         numberOfPages: 0,
         activePage: 0
-    }
-
-
-    componentDidMount() {
-        fetch('https://dailydiet-app.firebaseio.com/products/.json')
-            .then((response) => response.json())
-            .then((myJson) => {
-                const dataInArray = (
-                    Object.entries(myJson)
-                        .map(el => ({
-                            key: el[0],
-                            value: el[1].name,
-                            pic: el[1].picture
-                        }))
-                )
-
-                this.setState({
-                    products: dataInArray,
-                    numberOfPages: Math.ceil(dataInArray.length / ITEMS_PER_PAGE)
-                })
-                console.log(dataInArray)
-            })
     }
 
 
@@ -61,12 +40,16 @@ class Products extends Component {
                                     ))
                                     .map(
                                         aProduct => (
+
                                             <ListItem key={aProduct.key}
-                                                      primaryText={aProduct.value}
+                                                      primaryText={aProduct.name}
                                                       insetChildren={true}
-                                                      leftAvatar={<Avatar src={aProduct.pic}/>}
-                                                      rightAvatar={<IconButton><StarBorder
-                                                          color="lightBlue"/></IconButton>}
+                                                      containerElement={<Link to={`product/:${aProduct.key}`}/>}
+                                                      leftAvatar={<Avatar src={aProduct.picture}/>}
+                                                      rightAvatar={
+                                                          <IconButton><StarBorder
+                                                              color="lightBlue"/></IconButton>}
+
                                             >
 
                                             </ListItem>

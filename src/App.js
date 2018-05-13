@@ -85,10 +85,11 @@ class App extends React.Component {
             />
               <Route //TEMORARY
               path={'/all'}
-              render={
-                  () => (<Products/>)
-              }
-          />
+              component={() => (
+                  <Products
+                      products={this.state.products}
+                  />)}
+              />
 
           </div>
 
