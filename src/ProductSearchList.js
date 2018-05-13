@@ -24,6 +24,7 @@ class ProductsSearchList extends React.Component {
         productsList: [], // kompletna baza danych 
         filtredListOfProduct: [],
         slider: 500,
+        toggleButtonState: false
     }
 
 
@@ -88,8 +89,9 @@ class ProductsSearchList extends React.Component {
                 <Container>
                     <div>
                         <Toggle
-                            label="Simple"
-                            
+                            label="Disable searching by calories"
+                            onToggle={(e,i)=>this.setState({toggleButtonState: i})}
+                            toggled={this.state.toggleButtonState}
                         />
                         <Slider
                             min={0}
@@ -97,7 +99,7 @@ class ProductsSearchList extends React.Component {
                             step={1}
                             value={this.state.slider}
                             onChange={this.handleSlider}
-                            onClick={() => alert('works')}
+                            onClick={() => this.setState({toggleButtonState: true})}
                         />
                         <p>
                             <span>{'Value of calories: '}</span>
