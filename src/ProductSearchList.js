@@ -16,7 +16,6 @@ class ProductsSearchList extends React.Component {
         filtredListOfProductByTextField: [], // lista produktów przefiltrowana przez wyszukiwarkę po nazwie 
         filtredListOfProductBySlider: [], // lista produktów przefiltrowana przez slider i wyszukiwarkę po nazwie  // LISTA WYŚWIETLENIA
         calories: 500, //kalorie
-        toggleButtonState: false //przełącznik możliwiający włączanie/wyłączanie wyszukiwania po kaloriach
     }
 
 
@@ -52,30 +51,31 @@ class ProductsSearchList extends React.Component {
 
     searchProducts = () => {
 
-        // filtrowanie produktów po wpisywaniu nazwy do textFieldu
-        // jeżeli nic nie jest wpisane wyświetl wszystkie
-        if (this.state.lookingProduct == '') this.setState({ filtredListOfProductByTextField: this.state.productsList })
-        else this.setState({
-            filtredListOfProductByTextField: this.state.productsList.filter((el, i, arr) => {
-                if (el.value.name.indexOf(this.state.lookingProduct) != -1) return true
+
+
+        this.setState({
+            filtredListOfProductBySlider: this.state.filtredListOfProductByTextField.filter((el, i, arr) => {
+                if (el.value.kcal < this.state.calories && el.value.name.indexOf(this.state.lookingProduct) != -1) return true
             })
         })
-
-
-        //filtrowanie produktów za pomocą slidera (kalorie)
-
-        if (this.state.toggleButtonState) {
-
-            this.setState({
-
-                filtredListOfProductBySlider: this.state.filtredListOfProductByTextField.filter((el, i, arr) => {
-                    if (el.value.kcal < this.state.calories) return true
-                })
-
-            })
-
-        }
     }
+
+
+    // filtrowanie produktów po wpisywaniu nazwy do textFieldu
+    // jeżeli nic nie jest wpisane wyświetl wszystkie
+    // if (this.state.lookingProduct == '') this.setState({ filtredListOfProductByTextField: this.state.productsList })
+    //     else {
+
+    //         this.setState({ filtredListOfProductBySlider: this.state.filtredListOfProductByTextField })
+    //     } //NIE WCHODZI DO ELSA :/ 
+
+
+    //     //filtrowanie produktów za pomocą slidera (kalorie)
+
+    //     if (this.state.toggleButtonState) {
+
+    //     }
+
     render() {
         return (
             <Container>
@@ -86,15 +86,8 @@ class ProductsSearchList extends React.Component {
                         this.setState({ lookingProduct: newValue })
                         this.searchProducts()
                     }}// w onChange-u filter 
-
                 />
                 <Container>
-
-                    <Toggle
-                        label="Disable searching by calories"
-                        onToggle={(e, i) => this.setState({ toggleButtonState: i })}
-                        toggled={this.state.toggleButtonState}
-                    />
                     <Slider
                         min={0}
                         max={500}
@@ -103,23 +96,16 @@ class ProductsSearchList extends React.Component {
                         onChange={
                             (event, value) =>
                                 this.handleSlider(event, value)
-
                         }
-                        onClick={() => {
-                            this.setState({ toggleButtonState: true })
-                        }}
                     />
                     <p>
                         <span>{'Value of calories: '}</span>
                         <span>{this.state.calories}</span>
                     </p>
-
-
                 </Container>
-
                 {
                     this.state.filtredListOfProductBySlider.map((el, i) => (
-                        <div key={el.key}>{i} {el.value.name} </div>
+                        <div key={el.key}>{i} {el.value.name} {el.value.kcal}</div>
                     ))
                 }
 
