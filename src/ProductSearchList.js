@@ -60,7 +60,8 @@ class ProductsSearchList extends React.Component {
                 if (el.value.kcal < this.state.calories && el.value.name.indexOf(this.state.lookingProduct) != -1) return true
             })
             .filter((el) => { 
-                if (el.value.category === this.state.valueDropMenu ) return true })
+                if(this.state.valueDropMenu === 'every') return true
+                else if (el.value.category === this.state.valueDropMenu ) return true })
        
       
         })
