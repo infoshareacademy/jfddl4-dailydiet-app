@@ -29,12 +29,12 @@ const Sidebar = (props) => (
       </MenuItem>
     </Link>
     <Link
-      to={'/favourites'}
+      to={'/favorites'}
     >
       <MenuItem
         onClick={props.close}
       >
-        Favourite Products
+        Favorite Products
       </MenuItem>
     </Link>
   </Drawer>
