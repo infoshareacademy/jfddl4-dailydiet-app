@@ -16,7 +16,7 @@ class ProductsSearchList extends React.Component {
         productsList: [], // kompletna baza danych 
         filtredListOfProduct: [], // lista produktów przefiltrowana przez wyszukiwarkę po nazwie 
         calories: 700, //kalorie
-        valueDropMenu: 'Every'
+        valueDropMenu: 'every'
     }
 
     componentDidMount() { // pobranie danych i zamiana na tablice obiektów
@@ -87,6 +87,7 @@ render() {
                     <span>{'Value of calories: '}</span>
                     <span>{this.state.calories}</span>
                 </p>
+                
                 <DropDownMenu value={this.state.valueDropMenu} onChange={this.handleChange} openImmediately={false}>
                     <MenuItem value={'every'} primaryText="Every" />
                     <MenuItem value={'other'} primaryText="Other" />
