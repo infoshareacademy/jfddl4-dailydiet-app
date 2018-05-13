@@ -14,10 +14,9 @@ class ProductsSearchList extends React.Component {
     state = {
         lookingProduct: '', // część tekstu po którym jest wyszukiwany produkt
         productsList: [], // kompletna baza danych 
-        filtredListOfProductByTextField: [], // lista produktów przefiltrowana przez wyszukiwarkę po nazwie 
-        filtredListOfProductBySlider: [], // lista produktów przefiltrowana przez slider i wyszukiwarkę po nazwie  // LISTA WYŚWIETLENIA
+        filtredListOfProduct: [], // lista produktów przefiltrowana przez wyszukiwarkę po nazwie 
         calories: 700, //kalorie
-        valueDropMenu: 2
+        valueDropMenu: 'Every'
     }
 
     componentDidMount() { // pobranie danych i zamiana na tablice obiektów
@@ -34,8 +33,9 @@ class ProductsSearchList extends React.Component {
                 )
                 this.setState({ productsList: dataInArray })
                 console.log(dataInArray)
-            }).then(() => { // zapis całej listy produktów do przefiltrowanej listy po to żeby po załadowaniu strony gdy textField jest pusty widoczne były wszystkie produkty
-                if (this.state.lookingProduct === '') this.setState({ filtredListOfProductByTextField: this.state.productsList }, () => this.searchProducts())
+            })
+            .then(() => { // zapis całej listy produktów do przefiltrowanej listy po to żeby po załadowaniu strony gdy textField jest pusty widoczne były wszystkie produkty
+                if (this.state.lookingProduct === '') this.setState({ filtredListOfProduct: this.state.productsList }, () => this.searchProducts())
             }
             )
     }
@@ -50,52 +50,61 @@ class ProductsSearchList extends React.Component {
 
     }
 
-    handleChange = (event, index, value) => this.setState({valueDropMenu: value});
-
+    handleChange = (event, index, value) => {
+        this.setState({ valueDropMenu: value }, () => this.searchProducts());
+    }
     searchProducts = () => {
+        //wyświetl całą
         this.setState({
-            filtredListOfProductBySlider: this.state.filtredListOfProductByTextField.filter((el, i, arr) => {
+            filtredListOfProduct: this.state.productsList.filter((el, i, arr) => {
                 if (el.value.kcal < this.state.calories && el.value.name.indexOf(this.state.lookingProduct) != -1) return true
             })
+            .filter((el) => { 
+                if (el.value.category === this.state.valueDropMenu ) return true })
+       
+      
         })
-    }
+}
 
-    render() {
-        return (
+render() {
+    return (
+        <Container>
+            <TextField
+                hintText={'Type name of looking product'}
+                fullWidth={true}
+                onChange={(event, newValue) => this.handleTextField(event, newValue)}// w onChange-u filter 
+            />
             <Container>
-                <TextField
-                    hintText={'Type name of looking product'}
-                    fullWidth={true}
-                    onChange={(event, newValue) => this.handleTextField(event, newValue)}// w onChange-u filter 
+                <Slider
+                    min={0}
+                    max={700}
+                    step={1}
+                    value={this.state.calories}
+                    onChange={(event, value) => this.handleSlider(event, value)}
                 />
-                <Container>
-                    <Slider
-                        min={0}
-                        max={700}
-                        step={1}
-                        value={this.state.calories}
-                        onChange={(event, value) => this.handleSlider(event, value)}
-                    />
-                    <p>
-                        <span>{'Value of calories: '}</span>
-                        <span>{this.state.calories}</span>
-                    </p>
-                    <DropDownMenu value={this.state.valueDropMenu} onChange={this.handleChange} openImmediately={true}>
-                        <MenuItem value={1} primaryText="Never" />
-                        <MenuItem value={2} primaryText="Every Night" />
-                        <MenuItem value={3} primaryText="Weeknights" />
-                        <MenuItem value={4} primaryText="Weekends" />
-                        <MenuItem value={5} primaryText="Weekly" />
-                    </DropDownMenu>
-                </Container>
-                {
-                    this.state.filtredListOfProductBySlider.map((el, i) => (
-                        <div key={el.key}>{i} {el.value.name} {el.value.kcal}</div>
-                    ))
-                }
+                <p>
+                    <span>{'Value of calories: '}</span>
+                    <span>{this.state.calories}</span>
+                </p>
+                <DropDownMenu value={this.state.valueDropMenu} onChange={this.handleChange} openImmediately={false}>
+                    <MenuItem value={'every'} primaryText="Every" />
+                    <MenuItem value={'other'} primaryText="Other" />
+                    <MenuItem value={'dairy'} primaryText="Dairy" />
+                    <MenuItem value={'sweets'} primaryText="Sweets" />
+                    <MenuItem value={'drinks'} primaryText="Drinks" />
+                    <MenuItem value={'fruit'} primaryText="Fruit" />
+                    <MenuItem value={'vegetable'} primaryText="Vegetable" />
+                    <MenuItem value={'meat'} primaryText="Meat" />
+                </DropDownMenu>
             </Container>
-        )
-    }
+            {
+                this.state.filtredListOfProduct.map((el, i) => (
+                    <div key={el.key}>{i} {el.value.name} {el.value.kcal}</div>
+                ))
+            }
+        </Container>
+    )
+}
 
 }
 
