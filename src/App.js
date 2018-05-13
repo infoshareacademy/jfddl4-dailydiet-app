@@ -61,7 +61,7 @@ class App extends React.Component {
               }
             />
               <Route //TEMORARY
-              path={'/product/all'}
+              path={'/all'}
               render={
                   () => (<Products/>)
               }
