@@ -18,7 +18,6 @@ class ProductsSearchList extends React.Component {
         calories: 500, //kalorie
     }
 
-
     componentDidMount() { // pobranie danych i zamiana na tablice obiektów
 
         fetch('https://dailydiet-app.firebaseio.com/products/.json')
@@ -37,22 +36,19 @@ class ProductsSearchList extends React.Component {
                 if (this.state.lookingProduct === '') this.setState({ filtredListOfProductByTextField: this.state.productsList })
             }
             )
-
-
     }
 
-
     handleSlider = (event, value) => {
-
         this.setState({ calories: value });
         this.searchProducts()
     }
 
+    handleTextField = (event, newValue) => {
+        this.setState({ lookingProduct: newValue })
+        this.searchProducts()
+    }
 
     searchProducts = () => {
-
-
-
         this.setState({
             filtredListOfProductBySlider: this.state.filtredListOfProductByTextField.filter((el, i, arr) => {
                 if (el.value.kcal < this.state.calories && el.value.name.indexOf(this.state.lookingProduct) != -1) return true
@@ -60,32 +56,13 @@ class ProductsSearchList extends React.Component {
         })
     }
 
-
-    // filtrowanie produktów po wpisywaniu nazwy do textFieldu
-    // jeżeli nic nie jest wpisane wyświetl wszystkie
-    // if (this.state.lookingProduct == '') this.setState({ filtredListOfProductByTextField: this.state.productsList })
-    //     else {
-
-    //         this.setState({ filtredListOfProductBySlider: this.state.filtredListOfProductByTextField })
-    //     } //NIE WCHODZI DO ELSA :/ 
-
-
-    //     //filtrowanie produktów za pomocą slidera (kalorie)
-
-    //     if (this.state.toggleButtonState) {
-
-    //     }
-
     render() {
         return (
             <Container>
                 <TextField
                     hintText={'Type name of looking product'}
                     fullWidth={true}
-                    onChange={(target, newValue) => {
-                        this.setState({ lookingProduct: newValue })
-                        this.searchProducts()
-                    }}// w onChange-u filter 
+                    onChange={(event, newValue) => this.handleTextField(event, newValue)}// w onChange-u filter 
                 />
                 <Container>
                     <Slider
@@ -93,10 +70,7 @@ class ProductsSearchList extends React.Component {
                         max={500}
                         step={1}
                         value={this.state.calories}
-                        onChange={
-                            (event, value) =>
-                                this.handleSlider(event, value)
-                        }
+                        onChange={(event, value) => this.handleSlider(event, value)}
                     />
                     <p>
                         <span>{'Value of calories: '}</span>
@@ -108,7 +82,6 @@ class ProductsSearchList extends React.Component {
                         <div key={el.key}>{i} {el.value.name} {el.value.kcal}</div>
                     ))
                 }
-
             </Container>
         )
     }
