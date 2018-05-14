@@ -117,6 +117,7 @@ class ProductsSearchList extends React.Component {
                                         .map(
                                             el => (
                                                 <ListElement
+                                                    key={el.key}
                                                     productName={el.name}
                                                     productKey={el.key}
                                                     isProductFavorite={el.isFavorite}
@@ -136,7 +137,7 @@ class ProductsSearchList extends React.Component {
 
                             </List>
                     }
-    
+
 
                 </Container>
             </Container>
