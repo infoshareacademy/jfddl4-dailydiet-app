@@ -3,3 +3,26 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.activePage {
+  background: rgb(255,152,0);
+  border-radius: 10%;
+}
+
+.pagination li{
+  display: inline-flex;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.pagination{
+  text-align: center;
+}
+.recharts-wrapper {
+  margin: auto;
+}
+
+a, a:hover, a:active, a:visited, a:focus {
+  text-decoration: none;
+  color: black
+}

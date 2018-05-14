@@ -37,6 +37,7 @@ const Sidebar = (props) => (
         Favorite Products
       </MenuItem>
     </Link>
+
   </Drawer>
 
 )
