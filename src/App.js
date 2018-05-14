@@ -14,7 +14,7 @@ import FavoriteProducts from './favorites'
 class App extends React.Component {
   state = {
     isSidebarOpen: false,
-    products: null
+    products: []
   }
 
   componentDidMount() {
@@ -62,7 +62,11 @@ class App extends React.Component {
             />
             <Route
               path={'/library'}
-              component={ProductsSearchList}
+              component={() => (
+                <ProductsSearchList
+                  products={this.state.products}
+                />)}
+              
             />
             <Route
               path={'/product/:product'}
