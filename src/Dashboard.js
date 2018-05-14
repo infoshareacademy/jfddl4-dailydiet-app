@@ -1,9 +1,10 @@
 import React from 'react'
-import {Grid, Row, Col} from 'react-flexbox-grid'
+import { Grid, Row, Col } from 'react-flexbox-grid'
 
 import PieChart from './Charts/PieChart'
 import LineChartPic from './Charts/LineChartPic'
 import Paper from 'material-ui/Paper'
+import ShareButtonFacebook from './ShareButtonFacebook';
 
 const styles = {
     width: '100%',
@@ -53,15 +54,15 @@ class Dashboard extends React.Component {
                     </Paper>
                     <Row style={styles}>
                         <Col md>
-                            <PieChart center/>
+                            <PieChart center />
                         </Col>
                         <Col md center={"true"}>
                             <LineChartPic widthOfLineChart={this.state.LineChartPic.width}
-                                          heightOfLineChart={this.state.LineChartPic.height}/>
+                                heightOfLineChart={this.state.LineChartPic.height} />
                         </Col>
                     </Row>
                 </Row>
-
+                <ShareButtonFacebook />
             </Grid>
 
         )

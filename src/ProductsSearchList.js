@@ -12,6 +12,7 @@ import DialogFavorites from './favorites/DialogFavorites';
 import ReactPaginate from 'react-paginate';
 import {Link} from 'react-router-dom'
 
+import ShareButtonFacebook from './ShareButtonFacebook'
 
 const ITEMS_PER_PAGE = 10
 
@@ -100,24 +101,25 @@ class ProductsSearchList extends React.Component {
     render() {
 
         return (
-            <Container>
-                <TextField
-                    hintText={'Type name of looking product'}
-                    fullWidth={true}
-                    onChange={(event, newValue) => this.handleTextField(event, newValue)}// w onChange-u filter 
-                />
+            <div>
                 <Container>
-                    <Slider
-                        min={0}
-                        max={700}
-                        step={1}
-                        value={this.state.calories}
-                        onChange={(event, value) => this.handleSlider(event, value)}
+                    <TextField
+                        hintText={'Type name of looking product'}
+                        fullWidth={true}
+                        onChange={(event, newValue) => this.handleTextField(event, newValue)}// w onChange-u filter
                     />
-                    <p>
-                        <span>{'Value of calories: '}</span>
-                        <span>{this.state.calories}</span>
-                    </p>
+                    <Container>
+                        <Slider
+                            min={0}
+                            max={700}
+                            step={1}
+                            value={this.state.calories}
+                            onChange={(event, value) => this.handleSlider(event, value)}
+                        />
+                        <p>
+                            <span>{'Value of calories: '}</span>
+                            <span>{this.state.calories}</span>
+                        </p>
 
                     <DropDownMenu value={this.state.valueDropMenu} onChange={this.handleChange} openImmediately={false}>
                         <MenuItem value={'every'} primaryText="Every"/>
@@ -169,8 +171,8 @@ class ProductsSearchList extends React.Component {
                                     productName={this.state.productName}
                                 />
 
-                            </List>
-                    }
+                                </List>
+                        }
 
                     <ReactPaginate
                         previousLabel={"previous"}
@@ -186,8 +188,10 @@ class ProductsSearchList extends React.Component {
                         activeClassName={"activePage"}
                     />
 
+                    </Container>
                 </Container>
-            </Container>
+                <ShareButtonFacebook/>
+            </div>
         )
     }
 
