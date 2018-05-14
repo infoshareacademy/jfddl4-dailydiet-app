@@ -67,7 +67,10 @@ class App extends React.Component {
             />
             <Route
               path={'/add-product'}
-              component={AddProduct}
+              component={() => (
+                <AddProduct
+                  products={this.state.products}
+                />)}
             />
             <Route
               path={'/product/:product'}

@@ -19,6 +19,7 @@ const style = {
 
 class AddProduct extends React.Component {
   state = {
+    products: this.props.products,
     name: '',
     category: 'other',
     isFavorite: true,
@@ -30,18 +31,10 @@ class AddProduct extends React.Component {
   }
 
   addToDatabase = () => {
-    db.ref(`/products`)
-      .push({
-        name: this.state.name,
-        category: this.state.category,
-        isFavorite: this.state.isFavorite,
-        picture: this.state.picture,
-        kcal: this.state.kcal,
-        proteins: this.state.proteins,
-        carbohydrates: this.state.carbohydrates,
-        fat: this.state.fat
-      }).then(() => this.setState({
-        name: '',
+    this.state.products.filter(el =>
+      el.name === this.state.name
+    ).length ?
+      this.setState({
         category: 'other',
         isFavorite: true,
         picture: '',
@@ -49,7 +42,28 @@ class AddProduct extends React.Component {
         proteins: 0,
         carbohydrates: 0,
         fat: 0
-      }))
+      }, alert(`${this.state.name} is already in base!`))
+      :
+      db.ref(`/products`)
+        .push({
+          name: this.state.name,
+          category: this.state.category,
+          isFavorite: this.state.isFavorite,
+          picture: this.state.picture,
+          kcal: this.state.kcal,
+          proteins: this.state.proteins,
+          carbohydrates: this.state.carbohydrates,
+          fat: this.state.fat
+        }).then(() => this.setState({
+          name: '',
+          category: 'other',
+          isFavorite: true,
+          picture: '',
+          kcal: 0,
+          proteins: 0,
+          carbohydrates: 0,
+          fat: 0
+        }))
   }
 
   dropDownCategoryHandler = (event, index, value) => {
@@ -92,7 +106,7 @@ class AddProduct extends React.Component {
           <span>Type name: </span>
           <TextField
             name={'new-product-name'}
-            hintText={'e.g. avokado'}
+            hintText={'e.g. avocado'}
             fullWidth={false}
             onChange={(event, value) => this.nameHandler(value)}
           />
@@ -130,6 +144,7 @@ class AddProduct extends React.Component {
             hintText={'e.g https://freepik.com/...jpg'}
             fullWidth={false}
             onChange={(event, value) => this.pictureHandler(value)}
+            value={this.state.picture}
           />
           <br />
           <span>Calories: </span>
