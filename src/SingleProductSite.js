@@ -28,7 +28,7 @@ class SingleProductSite extends React.Component {
             .then(dataProduct => {
                 this.setState({
                     product: dataProduct,
-                    data:[
+                    data: [
                         {name: 'fat', dailyNorm: 56, product: dataProduct.fat, amt: 2400},
                         {name: 'protein', dailyNorm: 63, product: dataProduct.protein, amt: 2290},
                         {name: 'carbohydrates', dailyNorm: 282, product: dataProduct.carbohydrates, amt: 2000},
@@ -39,9 +39,7 @@ class SingleProductSite extends React.Component {
     }
 
     render() {
-
         return (
-
             <div>
                 {
                     this.state.product ?
@@ -50,7 +48,6 @@ class SingleProductSite extends React.Component {
                                 {upper(this.state.product.name)}
                             </h1>
                             <Grid fluid>
-
                                 <Row center="xs" middle="xs">
                                     <Col xs={12} md={6}>
                                         <Table>
@@ -62,11 +59,13 @@ class SingleProductSite extends React.Component {
                                                 </TableRow>
                                                 <TableRow>
                                                     <TableRowColumn style={fontSizes}>kcal: </TableRowColumn>
-                                                    <TableRowColumn style={fontSizes}>{this.state.product.kcal}</TableRowColumn>
+                                                    <TableRowColumn
+                                                        style={fontSizes}>{this.state.product.kcal}</TableRowColumn>
                                                 </TableRow>
                                                 <TableRow>
                                                     <TableRowColumn style={fontSizes}>fat:</TableRowColumn>
-                                                    <TableRowColumn style={fontSizes}>{this.state.product.fat}</TableRowColumn>
+                                                    <TableRowColumn
+                                                        style={fontSizes}>{this.state.product.fat}</TableRowColumn>
                                                 </TableRow>
                                                 <TableRow>
                                                     <TableRowColumn style={fontSizes}>carbohydrates:</TableRowColumn>
@@ -81,15 +80,13 @@ class SingleProductSite extends React.Component {
                                             </TableBody>
                                         </Table>
                                     </Col>
-
                                     <Col xs={12} md={6}>
-                                        <img src={this.state.product.picture} alt={this.state.product.name} width={'250vw'}/>
+                                        <img src={this.state.product.picture} alt={this.state.product.name}
+                                             width={'250vw'}/>
                                     </Col>
                                 </Row>
-
                                 <Row center="xs" middle="xs">
                                     <Col xs={12} md={6}>
-
                                         <BarChart width={600} height={300} data={this.state.data}>
                                             <CartesianGrid strokeDasharray="3 3"/>
                                             <XAxis dataKey="name"/>
@@ -99,7 +96,6 @@ class SingleProductSite extends React.Component {
                                             <Bar dataKey="product" fill="#FBC02D"/>
                                             <Bar dataKey="dailyNorm" fill="#EF6C00"/>
                                         </BarChart>
-
                                     </Col>
                                     <Col xs={12} md={6} center="xs">
                                         <RaisedButton
@@ -109,12 +105,10 @@ class SingleProductSite extends React.Component {
                                         />
                                     </Col>
                                 </Row>
-
-
                             </Grid>
                         </div>
-                    :
-                    "Loading..."
+                        :
+                        "Loading..."
                 }
             </div>
         )
