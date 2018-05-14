@@ -1,24 +1,25 @@
 import React from 'react'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 // Material-ui
 import AppBar from 'material-ui/AppBar'
 import { orange500 } from 'material-ui/styles/colors'
-
+// Components
 import readFromDatabase from './logic'
+import Sidebar from './Sidebar'
 import Dashboard from './Dashboard'
 import ProductsSearchList from './ProductsSearchList'
-import Sidebar from './Sidebar'
 import SingleProductSite from './SingleProductSite'
 import Products from "./FinalProductPage";
 
 import FavoriteProducts from './favorites'
+import AddProduct from './AddProduct'
 
 class App extends React.Component {
 
-  state = {
-    isSidebarOpen: false,
-    products: []
-  }
+    state = {
+        isSidebarOpen: false,
+        products: []
+    }
 
     componentDidMount() {
         readFromDatabase(this.setArrayToState)
@@ -37,7 +38,6 @@ class App extends React.Component {
     drawerClose = () => this.setState({
         isSidebarOpen: false
     })
-
 
     render() {
         return (
@@ -75,29 +75,29 @@ class App extends React.Component {
                         <Route
                             path={'/product/:product'}
                             component={SingleProductSite}
-                    />
-                    <Route
-                        path={'/favorites'}
-                        component={() => (
-                            <FavoriteProducts
-                                products={this.state.products}
-                            />)}
-                    />
-                    <Route //TEMORARY
-                        path={'/all'}
-                        component={() => (
-                            <Products
-                                products={this.state.products}
-                            />)}
-                    />
+                        />
+                        <Route
+                            path={'/favorites'}
+                            component={() => (
+                                <FavoriteProducts
+                                    products={this.state.products}
+                                />)}
+                        />
+                        <Route
+                            path={'/add-product'}
+                            component={() => (
+                                <AddProduct
+                                    products={this.state.products}
+                                />)}
+                        />
 
 
-          </div>
+                    </div>
 
-    </Router>
+                </Router>
 
-    </div>
-    )
+            </div>
+        )
     }
 }
 

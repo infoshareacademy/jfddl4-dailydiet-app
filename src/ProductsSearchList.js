@@ -36,9 +36,7 @@ class ProductsSearchList extends React.Component {
     }
 
     componentDidMount() { // pobranie danych i zamiana na tablice obiektów
-
         this.searchProducts()
-
     }
 
     handlePageClick = (e) => {
