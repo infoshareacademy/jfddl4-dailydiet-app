@@ -7,46 +7,15 @@ import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recha
 const fontSizes = {
     fontSize: '24px',
 }
-
-// const products = {
-//     "-LC45BiLSirlJPRLEN2r":
-//         {
-//             "carbohydrates": 15,
-//             "category": "other",
-//             "fat": 4.9,
-//             "kcal": 134,
-//             "name": "lasagne",
-//             "picture": "https://images.freeimages.com/images/large-previews/982/lasagne-1320600.jpg",
-//             "protein": 7
-//         }
-// }
-//
-// const arrayFromProducts = Object.entries(products)
-//     .map(el => ({
-//         key: el[0],
-//         value: el[1].name,
-//         pic: el[1].picture,
-//         fat: el[1].fat,
-//         kcal: el[1].kcal,
-//         protein: el[1].protein,
-//         category: el[1].category,
-//         carbohydrates: el[1].carbohydrates
-//
-//     }))
-// const data = [
-//     {name: 'fat', dailyNorm: 56, product: arrayFromProducts[0].fat, amt: 2400},
-//     {name: 'protein', dailyNorm: 63, product: arrayFromProducts[0].protein, amt: 2290},
-//     {name: 'carbohydrates', dailyNorm: 282, product: arrayFromProducts[0].carbohydrates, amt: 2000},
-//
-// ]
+const upper = word => {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+}
 
 class SingleProductSite extends React.Component {
     state = {
         product: null,
         productKey: ''
     }
-
-// const theProduct = props.match.params.product
 
     componentDidMount() {
 
@@ -69,7 +38,6 @@ class SingleProductSite extends React.Component {
             })
     }
 
-
     render() {
 
         return (
@@ -79,7 +47,7 @@ class SingleProductSite extends React.Component {
                     this.state.product ?
                         <div>
                             <h1 style={{textAlign: 'center', color: '#E65100'}}>
-                                {this.state.product.name}
+                                {upper(this.state.product.name)}
                             </h1>
                             <Grid fluid>
 
@@ -114,8 +82,8 @@ class SingleProductSite extends React.Component {
                                         </Table>
                                     </Col>
 
-                                    <Col sxs={12} md={6}>
-                                        <img src={this.state.product.picture} alt={this.state.product.name} width={'400'}/>
+                                    <Col xs={12} md={6}>
+                                        <img src={this.state.product.picture} alt={this.state.product.name} width={'250vw'}/>
                                     </Col>
                                 </Row>
 
@@ -131,7 +99,6 @@ class SingleProductSite extends React.Component {
                                             <Bar dataKey="product" fill="#FBC02D"/>
                                             <Bar dataKey="dailyNorm" fill="#EF6C00"/>
                                         </BarChart>
-
 
                                     </Col>
                                     <Col xs={12} md={6} center="xs">
@@ -149,8 +116,6 @@ class SingleProductSite extends React.Component {
                     :
                     "Loading..."
                 }
-
-
             </div>
         )
     }
