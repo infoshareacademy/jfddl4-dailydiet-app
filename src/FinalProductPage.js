@@ -44,7 +44,7 @@ class Products extends React.Component {
                                             <ListItem key={aProduct.key}
                                                       primaryText={aProduct.name}
                                                       insetChildren={true}
-                                                      containerElement={<Link to={`product/${aProduct.key}` }/>}
+                                                      containerElement={<Link to={`product/${aProduct.key}`}/>}
                                                       leftAvatar={<Avatar src={aProduct.picture}/>}
                                                       rightAvatar={
                                                           <IconButton><StarBorder
