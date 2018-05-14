@@ -8,6 +8,10 @@ import {Link} from 'react-router-dom'
 
 const ITEMS_PER_PAGE = 10
 
+const upper = word => {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
 class Products extends React.Component {
     state = {
         products: this.props.products,
@@ -55,7 +59,7 @@ class Products extends React.Component {
                                         aProduct => (
 
                                             <ListItem key={aProduct.key}
-                                                      primaryText={aProduct.name}
+                                                      primaryText={upper(aProduct.name)}
                                                       insetChildren={true}
                                                       containerElement={<Link to={`product/${aProduct.key}`}/>}
                                                       leftAvatar={<Avatar src={aProduct.picture}/>}
