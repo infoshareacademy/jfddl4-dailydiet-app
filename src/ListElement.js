@@ -2,9 +2,8 @@ import React from 'react'
 // Material-ui
 import { ListItem, IconButton } from 'material-ui'
 import Avatar from 'material-ui/Avatar'
-import Star from 'material-ui/svg-icons/toggle/star'
-import StarBorder from 'material-ui/svg-icons/toggle/star-border'
-
+import Favorite from 'material-ui/svg-icons/action/favorite'
+import FavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 
 const ListElement = (props) => (
   <ListItem
@@ -18,9 +17,9 @@ const ListElement = (props) => (
       >
         {
           props.isProductFavorite ?
-            <Star />
+            <Favorite color={'#F44336'} />
             :
-            <StarBorder />
+            <FavoriteBorder color={'#F44336'} />
         }
       </IconButton>
     }
