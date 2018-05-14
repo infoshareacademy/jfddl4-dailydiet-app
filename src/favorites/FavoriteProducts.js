@@ -46,6 +46,7 @@ class FavoriteProducts extends React.Component {
                   .map(
                     el => (
                       <ListElement
+                        key={el.key}
                         productName={el.name}
                         productKey={el.key}
                         isProductFavorite={el.isFavorite}
@@ -62,13 +63,11 @@ class FavoriteProducts extends React.Component {
                 productIsFavorite={this.state.productIsFavorite}
                 productName={this.state.productName}
               />
-              
             </List>
         }
       </div>
     )
   }
-
 }
 
 export default FavoriteProducts

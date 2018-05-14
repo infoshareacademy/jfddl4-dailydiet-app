@@ -6,8 +6,6 @@ import { MenuItem } from 'material-ui'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 import DropDownMenu from 'material-ui/DropDownMenu'
-// Components
-import DialogFavorites from './favorites/DialogFavorites'
 
 const style = {
   wrapper: {
@@ -24,10 +22,10 @@ class AddProduct extends React.Component {
     category: 'other',
     isFavorite: true,
     picture: '',
-    kcal: 0,
-    proteins: 0,
-    carbohydrates: 0,
-    fat: 0
+    kcal: '',
+    proteins: '',
+    carbohydrates: '',
+    fat: ''
   }
 
   addToDatabase = () => {
@@ -86,16 +84,33 @@ class AddProduct extends React.Component {
     if (kcal % 1 === 0) {
       this.setState({ kcal })
     } else {
-      alert('A number is required in this field')
-      this.setState({ kcal: 0 })
+      alert('An integer is required in this field')
     }
   }
 
-  proteinsHandler = (proteins) => { this.setState({ proteins }) }
+  proteinsHandler = (proteins) => {
+    if (proteins % 1 === 0) {
+      this.setState({ proteins })
+    } else {
+      alert('A number is required in this field')
+    }
+  }
 
-  carbohydratesHandler = (carbohydrates) => { this.setState({ carbohydrates }) }
+  carbohydratesHandler = (carbohydrates) => {
+    if (carbohydrates % 1 === 0) {
+      this.setState({ carbohydrates })
+    } else {
+      alert('A number is required in this field')
+    }
+  }
 
-  fatHandler = (fat) => { this.setState({ fat }) }
+  fatHandler = (fat) => {
+    if (fat % 1 === 0) {
+      this.setState({ fat })
+    } else {
+      alert('A number is required in this field')
+    }
+  }
 
   render() {
     return (
