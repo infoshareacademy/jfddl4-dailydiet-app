@@ -9,7 +9,7 @@ import MenuItem from 'material-ui/MenuItem';
 import { List } from 'material-ui';
 import ListElement from './ListElement';
 import DialogFavorites from './favorites/DialogFavorites';
-
+import ShareButtonFacebook from './ShareButtonFacebook'
 
 
 class ProductsSearchList extends React.Component {
@@ -140,7 +140,9 @@ class ProductsSearchList extends React.Component {
                             </List>
                     }
 
-
+                    <Container>
+                        <ShareButtonFacebook />
+                    </Container>
                 </Container>
             </Container>
         )
