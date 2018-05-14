@@ -37,24 +37,7 @@ const Sidebar = (props) => (
         Favorite Products
       </MenuItem>
     </Link>
-      <Link
-          to={'/all'}
-      >
-          <MenuItem
-              onClick={props.close}
-          >
-              TEMPORARY all
-          </MenuItem>
-      </Link>
-      <Link
-          to={'/product/:product'}
-      >
-          <MenuItem
-              onClick={props.close}
-          >
-              TEMPORARY one
-          </MenuItem>
-      </Link>
+
   </Drawer>
 
 )

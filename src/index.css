@@ -21,3 +21,8 @@ body {
 .recharts-wrapper {
   margin: auto;
 }
+
+a, a:hover, a:active, a:visited, a:focus {
+  text-decoration: none;
+  color: black
+}

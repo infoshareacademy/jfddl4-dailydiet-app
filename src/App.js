@@ -2,7 +2,7 @@ import React from 'react'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 // Material-ui
 import AppBar from 'material-ui/AppBar'
-import {orange500} from 'material-ui/styles/colors'
+import { orange500 } from 'material-ui/styles/colors'
 
 import readFromDatabase from './logic'
 import Dashboard from './Dashboard'
@@ -15,10 +15,6 @@ import FavoriteProducts from './favorites'
 
 class App extends React.Component {
 
-    state = {
-        isSidebarOpen: false,
-        products: null
-    }
   state = {
     isSidebarOpen: false,
     products: []
@@ -68,9 +64,13 @@ class App extends React.Component {
                             exact path={'/'}
                             component={Dashboard}
                         />
+
                         <Route
                             path={'/library'}
-                            component={ProductsSearchList}
+                            component={() => (
+                                <ProductsSearchList
+                                    products={this.state.products}
+                                />)}
                         />
                         <Route
                             path={'/product/:product'}
