@@ -1,0 +1,92 @@
+-dane w jednym miejscu
+-zmienianie danych w jednym miejscu
+-flux jest wzorcem
+
+-dane plyną w jedną strone
+
+
+-dispatcher - wyslać przekazac - coś co wysyła info
+-store - przehcowuje dane- obiekt przechowujący wiele stateów
+-action - rzecy któ©e robimy
+-view - komponent - otrzymuje dane od stora jeżeli cos sie zmieniło 
+
+jak to jest zrobione że dane płyna wjedną stronę? zawsze w jedna stronę płyną (coś w stylu onChange) 
+
+
+widok wysyła akcje przez dispatchera - przetwarzanie struktów danych - store na podstawe akcji przetwarza/zapisuje dane 
+dalej store informuje widok co się zmieniło
+
+
+event jest obiektem --> stan jest obiektem 
+
+akcje zestaw zdarzeń które moga sie zdarzyć
+
+cała logika nalzey do store i akcji 
+
+akcje powiiny byc opisujace co robią
+
+samokomentujący sie kod :D 
+
+*************************************************
+**********************REDUX**********************
+***REDUX*********************************REDUX***
+*************************************************
+
+reduxer to jest funkcja do kt©óej trafia akcja zanim zmieni się store
+
+jeden reduser powinien odpowiadać za jeden obiekt w obiekcie
+
+wszystkie reducery dostają akcje
+
+nie ma obiektu który słuzy tylko do wysyłania
+
+store posiada sam metode dispatch
+
+-> pojednycze źródło prawdy kazde dane pochodzą ze stanu - jak robimy w reduxie to wszystko robimy w nim
+
+-> stan jest tylko do odczytu - 
+
+-> zmiany muszą być robione przez czyste funkcje - reducery muszą być czystymi funkcjami
+
+
+
+TWÓRCY AKCJI
+ // do uzupłniania
+
+
+REDUCER: 
+zwykła funkcja 
+
+- każdy reducer ma funkcje switch z koniecznym defaultem
+
+- combineReducer przyjmuje wszystkie reducery i robi z niegoo jeden zachowuje się jak jeden duży reducer wywołuje wszystkie
+wrzuca ze stanu tylko kawałki stanu określone w reducerach 
+
+STORE jeden w reduxie trzyma stan aplikacji pozwala na dostęp do stanu metodami
+-getState()
+-pozwala byc stanowi aktualizowany   ->   dispatch(action)
+
+
+funckja która tworzy store
+createStore(todoApp)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

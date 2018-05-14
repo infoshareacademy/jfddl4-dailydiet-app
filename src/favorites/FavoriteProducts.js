@@ -6,7 +6,8 @@ import { List } from 'material-ui/List'
 
 import DialogFavorites from './DialogFavorites'
 import ListElement from './../ListElement'
-
+import ShareButtonFacebook from '../ShareButtonFacebook';
+import Container from '../UI/Container';
 class FavoriteProducts extends React.Component {
   state = {
     products: this.props.products,
@@ -32,7 +33,10 @@ class FavoriteProducts extends React.Component {
   render() {
     return (
       <div>
+        <Container>
         <h1>Favorite products</h1>
+        </Container>
+        <Container>
         {
           !this.state.products ?
             'Loading...'
@@ -65,6 +69,8 @@ class FavoriteProducts extends React.Component {
               />
             </List>
         }
+        </Container>
+        <ShareButtonFacebook/>
       </div>
     )
   }

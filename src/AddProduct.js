@@ -92,7 +92,7 @@ class AddProduct extends React.Component {
     if (proteins % 1 === 0) {
       this.setState({ proteins })
     } else {
-      alert('A number is required in this field')
+      alert('An integer is required in this field')
     }
   }
 
@@ -100,7 +100,7 @@ class AddProduct extends React.Component {
     if (carbohydrates % 1 === 0) {
       this.setState({ carbohydrates })
     } else {
-      alert('A number is required in this field')
+      alert('An integer is required in this field')
     }
   }
 
@@ -108,7 +108,7 @@ class AddProduct extends React.Component {
     if (fat % 1 === 0) {
       this.setState({ fat })
     } else {
-      alert('A number is required in this field')
+      alert('An integer is required in this field')
     }
   }
 
