@@ -58,89 +58,91 @@ class ProductsSearchList extends React.Component {
     }
 
     searchProducts = () => {
-        
-            //wyświetl całą
-            this.setState({
-                filtredListOfProduct: this.state.productsList.filter((el, i, arr) => {
-                    if (el.kcal < this.state.calories && el.name.indexOf(this.state.lookingProduct) != -1) return true
-                })
-                    .filter((el) => {
-                        if (this.state.valueDropMenu === 'every') return true
-                        else if (el.category === this.state.valueDropMenu) return true
-                    })
 
-
+        //wyświetl całą
+        this.setState({
+            filtredListOfProduct: this.state.productsList.filter((el, i, arr) => {
+                if (el.kcal < this.state.calories && el.name.indexOf(this.state.lookingProduct) != -1) return true
             })
-        }
+                .filter((el) => {
+                    if (this.state.valueDropMenu === 'every') return true
+                    else if (el.category === this.state.valueDropMenu) return true
+                })
 
-        render() {
 
-            return (
-                <Container>
-                    <TextField
-                        hintText={'Type name of looking product'}
-                        fullWidth={true}
-                        onChange={(event, newValue) => this.handleTextField(event, newValue)}// w onChange-u filter 
-                    />
-                    <Container>
-                        <Slider
-                            min={0}
-                            max={700}
-                            step={1}
-                            value={this.state.calories}
-                            onChange={(event, value) => this.handleSlider(event, value)}
-                        />
-                        <p>
-                            <span>{'Value of calories: '}</span>
-                            <span>{this.state.calories}</span>
-                        </p>
-
-                        <DropDownMenu value={this.state.valueDropMenu} onChange={this.handleChange} openImmediately={false}>
-                            <MenuItem value={'every'} primaryText="Every" />
-                            <MenuItem value={'other'} primaryText="Other" />
-                            <MenuItem value={'dairy'} primaryText="Dairy" />
-                            <MenuItem value={'sweets'} primaryText="Sweets" />
-                            <MenuItem value={'drinks'} primaryText="Drinks" />
-                            <MenuItem value={'fruit'} primaryText="Fruit" />
-                            <MenuItem value={'vegetable'} primaryText="Vegetable" />
-                            <MenuItem value={'meat'} primaryText="Meat" />
-                        </DropDownMenu>
-                    </Container>
-                    <Container>
-                        {
-                            !this.state.filtredListOfProduct.length ?
-                                'Loading...'
-                                :
-                                <List>
-                                    { 
-                                        this.state.filtredListOfProduct
-                                            .map(
-                                                el => (
-                                                    <ListElement
-                                                        productName={el.name}
-                                                        productKey={el.key}
-                                                        isProductFavorite={el.isFavorite}
-                                                        productPicture={el.picture}
-                                                        onFavoriteRequest={this.onFavoriteRequest}
-                                                    />
-                                                )
-                                            )
-                                    }
-                                    <DialogFavorites
-                                        openToggler={this.isDialogOpenToggler}
-                                        favoriteToggler={this.toggleFavorite}
-                                        isOpen={this.state.isDialogOpen}
-                                        productIsFavorite={this.state.productIsFavorite}
-                                        productName={this.state.productName}
-                                    />
-
-                                </List>
-                        }
-                    </Container>
-                </Container>
-            )
-        }
-
+        })
     }
 
-    export default ProductsSearchList
+    render() {
+
+        return (
+            <Container>
+                <TextField
+                    hintText={'Type name of looking product'}
+                    fullWidth={true}
+                    onChange={(event, newValue) => this.handleTextField(event, newValue)}// w onChange-u filter 
+                />
+                <Container>
+                    <Slider
+                        min={0}
+                        max={700}
+                        step={1}
+                        value={this.state.calories}
+                        onChange={(event, value) => this.handleSlider(event, value)}
+                    />
+                    <p>
+                        <span>{'Value of calories: '}</span>
+                        <span>{this.state.calories}</span>
+                    </p>
+
+                    <DropDownMenu value={this.state.valueDropMenu} onChange={this.handleChange} openImmediately={false}>
+                        <MenuItem value={'every'} primaryText="Every" />
+                        <MenuItem value={'other'} primaryText="Other" />
+                        <MenuItem value={'dairy'} primaryText="Dairy" />
+                        <MenuItem value={'sweets'} primaryText="Sweets" />
+                        <MenuItem value={'drinks'} primaryText="Drinks" />
+                        <MenuItem value={'fruit'} primaryText="Fruit" />
+                        <MenuItem value={'vegetable'} primaryText="Vegetable" />
+                        <MenuItem value={'meat'} primaryText="Meat" />
+                    </DropDownMenu>
+                </Container>
+                <Container>
+                    {
+                        !this.state.filtredListOfProduct.length ?
+                            'Loading...'
+                            :
+                            <List>
+                                {
+                                    this.state.filtredListOfProduct
+                                        .map(
+                                            el => (
+                                                <ListElement
+                                                    productName={el.name}
+                                                    productKey={el.key}
+                                                    isProductFavorite={el.isFavorite}
+                                                    productPicture={el.picture}
+                                                    onFavoriteRequest={this.onFavoriteRequest}
+                                                />
+                                            )
+                                        )
+                                }
+                                <DialogFavorites
+                                    openToggler={this.isDialogOpenToggler}
+                                    favoriteToggler={this.toggleFavorite}
+                                    isOpen={this.state.isDialogOpen}
+                                    productIsFavorite={this.state.productIsFavorite}
+                                    productName={this.state.productName}
+                                />
+
+                            </List>
+                    }
+    
+
+                </Container>
+            </Container>
+        )
+    }
+
+}
+
+export default ProductsSearchList
