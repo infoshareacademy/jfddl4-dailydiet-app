@@ -9,7 +9,7 @@ import {Link} from 'react-router-dom'
 const ITEMS_PER_PAGE = 10
 
 const upper = word => {
-    return word.charAt(0).toUpperCase() + word.slice(1);
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
 }
 
 class Products extends React.Component {

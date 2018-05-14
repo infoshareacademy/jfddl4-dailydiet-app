@@ -8,7 +8,7 @@ const fontSizes = {
     fontSize: '24px',
 }
 const upper = word => {
-    return word.charAt(0).toUpperCase() + word.slice(1);
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
 }
 
 class SingleProductSite extends React.Component {
