@@ -7,8 +7,6 @@ import { List } from 'material-ui/List'
 import DialogFavorites from './DialogFavorites'
 import ListElement from './../ListElement'
 
-const PRODUCTS_RESOURCE_PATH = `https://dailydiet-app.firebaseio.com`
-
 class FavoriteProducts extends React.Component {
   state = {
     products: this.props.products,

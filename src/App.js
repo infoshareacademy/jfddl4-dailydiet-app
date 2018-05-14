@@ -19,6 +19,10 @@ class App extends React.Component {
         isSidebarOpen: false,
         products: null
     }
+  state = {
+    isSidebarOpen: false,
+    products: []
+  }
 
     componentDidMount() {
         readFromDatabase(this.setArrayToState)
@@ -87,7 +91,8 @@ class App extends React.Component {
                             />)}
                     />
 
-            </div>
+
+          </div>
 
     </Router>
 
