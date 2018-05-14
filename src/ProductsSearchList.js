@@ -62,11 +62,13 @@ class ProductsSearchList extends React.Component {
         //wyświetl całą
         this.setState({
             filtredListOfProduct: this.state.productsList.filter((el, i, arr) => {
-                if (el.kcal < this.state.calories && el.name.indexOf(this.state.lookingProduct) != -1) return true
+                if (el.kcal < this.state.calories && el.name.indexOf(this.state.lookingProduct) !== -1) return true
+                else return false
             })
                 .filter((el) => {
                     if (this.state.valueDropMenu === 'every') return true
                     else if (el.category === this.state.valueDropMenu) return true
+                    else return false
                 })
 
 
