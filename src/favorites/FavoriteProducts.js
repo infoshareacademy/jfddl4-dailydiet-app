@@ -6,7 +6,7 @@ import { List } from 'material-ui/List'
 
 import DialogFavorites from './DialogFavorites'
 import ListElement from './../ListElement'
-import ShareButton from './../'
+import ShareButtonFacebook from '../ShareButtonFacebook';
 class FavoriteProducts extends React.Component {
   state = {
     products: this.props.products,
@@ -65,6 +65,7 @@ class FavoriteProducts extends React.Component {
               
             </List>
         }
+        <ShareButtonFacebook/>
       </div>
     )
   }
