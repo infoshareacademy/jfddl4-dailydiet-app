@@ -16,23 +16,16 @@ class Products extends React.Component {
     }
 
     componentDidMount() {
-        -
-            fetch('https://dailydiet-app.firebaseio.com/products/.json')
-                .then((response) => response.json())
-                .then((myJson) => {
+        const dataInArray = (
+            Object.entries(this.props.products)
+                .map(el => ({
+                    value: el[1].name,
+                }))
 
-                    const dataInArray = (
-                        Object.entries(myJson)
-                            .map(el => ({
-                                value: el[1].name,
-                            }))
-
-                    )
-
-                    this.setState({
-                        numberOfPages: Math.ceil(dataInArray.length / ITEMS_PER_PAGE)
-                    })
-                })
+        )
+        this.setState({
+            numberOfPages: Math.ceil(dataInArray.length / ITEMS_PER_PAGE)
+        })
 
     }
 
