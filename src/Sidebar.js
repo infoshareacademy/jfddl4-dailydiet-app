@@ -90,6 +90,7 @@ const Sidebar = (props) => (
         </p>
       </MenuItem>
     </Link>
+
   </Drawer>
 
 )
