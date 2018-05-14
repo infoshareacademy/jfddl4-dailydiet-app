@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import AppBar from 'material-ui/AppBar'
 import Drawer from 'material-ui/Drawer'
 import MenuItem from 'material-ui/MenuItem'
 
 const Sidebar = (props) => (
-  
+
   <Drawer
     docked={false}
     open={props.open}
@@ -35,6 +36,15 @@ const Sidebar = (props) => (
         onClick={props.close}
       >
         Favorite Products
+      </MenuItem>
+    </Link>
+    <Link
+      to={'/add-product'}
+    >
+      <MenuItem
+        onClick={props.close}
+      >
+        Add New Product
       </MenuItem>
     </Link>
   </Drawer>
