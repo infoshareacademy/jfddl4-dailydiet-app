@@ -9,12 +9,10 @@ import Sidebar from './Sidebar'
 import Dashboard from './Dashboard'
 import ProductsSearchList from './ProductsSearchList'
 import SingleProductSite from './SingleProductSite'
-
 import FavoriteProducts from './favorites'
 import AddProduct from './AddProduct'
 
 class App extends React.Component {
-
     state = {
         isSidebarOpen: false,
         products: []
@@ -24,11 +22,9 @@ class App extends React.Component {
         readFromDatabase(this.setArrayToState)
     }
 
-    setArrayToState = (data) => {
-        this.setState({
-            products: data
-        })
-    }
+    setArrayToState = (data) => this.setState({
+        products: data
+    })
 
     drawerStateHandler = () => this.setState({
         isSidebarOpen: !this.state.isSidebarOpen
@@ -48,22 +44,17 @@ class App extends React.Component {
                         backgroundColor: orange500,
                     }}
                 />
-
                 <Router>
-
                     <div>
-
                         <Sidebar
                             open={this.state.isSidebarOpen}
                             handler={this.drawerStateHandler}
                             close={this.drawerClose}
                         />
-
                         <Route
                             exact path={'/'}
                             component={Dashboard}
                         />
-
                         <Route
                             path={'/library'}
                             component={() => (
@@ -89,12 +80,8 @@ class App extends React.Component {
                                     products={this.state.products}
                                 />)}
                         />
-
-
                     </div>
-
                 </Router>
-
             </div>
         )
     }

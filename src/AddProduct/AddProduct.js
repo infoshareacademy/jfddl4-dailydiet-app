@@ -2,13 +2,9 @@ import React from 'react'
 // Firebase
 import { db } from '../firebase'
 // Material-ui
-import { MenuItem } from 'material-ui'
 import RaisedButton from 'material-ui/RaisedButton'
-import TextField from 'material-ui/TextField'
-import DropDownMenu from 'material-ui/DropDownMenu'
 import Container from '../UI/Container'
-// Add product logic
-import * as logic from './logic'
+// Add product views
 import AddProductPart from './AddProductPart'
 
 const style = {
@@ -16,9 +12,6 @@ const style = {
     diplay: 'flex',
     flexGrow: 1,
     maxWidth: '500px'
-  },
-  centered: {
-    textAlign: 'center'
   }
 }
 
@@ -29,10 +22,84 @@ class AddProduct extends React.Component {
     category: 'other',
     isFavorite: true,
     picture: '',
-    kcal: '',
+    calories: '',
     proteins: '',
     carbohydrates: '',
     fat: ''
+  }
+
+  addToDatabase = () => {
+    this.state.products.filter(el =>
+      el.name === this.state.name
+    ).length ?
+      this.clearState(alert(`${this.state.name} is already in base!`))
+      :
+      db.ref(`/products`)
+        .push({
+          name: this.state.name,
+          category: this.state.category,
+          isFavorite: this.state.isFavorite,
+          picture: this.state.picture,
+          kcal: this.state.calories,
+          proteins: this.state.proteins,
+          carbohydrates: this.state.carbohydrates,
+          fat: this.state.fat
+        }).then(this.clearState)
+  }
+
+  clearState = (callback) =>
+    this.setState({
+      category: 'other',
+      isFavorite: true,
+      picture: '',
+      calories: 0,
+      proteins: 0,
+      carbohydrates: 0,
+      fat: 0
+    }, callback())
+
+  nameHandler = (name) => (this.setState({ name }))
+
+  dropDownCategoryHandler = (event, index, value) => {
+    this.setState({ category: value });
+  }
+
+  dropDownFavoriteHandler = (event, index, value) => {
+    this.setState({ isFavorite: value });
+  }
+
+  pictureHandler = (picture) => (this.setState({ picture }))
+
+  caloriesHandler = (calories) => {
+    if (calories % 1 === 0) {
+      this.setState({ calories })
+    } else {
+      alert('An integer is required in this field')
+    }
+  }
+
+  proteinsHandler = (proteins) => {
+    if (proteins % 1 === 0) {
+      this.setState({ proteins })
+    } else {
+      alert('An integer is required in this field')
+    }
+  }
+
+  carbohydratesHandler = (carbohydrates) => {
+    if (carbohydrates % 1 === 0) {
+      this.setState({ carbohydrates })
+    } else {
+      alert('An integer is required in this field')
+    }
+  }
+
+  fatHandler = (fat) => {
+    if (fat % 1 === 0) {
+      this.setState({ fat })
+    } else {
+      alert('An integer is required in this field')
+    }
   }
 
   render() {
@@ -44,56 +111,29 @@ class AddProduct extends React.Component {
         <Container>
           <div style={style.wrapper}>
             <h2>Complete all this fields to add new product:</h2>
-            
             <AddProductPart
-              name={true}
+              nameHandler={this.nameHandler}
+              categoryState={this.state.category}
+              categoryHandler={this.dropDownCategoryHandler}
+              favoriteState={this.state.isFavorite}
+              favoriteHandler={this.dropDownFavoriteHandler}
+              pictureState={this.state.picture}
+              pictureHandler={this.pictureHandler}
+              caloriesHandler={this.caloriesHandler}
+              caloriesState={this.state.calories}
+              proteinsHandler={this.proteinsHandler}
+              proteinsState={this.state.proteins}
+              carbohydratesHandler={this.carbohydratesHandler}
+              carbohydratesState={this.state.carbohydrates}
+              fatHandler={this.fatHandler}
+              fatState={this.state.fat}
             />
-
-            <AddProductPart
-              category={true}
-            />
-
-            <AddProductPart
-              favorite={true}
-            />
-
-            <AddProductPart
-              calories={true}
-            />
-
-            <AddProductPart
-              proteins={true}
-            />
-
-            <span>Carbohydrates: </span>
-            <TextField
-              floatingLabelText="Number is required"
-              floatingLabelFixed={true}
-              name={'new-product-kcal'}
-              hintText={'Type carbohydrates per 100g'}
-              fullWidth={false}
-              onChange={(event, value) => { logic.carbohydratesHandler(value) }}
-              value={this.state.carbohydrates}
-            />
-            <br />
-            <div>
-              <span>Fat: </span>
-              <TextField
-                floatingLabelText="Number is required"
-                floatingLabelFixed={true}
-                name={'new-product-kcal'}
-                hintText={'Type fat per 100g'}
-                fullWidth={false}
-                onChange={(event, value) => { logic.fatHandler(value) }}
-                value={this.state.fat}
-              />
-            </div>
           </div>
         </Container>
         <Container>
           <RaisedButton
             label={<b>Add!</b>}
-            onClick={logic.addToDatabase}
+            onClick={this.addToDatabase}
             primary={true}
             fullWidth={true}
           />

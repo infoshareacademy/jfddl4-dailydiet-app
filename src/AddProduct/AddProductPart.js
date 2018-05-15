@@ -3,97 +3,144 @@ import React from 'react'
 import { MenuItem } from 'material-ui'
 import TextField from 'material-ui/TextField'
 import DropDownMenu from 'material-ui/DropDownMenu'
-// Add product logic
-import * as logic from './logic'
+
+const style = {
+  textField: {
+    paddingLeft: '2rem',
+    textAlign: 'right'
+  }
+}
 
 const AddProductPart = (props) => (
-  props.name ?
-    <div>
-      <span>Type name: </span>
+  <div>
+    <span>Type name: </span>
+    <br />
+    <div
+      style={style.textField}
+    >
       <TextField
         name={'new-product-name'}
         hintText={'e.g. avocado'}
-        fullWidth={false}
-        onChange={(event, value) => logic.nameHandler(value)}
+        fullWidth={true}
+        onChange={(event, value) => props.nameHandler(value)}
       />
-      <br />
     </div>
-    :
-    props.category ?
-      <div>
-        <span> Choose category: </span>
-        <DropDownMenu
-          value={this.state.category}
-          onChange={logic.dropDownCategoryHandler}
-          openImmediately={false}
-        >
-          <MenuItem value={'other'} primaryText="Other" />
-          <MenuItem value={'dairy'} primaryText="Dairy" />
-          <MenuItem value={'sweets'} primaryText="Sweets" />
-          <MenuItem value={'drinks'} primaryText="Drinks" />
-          <MenuItem value={'fruit'} primaryText="Fruit" />
-          <MenuItem value={'vegetable'} primaryText="Vegetable" />
-          <MenuItem value={'meat'} primaryText="Meat" />
-        </DropDownMenu>
-        <br />
-      </div>
-      :
-      props.favorite ?
-        <div>
-          <span>Mark as favorite: </span>
-          <DropDownMenu
-            value={this.state.isFavorite}
-            onChange={logic.dropDownFavoriteHandler}
-            openImmediately={false}
-          >
-            <MenuItem value={true} primaryText={'Yes'} />
-            <MenuItem value={false} primaryText={'No'} />
-          </DropDownMenu>
-          <br />
-          <span>Paste image link: </span>
-          <TextField
-            name={'new-product-picture'}
-            floatingLabelText="Required .jpg or .png formats"
-            floatingLabelFixed={true}
-            hintText={'e.g https://freepik.com/...jpg'}
-            fullWidth={false}
-            onChange={(event, value) => this.pictureHandler(value)}
-            value={this.state.picture}
-          />
-          <br />
-        </div>
-        :
-        props.clories ?
-          <div>
-            <span>Calories: </span>
-            <TextField
-              floatingLabelText="Number is required"
-              floatingLabelFixed={true}
-              name={'new-product-kcal'}
-              hintText={'Type calories per 100g'}
-              fullWidth={false}
-              onChange={(event, value) => { this.kcalHandler(value) }}
-              value={this.state.kcal}
-            />
-            <br />
-          </div>
-          :
-          props.proteins ?
-            <div>
-              <span>Proteins: </span>
-              <TextField
-                floatingLabelText="Number is required"
-                floatingLabelFixed={true}
-                name={'new-product-kcal'}
-                hintText={'Type proteins per 100g'}
-                fullWidth={false}
-                onChange={(event, value) => { this.proteinsHandler(value) }}
-                value={this.state.proteins}
-              />
-              <br />
-            </div>
-            :
-            null
+    <br />
+    <span> Choose category: </span>
+    <br />
+    <div
+      style={style.textField}
+    >
+      <DropDownMenu
+        value={props.categoryState}
+        onChange={props.categoryHandler}
+        openImmediately={false}
+      >
+        <MenuItem value={'other'} primaryText="Other" />
+        <MenuItem value={'dairy'} primaryText="Dairy" />
+        <MenuItem value={'sweets'} primaryText="Sweets" />
+        <MenuItem value={'drinks'} primaryText="Drinks" />
+        <MenuItem value={'fruit'} primaryText="Fruit" />
+        <MenuItem value={'vegetable'} primaryText="Vegetable" />
+        <MenuItem value={'meat'} primaryText="Meat" />
+      </DropDownMenu>
+    </div>
+    <br />
+    <span>Mark as favorite: </span>
+    <br />
+    <div
+      style={style.textField}
+    >
+      <DropDownMenu
+        value={props.favoriteState}
+        onChange={props.favoriteHandler}
+        openImmediately={false}
+      >
+        <MenuItem value={true} primaryText={'Yes'} />
+        <MenuItem value={false} primaryText={'No'} />
+      </DropDownMenu>
+    </div>
+    <br />
+    <span>Paste image link: </span>
+    <br />
+    <div
+      style={style.textField}
+    >
+      <TextField
+        name={'new-product-picture'}
+        hintText={'e.g https://freepik.com/...jpg'}
+        floatingLabelText="Required .jpg or .png formats"
+        floatingLabelFixed={true}
+        fullWidth={true}
+        onChange={(event, value) => props.pictureHandler(value)}
+        value={props.pictureState}
+      />
+    </div>
+    <br />
+    <span>Calories: </span>
+    <br />
+    <div
+      style={style.textField}
+    >
+      <TextField
+        name={'new-product-kcal'}
+        hintText={'Type calories per 100g'}
+        floatingLabelText="Number is required"
+        floatingLabelFixed={true}
+        fullWidth={true}
+        onChange={(event, value) => { props.caloriesHandler(value) }}
+        value={props.caloriesState}
+      />
+    </div>
+    <br />
+    <span>Proteins: </span>
+    <br />
+    <div
+      style={style.textField}
+    >
+      <TextField
+        name={'new-product-kcal'}
+        hintText={'Type proteins per 100g'}
+        floatingLabelText="Number is required"
+        floatingLabelFixed={true}
+        fullWidth={true}
+        onChange={(event, value) => { props.proteinsHandler(value) }}
+        value={props.proteinsState}
+      />
+    </div>
+    <br />
+    <span>Carbohydrates: </span>
+    <br />
+    <div
+      style={style.textField}
+    >
+      <TextField
+        name={'new-product-kcal'}
+        hintText={'Type carbohydrates per 100g'}
+        floatingLabelText="Number is required"
+        floatingLabelFixed={true}
+        fullWidth={true}
+        onChange={(event, value) => { props.carbohydratesHandler(value) }}
+        value={props.carbohydratesState}
+      />
+    </div>
+    <br />
+    <span>Fat: </span>
+    <br />
+    <div
+      style={style.textField}
+    >
+      <TextField
+        name={'new-product-kcal'}
+        hintText={'Type fat per 100g'}
+        floatingLabelText="Number is required"
+        floatingLabelFixed={true}
+        fullWidth={true}
+        onChange={(event, value) => { props.fatHandler(value) }}
+        value={props.fatState}
+      />
+    </div>
+  </div>
 )
 
 export default AddProductPart
