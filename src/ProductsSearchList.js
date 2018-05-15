@@ -79,71 +79,80 @@ class ProductsSearchList extends React.Component {
 
         return (
             <div>
+
                 <Container>
                     <TextField
-                        hintText={'Type name of looking product'}
+                        hintText={'Search product'}
                         fullWidth={true}
-                        onChange={(event, newValue) => this.handleTextField(event, newValue)}// w onChange-u filter 
+                        onChange={(event, newValue) => this.handleTextField(event, newValue.toLowerCase())}// w onChange-u filter 
                     />
-                    <Container>
-                        <Slider
-                            min={0}
-                            max={700}
-                            step={1}
-                            value={this.state.calories}
-                            onChange={(event, value) => this.handleSlider(event, value)}
-                        />
-                        <p>
-                            <span>{'Value of calories: '}</span>
-                            <span>{this.state.calories}</span>
-                        </p>
-
-                        <DropDownMenu value={this.state.valueDropMenu} onChange={this.handleChange} openImmediately={false}>
-                            <MenuItem value={'every'} primaryText="Every" />
-                            <MenuItem value={'other'} primaryText="Other" />
-                            <MenuItem value={'dairy'} primaryText="Dairy" />
-                            <MenuItem value={'sweets'} primaryText="Sweets" />
-                            <MenuItem value={'drinks'} primaryText="Drinks" />
-                            <MenuItem value={'fruit'} primaryText="Fruit" />
-                            <MenuItem value={'vegetable'} primaryText="Vegetable" />
-                            <MenuItem value={'meat'} primaryText="Meat" />
-                        </DropDownMenu>
-                    </Container>
-                    <Container>
-                        {
-                            !this.state.filtredListOfProduct.length ?
-                                'Loading...'
-                                :
-                                <List>
-                                    {
-                                        this.state.filtredListOfProduct
-                                            .map(
-                                                el => (
-                                                    <ListElement
-                                                        key={el.key}
-                                                        productName={el.name}
-                                                        productKey={el.key}
-                                                        isProductFavorite={el.isFavorite}
-                                                        productPicture={el.picture}
-                                                        onFavoriteRequest={this.onFavoriteRequest}
-                                                    />
-                                                )
-                                            )
-                                    }
-                                    <DialogFavorites
-                                        openToggler={this.isDialogOpenToggler}
-                                        favoriteToggler={this.toggleFavorite}
-                                        isOpen={this.state.isDialogOpen}
-                                        productIsFavorite={this.state.productIsFavorite}
-                                        productName={this.state.productName}
-                                    />
-
-                                </List>
-                        }
-
-                    </Container>
                 </Container>
-                <ShareButtonFacebook/>
+                <Container>
+                    <div style={{ display: 'flex', flexDirection: 'row' }}>
+                        <div> {'0 kcal'} </div>
+                        <div>
+                            <Slider
+                                min={0}
+                                max={700}
+                                step={1}
+                                value={this.state.calories}
+                                onChange={(event, value) => this.handleSlider(event, value)
+                                }
+                            />
+                        </div>
+                        <div>{'700 kcal'}</div>
+                    </div>
+                    <p>
+                        <span>{'Calories: '}</span>
+                        <span>{this.state.calories}</span>
+                    </p>
+
+                    <DropDownMenu value={this.state.valueDropMenu} onChange={this.handleChange} openImmediately={false}>
+                        <MenuItem value={'every'} primaryText="Every" />
+                        <MenuItem value={'other'} primaryText="Other" />
+                        <MenuItem value={'dairy'} primaryText="Dairy" />
+                        <MenuItem value={'sweets'} primaryText="Sweets" />
+                        <MenuItem value={'drinks'} primaryText="Drinks" />
+                        <MenuItem value={'fruit'} primaryText="Fruit" />
+                        <MenuItem value={'vegetable'} primaryText="Vegetable" />
+                        <MenuItem value={'meat'} primaryText="Meat" />
+                    </DropDownMenu>
+                </Container>
+                <Container>
+                    {
+                        !this.state.filtredListOfProduct.length ?
+                            'Loading...'
+                            :
+                            <List>
+                                {
+                                    this.state.filtredListOfProduct
+                                        .map(
+                                            el => (
+                                                <ListElement
+                                                    key={el.key}
+                                                    productName={el.name}
+                                                    productKey={el.key}
+                                                    isProductFavorite={el.isFavorite}
+                                                    productPicture={el.picture}
+                                                    onFavoriteRequest={this.onFavoriteRequest}
+                                                />
+                                            )
+                                        )
+                                }
+                                <DialogFavorites
+                                    openToggler={this.isDialogOpenToggler}
+                                    favoriteToggler={this.toggleFavorite}
+                                    isOpen={this.state.isDialogOpen}
+                                    productIsFavorite={this.state.productIsFavorite}
+                                    productName={this.state.productName}
+                                />
+
+                            </List>
+                    }
+
+                </Container>
+
+                <ShareButtonFacebook />
             </div>
         )
     }

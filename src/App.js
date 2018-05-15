@@ -66,7 +66,7 @@ class App extends React.Component {
                 <ProductsSearchList
                   products={this.state.products}
                 />)}
-              
+
             />
             <Route
               path={'/product/:product'}
