@@ -2,9 +2,9 @@ import React from 'react'
 // Material-ui
 import {ListItem, IconButton} from 'material-ui'
 import Avatar from 'material-ui/Avatar'
-import Star from 'material-ui/svg-icons/toggle/star'
-import StarBorder from 'material-ui/svg-icons/toggle/star-border'
-import {Link} from 'react-router-dom'
+import Favorite from 'material-ui/svg-icons/action/favorite'
+import FavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
+import { Link } from 'react-router-dom'
 
 const styles = {
     textDecoration: 'none',
@@ -12,21 +12,22 @@ const styles = {
     display: 'inline-block'
 }
 
+
 const ListElement = (props) => (
-    <ListItem
-        containerElement={props.containerElement}
+  <ListItem
         key={props.productKey}
-        insetChildren={true}
-        leftAvatar={<Avatar src={props.productPicture}/>}
-        rightAvatar={
-            < IconButton
-                onClick={() => props.onFavoriteRequest(props.productName, props.productKey, props.isProductFavorite)}
-            >
-                {
-                    props.isProductFavorite ?
-                        <Star/>
-                        :
-                        <StarBorder/>
+        containerElement={props.containerElement}
+    insetChildren={true}
+    leftAvatar={<Avatar src={props.productPicture} />}
+    rightAvatar={
+      < IconButton
+        onClick={() => props.onFavoriteRequest(props.productName, props.productKey, props.isProductFavorite)}
+      >
+        {
+          props.isProductFavorite ?
+            <Favorite color={'#F44336'} />
+            :
+            <FavoriteBorder color={'#F44336'} />
                 }
             </IconButton>
         }
