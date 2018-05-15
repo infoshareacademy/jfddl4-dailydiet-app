@@ -9,7 +9,6 @@ import Sidebar from './Sidebar'
 import Dashboard from './Dashboard'
 import ProductsSearchList from './ProductsSearchList'
 import SingleProductSite from './SingleProductSite'
-import Products from "./FinalProductPage";
 
 import FavoriteProducts from './favorites'
 import AddProduct from './AddProduct'

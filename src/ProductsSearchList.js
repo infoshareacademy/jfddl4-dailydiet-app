@@ -1,23 +1,22 @@
 import React from 'react'
 import TextField from 'material-ui/TextField'
 import Container from './UI/Container'
-import Slider from 'material-ui/Slider';
+import Slider from 'material-ui/Slider'
 // Firebase
 import {db} from './firebase'
-import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
-import {List} from 'material-ui';
-import ListElement from './ListElement';
-import DialogFavorites from './favorites/DialogFavorites';
-import ReactPaginate from 'react-paginate';
-import {Link} from 'react-router-dom'
+import DropDownMenu from 'material-ui/DropDownMenu'
+import MenuItem from 'material-ui/MenuItem'
+import {List} from 'material-ui'
+import ListElement from './ListElement'
+import DialogFavorites from './favorites/DialogFavorites'
+import ReactPaginate from 'react-paginate'
 
 import ShareButtonFacebook from './ShareButtonFacebook'
 
 const ITEMS_PER_PAGE = 10
 
 const upper = word => {
-    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
 }
 
 class ProductsSearchList extends React.Component {
