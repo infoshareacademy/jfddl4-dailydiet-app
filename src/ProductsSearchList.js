@@ -157,7 +157,6 @@ class ProductsSearchList extends React.Component {
                                                         productKey={el.key}
                                                         isProductFavorite={el.isFavorite}
                                                         productPicture={el.picture}
-                                                        onFavoriteRequest={this.onFavoriteRequest}
                                                     />
                                                 )
                                             }
