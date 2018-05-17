@@ -14,8 +14,10 @@ const upper = word => {
 class SingleProductSite extends React.Component {
     state = {
         product: null,
-        productKey: ''
+        productKey: '',
+        productName: '',
     }
+
 
     componentDidMount() {
 
@@ -102,7 +104,7 @@ class SingleProductSite extends React.Component {
                                             name={'addAProductToFavorites'}
                                             backgroundColor={'#E65100'}
                                             label={<span style={{color: 'white'}}>Add to favorites</span>}
-                                            onClick={this.onFavoriteRequest}
+                                            onClick={() => this.onFavoriteRequest()}
                                         />
                                     </Col>
                                 </Row>

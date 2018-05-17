@@ -57,12 +57,11 @@ class Products extends React.Component {
                                     ))
                                     .map(
                                         aProduct => (
-
                                             <ListItem key={aProduct.key}
                                                       primaryText={upper(aProduct.name)}
                                                       insetChildren={true}
                                                       containerElement={<Link to={`product/${aProduct.key}`}/>}
-                                                      leftAvatar={<Avatar src={aProduct.picture}/>}
+                                                      leftAvatar={<Avatar src={aProduct.picture} alt={(aProduct.name)}/>}
                                                       rightAvatar={
                                                           <IconButton><StarBorder
                                                               color="lightBlue"/></IconButton>}
