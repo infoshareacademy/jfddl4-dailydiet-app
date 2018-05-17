@@ -19,17 +19,12 @@ export const initProductSync = () => (dispatch, getState) => {
     )
 }
 
-const initialState = {
-    products: null
-}
+const initialState =  []
 
 export default (state = initialState, action) => {
     switch(action.type){
         case SET:
-            return{
-                ...state,
-                products: action.products,
-            }
+            return action.products
         default:
             return state
     }
