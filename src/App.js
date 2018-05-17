@@ -8,7 +8,7 @@ import readFromDatabase from './logic'
 import Sidebar from './Sidebar'
 import Dashboard from './Dashboard'
 import Products from './Components/Products'
-import SingleProductSite from './SingleProductSite'
+import SingleProductSite from './Components/SingleProductSite'
 
 import FavoriteProducts from './favorites'
 import AddProduct from './AddProduct'

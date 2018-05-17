@@ -19,7 +19,7 @@ export const initProductSync = () => (dispatch, getState) => {
     )
 }
 
-const initialState =  []
+const initialState = []
 
 export default (state = initialState, action) => {
     switch(action.type){

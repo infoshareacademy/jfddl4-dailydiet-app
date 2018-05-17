@@ -1,10 +1,10 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 
 import {List} from 'material-ui';
 import ListElement from '../ListElement';
 
-import { upper } from '../utils'
+import {upper} from '../utils'
 
 const Library = (props) => (
     <div>
@@ -15,14 +15,6 @@ const Library = (props) => (
                 <List>
                     {
                         props.products
-                            // .filter((aProduct, index) => {
-                            //
-                            //     return (
-                            //         this.state.activePage * ITEMS_PER_PAGE <= index
-                            //         &&
-                            //         (this.state.activePage + 1) * ITEMS_PER_PAGE > index
-                            //     )
-                            // })
                             .map(
                                 el => {
                                     return (
@@ -39,16 +31,15 @@ const Library = (props) => (
                     }
 
                 </List>
-        }    </div>
+        }
+    </div>
 )
 
 const mapStateToProps = state => ({
     products: state.products
 })
 
-const mapDispatchToProps = dispatch => ({
-
-})
+const mapDispatchToProps = dispatch => ({})
 
 export default connect(
     mapStateToProps,
