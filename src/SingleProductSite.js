@@ -98,11 +98,12 @@ class SingleProductSite extends React.Component {
                                         </BarChart>
                                     </Col>
                                     <Col xs={12} md={6} center="xs">
-                                        {/*<RaisedButton*/}
-                                            {/*name={'addAProductToFavorites'}*/}
-                                            {/*backgroundColor={'#E65100'}*/}
-                                            {/*label={<span style={{color: 'white'}}>Add to favorites</span>}*/}
-                                        {/*/>*/}
+                                        <RaisedButton
+                                            name={'addAProductToFavorites'}
+                                            backgroundColor={'#E65100'}
+                                            label={<span style={{color: 'white'}}>Add to favorites</span>}
+                                            onClick={this.onFavoriteRequest}
+                                        />
                                     </Col>
                                 </Row>
                             </Grid>

@@ -50,7 +50,7 @@ class Dashboard extends React.Component {
 
                 <Row>
                     <Paper style={styles}>
-                        <h2>Micronutrients in today's meals</h2>
+                        <h2>Macronutrients in today's meals</h2>
                     </Paper>
                     <Row style={styles}>
                         <Col md>

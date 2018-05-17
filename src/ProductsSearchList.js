@@ -25,7 +25,7 @@ class ProductsSearchList extends React.Component {
     state = {
         lookingProduct: '', // część tekstu po którym jest wyszukiwany produkt
         productsList: this.props.products || [], // kompletna baza danych
-        filtredListOfProduct: [], // lista produktów przefiltrowana przez wyszukiwarkę po nazwie
+        filteredListOfProduct: [], // lista produktów przefiltrowana przez wyszukiwarkę po nazwie
         calories: 700, //kalorie
         valueDropMenu: 'every',
         isDialogOpen: false,
@@ -88,7 +88,7 @@ class ProductsSearchList extends React.Component {
 
 
         this.setState({
-            filtredListOfProduct: filteredArray,
+            filteredListOfProduct: filteredArray,
             numberOfPages: Math.ceil(filteredArray.length / ITEMS_PER_PAGE)
         })
 
@@ -132,12 +132,12 @@ class ProductsSearchList extends React.Component {
                 </Container>
                 <Container>
                     {
-                        !this.state.filtredListOfProduct.length ?
+                        !this.state.filteredListOfProduct.length ?
                             'Loading...'
                             :
                             <List>
                                 {
-                                    this.state.filtredListOfProduct
+                                    this.state.filteredListOfProduct
                                         .filter((aProduct, index) => {
 
                                             return (
@@ -151,11 +151,10 @@ class ProductsSearchList extends React.Component {
                                                 return (
                                                     <ListElement
                                                         key={el.key}
-                                                        productName={el.name}
+                                                        productName={upper(el.name)}
                                                         productKey={el.key}
                                                         isProductFavorite={el.isFavorite}
                                                         productPicture={el.picture}
-                                                        onFavoriteRequest={this.onFavoriteRequest}
                                                     />
                                                 )
                                             }
