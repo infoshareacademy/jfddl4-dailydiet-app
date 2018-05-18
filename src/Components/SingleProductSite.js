@@ -2,9 +2,9 @@ import React from 'react'
 import {Grid, Row, Col} from 'react-flexbox-grid'
 import RaisedButton from 'material-ui/RaisedButton'
 import {Table, TableBody, TableRow, TableRowColumn} from 'material-ui/Table';
-import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts'
 import {connect} from 'react-redux'
 import {upper} from '../utils'
+import SingleProductChart from '../Charts/SingleProductChart'
 
 const fontSizes = {
     fontSize: '24px',
@@ -70,15 +70,8 @@ const SingleProductSite = (props) => {
                             </Row>
                             <Row center="xs" middle="xs">
                                 <Col xs={12} md={6}>
-                                    <BarChart width={600} height={300} data={data}>
-                                        <CartesianGrid strokeDasharray="3 3"/>
-                                        <XAxis dataKey="name"/>
-                                        <YAxis/>
-                                        <Tooltip/>
-                                        <Legend/>
-                                        <Bar dataKey="product" fill="#FBC02D"/>
-                                        <Bar dataKey="dailyNorm" fill="#EF6C00"/>
-                                    </BarChart>
+                                    <SingleProductChart
+                                    chartProduct={product.key}/>
                                 </Col>
                                 <Col xs={12} md={6} center="xs">
                                     <RaisedButton
