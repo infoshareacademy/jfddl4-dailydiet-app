@@ -1,10 +1,10 @@
 import React from 'react'
 import {Grid, Row, Col} from 'react-flexbox-grid'
 import RaisedButton from 'material-ui/RaisedButton'
-import {Table, TableBody, TableRow, TableRowColumn} from 'material-ui/Table';
 import {connect} from 'react-redux'
 import {upper} from '../utils'
 import SingleProductChart from '../Charts/SingleProductChart'
+import SingleProductTable from '../Tables/SingleProductTable'
 
 const fontSizes = {
     fontSize: '24px',
@@ -33,35 +33,8 @@ const SingleProductSite = (props) => {
                         <Grid fluid>
                             <Row center="xs" middle="xs">
                                 <Col xs={12} md={6}>
-                                    <Table>
-                                        <TableBody displayRowCheckbox={false}>
-                                            <TableRow>
-                                                <TableRowColumn style={fontSizes}>category:</TableRowColumn>
-                                                <TableRowColumn
-                                                    style={fontSizes}>{product.category}</TableRowColumn>
-                                            </TableRow>
-                                            <TableRow>
-                                                <TableRowColumn style={fontSizes}>kcal: </TableRowColumn>
-                                                <TableRowColumn
-                                                    style={fontSizes}>{product.kcal}</TableRowColumn>
-                                            </TableRow>
-                                            <TableRow>
-                                                <TableRowColumn style={fontSizes}>fat:</TableRowColumn>
-                                                <TableRowColumn
-                                                    style={fontSizes}>{product.fat}</TableRowColumn>
-                                            </TableRow>
-                                            <TableRow>
-                                                <TableRowColumn style={fontSizes}>carbohydrates:</TableRowColumn>
-                                                <TableRowColumn
-                                                    style={fontSizes}>{product.carbohydrates}</TableRowColumn>
-                                            </TableRow>
-                                            <TableRow>
-                                                <TableRowColumn style={fontSizes}>protein:</TableRowColumn>
-                                                <TableRowColumn
-                                                    style={fontSizes}>{product.protein}</TableRowColumn>
-                                            </TableRow>
-                                        </TableBody>
-                                    </Table>
+                                    <SingleProductTable
+                                    tableProduct={product.key}/>
                                 </Col>
                                 <Col xs={12} md={6}>
                                     <img src={product.picture} alt={product.name}
