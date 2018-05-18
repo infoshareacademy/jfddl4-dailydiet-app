@@ -6,6 +6,18 @@ import { logInByGoogle } from '../../state/auth'
 import LogInByGoogle from './LogInByGoogle'
 // UI
 import Container from '../../UI/Container'
+import LogInByMailAndPass from './LogInByMailAndPass';
+
+const style = {
+  header: {
+    color: '#f1edef',
+    boxSizing: 'border-box',
+    fontSize: '2.5rem',
+    fontWeight: 'bold',
+    WebkitTextStroke: '2px #005a1f',
+    textStroke: '2px #005a1f'
+  }
+}
 
 const Auth = (props) => (
   <div>
@@ -13,7 +25,13 @@ const Auth = (props) => (
       props.isUserLoggedIn ?
         props.children
         :
-        <Container centered={true}>
+        <Container centered>
+          <h2 style={style.header}>
+            Welcome to Daily Diet App!
+          </h2>
+          <LogInByMailAndPass
+            onLogInClick={props.logInByMailAndPass}
+          />
           <LogInByGoogle
             onLogInClick={props.logInByGoogle}
           />

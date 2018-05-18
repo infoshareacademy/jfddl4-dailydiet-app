@@ -3,6 +3,7 @@ import Paper from 'material-ui/Paper'
 
 const styles = {
     default: {
+        boxSizing: 'border-box',
         margin: '15px',
         padding: '15px'
     },
@@ -15,10 +16,11 @@ const Container = (props) => (
     <Paper
         style={
             props.centered ?
-                { ...styles.default, ...props.styles }
+                { ...styles.default, ...styles.centered }
                 :
                 styles.default
-            }>
+        }
+    >
         {props.children}
     </Paper>
 )
