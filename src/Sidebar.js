@@ -52,7 +52,7 @@ const Sidebar = (props) => (
       </MenuItem>
     </Link>
     <Link
-      to={'library'}
+      to={'/library'}
       style={styles.link}
     >
       <MenuItem

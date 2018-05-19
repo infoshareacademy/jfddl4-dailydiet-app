@@ -7,9 +7,8 @@ import { orange500 } from 'material-ui/styles/colors'
 import readFromDatabase from './logic'
 import Sidebar from './Sidebar'
 import Dashboard from './Dashboard'
-import ProductsSearchList from './ProductsSearchList'
-import SingleProductSite from './SingleProductSite'
-import Products from "./FinalProductPage";
+import Products from './Components/Products'
+import SingleProductSite from './Components/SingleProductSite'
 
 import FavoriteProducts from './favorites'
 import AddProduct from './AddProduct'
@@ -68,9 +67,7 @@ class App extends React.Component {
                         <Route
                             path={'/library'}
                             component={() => (
-                                <ProductsSearchList
-                                    products={this.state.products}
-                                />)}
+                                <Products />)}
                         />
                         <Route
                             path={'/product/:product'}

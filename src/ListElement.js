@@ -32,7 +32,7 @@ const ListElement = (props) => (
             </IconButton>
         }
     >
-        <Link style={styles} to={`product/${props.productKey}`}>{props.productName}</Link>
+        <Link style={styles} to={`/product/${props.productKey}`}>{props.productName}</Link>
     </ListItem>
 )
 
