@@ -6,9 +6,8 @@ import { List } from 'material-ui/List'
 
 import DialogFavorites from './DialogFavorites'
 import ListElement from './../ListElement'
-
-const PRODUCTS_RESOURCE_PATH = `https://dailydiet-app.firebaseio.com`
-
+import ShareButtonFacebook from '../ShareButtonFacebook';
+import Container from '../UI/Container';
 class FavoriteProducts extends React.Component {
   state = {
     products: this.props.products,
@@ -34,7 +33,10 @@ class FavoriteProducts extends React.Component {
   render() {
     return (
       <div>
+        <Container>
         <h1>Favorite products</h1>
+        </Container>
+        <Container>
         {
           !this.state.products ?
             'Loading...'
@@ -48,6 +50,7 @@ class FavoriteProducts extends React.Component {
                   .map(
                     el => (
                       <ListElement
+                        key={el.key}
                         productName={el.name}
                         productKey={el.key}
                         isProductFavorite={el.isFavorite}
@@ -64,13 +67,13 @@ class FavoriteProducts extends React.Component {
                 productIsFavorite={this.state.productIsFavorite}
                 productName={this.state.productName}
               />
-              
             </List>
         }
+        </Container>
+        <ShareButtonFacebook/>
       </div>
     )
   }
-
 }
 
 export default FavoriteProducts
