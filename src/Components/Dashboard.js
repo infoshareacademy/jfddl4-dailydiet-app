@@ -15,57 +15,28 @@ const styles = {
 }
 
 const Dashboard = (props) => {
-    // state = {
-    //     LineChartPic: {
-    //         width: 500,
-    //         height: 300
-    //     }
-    // }
-
-    // componentDidMount()
-    // {
-    //     this.onResize()
-    //     window.addEventListener('resize', this.onResize)
-    // }
-    //
-    // componentWillUnmount()
-    // {
-    //     window.removeEventListener('resize', this.onResize)
-    // }
-
 
     const onResizeWidthOfLineChart = () => {
-        if (window.innerWidth > 800) {
-
+        if (window.innerWidth > 768) {
             return 400
         }
-        else if (window.innerWidth > 500) {
-
-            return
-                300
+        else if (window.innerWidth > 450) {
+            return 300
         }
         else {
-
-            return 200
+            return 300
         }
-
     }
     const onResizeHeightOfLineChart = () => {
-        if (window.innerWidth > 800) {
-
+        if (window.innerWidth > 768) {
             return 300
-
         }
-        else if (window.innerWidth > 500) {
-
-            return 200
-
+        else if (window.innerWidth > 450) {
+            return 250
         }
         else {
-
-            return 100
+            return 250
         }
-
     }
 
     return (
@@ -81,9 +52,9 @@ const Dashboard = (props) => {
                     </Col>
                     <Col md center={"true"}>
                         <LineChartPic
-                            widthOfLineChart={onResizeWidthOfLineChart}
+                            widthOfLineChart={onResizeWidthOfLineChart()}
 
-                            heightOfLineChart={onResizeHeightOfLineChart}/>
+                            heightOfLineChart={onResizeHeightOfLineChart()}/>
                     </Col>
                 </Row>
             </Row>
@@ -92,7 +63,6 @@ const Dashboard = (props) => {
 
     )
 }
-
 
 export default connect(
     state => ({
