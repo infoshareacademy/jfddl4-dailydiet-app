@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import { logInByGoogle } from '../../state/auth'
 // Components
 import LogInByGoogle from './LogInByGoogle'
+import LogInByMailAndPass from './LogInByMailAndPass'
 // UI
 import Container from '../../UI/Container'
-import LogInByMailAndPass from './LogInByMailAndPass';
 
 const style = {
   header: {
@@ -29,9 +29,7 @@ const Auth = (props) => (
           <h2 style={style.header}>
             Welcome to Daily Diet App!
           </h2>
-          <LogInByMailAndPass
-            onLogInClick={props.logInByMailAndPass}
-          />
+          <LogInByMailAndPass/>
           <LogInByGoogle
             onLogInClick={props.logInByGoogle}
           />
