@@ -1,16 +1,16 @@
 import React from 'react'
 import TextField from 'material-ui/TextField'
-import Container from './UI/Container'
-import Slider from 'material-ui/Slider';
+import Container from '../UI/Container'
+import Slider from 'material-ui/Slider'
 // Firebase
-import {db} from './firebase'
-import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
-import {List} from 'material-ui';
-import ListElement from './ListElement';
-import DialogFavorites from './favorites/DialogFavorites';
-import ReactPaginate from 'react-paginate';
-import {Link} from 'react-router-dom'
+import {db} from '../firebase'
+
+import DropDownMenu from './DropDownMenu'
+import {List} from 'material-ui'
+import ListElement from '../ListElement'
+import DialogFavorites from '../favorites/DialogFavorites'
+import ReactPaginate from 'react-paginate'
+
 
 import ShareButtonFacebook from './ShareButtonFacebook'
 
@@ -112,19 +112,10 @@ class ProductsSearchList extends React.Component {
                             <span>{'Value of calories: '}</span>
                             <span>{this.state.calories}</span>
                         </p>
-
-                    <DropDownMenu value={this.state.valueDropMenu} onChange={this.handleChange} openImmediately={false}>
-                        <MenuItem value={'every'} primaryText="Every"/>
-                        <MenuItem value={'other'} primaryText="Other"/>
-                        <MenuItem value={'dairy'} primaryText="Dairy"/>
-                        <MenuItem value={'sweets'} primaryText="Sweets"/>
-                        <MenuItem value={'drinks'} primaryText="Drinks"/>
-                        <MenuItem value={'fruit'} primaryText="Fruit"/>
-                        <MenuItem value={'vegetable'} primaryText="Vegetable"/>
-                        <MenuItem value={'meat'} primaryText="Meat"/>
-                    </DropDownMenu>
-                </Container>
+                <DropDownMenu/>
+                </Container>    
                 <Container>
+
                     {
                         !this.state.filteredListOfProduct.length ?
                             'Loading...'
