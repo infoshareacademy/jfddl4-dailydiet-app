@@ -10,8 +10,6 @@ import { List } from 'material-ui';
 import ListElement from './ListElement';
 import DialogFavorites from './favorites/DialogFavorites';
 
-
-
 class ProductsSearchList extends React.Component {
 
     state = {
@@ -25,38 +23,31 @@ class ProductsSearchList extends React.Component {
         productKey: '',
         productIsFavorite: null
     }
-
     componentDidMount() { // pobranie danych i zamiana na tablice obiektów
 
         this.searchProducts()
     }
-
     handleSlider = (event, value) => {
         this.setState({ calories: value }, () => this.searchProducts());
 
     }
-
     handleTextField = (event, newValue) => {
         this.setState({ lookingProduct: newValue }, () => this.searchProducts())
 
     }
-
     handleChange = (event, index, value) => {
         this.setState({ valueDropMenu: value }, () => this.searchProducts());
     }
     onFavoriteRequest = (name, key, isFavorite) => (
         this.setState({ productName: name, productKey: key, productIsFavorite: isFavorite }, this.isDialogOpenToggler)
     )
-
     toggleFavorite = () => {
         db.ref(`/products/${this.state.productKey}/isFavorite`)
             .set(!this.state.productIsFavorite)
     }
-
     isDialogOpenToggler = () => {
         this.setState({ isDialogOpen: !this.state.isDialogOpen })
     }
-
     searchProducts = () => {
 
         //wyświetl całą
@@ -70,11 +61,8 @@ class ProductsSearchList extends React.Component {
                     else if (el.category === this.state.valueDropMenu) return true
                     else return false
                 })
-
-
         })
     }
-
     render() {
 
         return (
@@ -136,16 +124,12 @@ class ProductsSearchList extends React.Component {
                                     productIsFavorite={this.state.productIsFavorite}
                                     productName={this.state.productName}
                                 />
-
                             </List>
                     }
-
-
                 </Container>
             </Container>
         )
     }
-
 }
 
 export default ProductsSearchList
