@@ -5,6 +5,8 @@ import PieChart from '../Charts/PieChart'
 import LineChartPic from '../Charts/LineChartPic'
 import Paper from 'material-ui/Paper'
 import ShareButtonFacebook from '../ShareButtonFacebook';
+import {connect} from 'react-redux'
+
 
 const styles = {
     width: '100%',
@@ -32,26 +34,36 @@ const Dashboard = (props) => {
     // }
 
 
-    onResize = () => {
-        console.log('test')
-        if (window.innerWidth >800) {
+    const onResizeWidthOfLineChart = () => {
+        if (window.innerWidth > 800) {
 
-            return {
-                widthOfLineChart: 400,
-                heightOfLineChart: 300
-            }
-        } else if (window.innerWidth >500) {
+            return 400
+        }
+        else if (window.innerWidth > 500) {
 
-            return {
-                widthOfLineChart: 300,
-                heightOfLineChart: 200
-            }
-        } else {
+            return
+                300
+        }
+        else {
 
-            return {
-                widthOfLineChart: 200,
-                heightOfLineChart: 100
-            }
+            return 200
+        }
+
+    }
+    const onResizeHeightOfLineChart = () => {
+        if (window.innerWidth > 800) {
+
+            return 300
+
+        }
+        else if (window.innerWidth > 500) {
+
+            return 200
+
+        }
+        else {
+
+            return 100
         }
 
     }
@@ -69,9 +81,9 @@ const Dashboard = (props) => {
                     </Col>
                     <Col md center={"true"}>
                         <LineChartPic
-                            widthOfLineChart={props.onResize}
+                            widthOfLineChart={onResizeWidthOfLineChart}
 
-                            heightOfLineChart={props.onResize}/>
+                            heightOfLineChart={onResizeHeightOfLineChart}/>
                     </Col>
                 </Row>
             </Row>
