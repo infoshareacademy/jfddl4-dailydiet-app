@@ -1,6 +1,6 @@
 import React from 'react'
 import {PieChart, Pie, Tooltip, Cell} from 'recharts'
-
+import {connect} from 'react-redux'
 
 const data = [
     {
@@ -24,26 +24,38 @@ const styles = {
 }
 
 
+
 const pie_cells = data.map((entry, index) => {
     return (<Cell key={index} fill={entry.color}/>)
 });
 
-const Chart1 = () => (
-    <div style={styles} >
-        <h3>Division of macronutrients</h3>
-        <PieChart  width={300} height={300} style={styles}>
-            <Pie
-                data={data}
-                dataKey="value"
-                nameKey="name"
-            >
-                {pie_cells}
-            </Pie>
-            <Tooltip/>
-        </PieChart>
-    </div>
-)
+const Chart1 = (props) => {
+    // const numberOfVegetables = Object.keys(props.products.other).reduce(function (reduced, key) {
+    //     return reduced + props.products.other
+    // }, 0)
 
-export default Chart1
+    return (
+        <div style={styles}>
+            {console.log(numberOfVegetables)}
+            <h3>Division of macronutrients</h3>
+            <PieChart width={300} height={300} style={styles}>
+                <Pie
+                    data={data}
+                    dataKey="value"
+                    nameKey="name"
+                >
+                    {pie_cells}
+                </Pie>
+                <Tooltip/>
+            </PieChart>
+        </div>
+    )
+}
+
+export default connect(
+    state => ({
+        products: state.products
+    })
+)(Chart1)
 
 
