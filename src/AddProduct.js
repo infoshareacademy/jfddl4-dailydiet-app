@@ -6,14 +6,16 @@ import { MenuItem } from 'material-ui'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 import DropDownMenu from 'material-ui/DropDownMenu'
-// Components
-import DialogFavorites from './favorites/DialogFavorites'
+import Container from './UI/Container';
 
 const style = {
   wrapper: {
     diplay: 'flex',
     flexGrow: 1,
     maxWidth: '500px'
+  },
+  centered: {
+    textAlign: 'center'
   }
 }
 
@@ -24,10 +26,10 @@ class AddProduct extends React.Component {
     category: 'other',
     isFavorite: true,
     picture: '',
-    kcal: 0,
-    proteins: 0,
-    carbohydrates: 0,
-    fat: 0
+    kcal: '',
+    proteins: '',
+    carbohydrates: '',
+    fat: ''
   }
 
   addToDatabase = () => {
@@ -86,119 +88,141 @@ class AddProduct extends React.Component {
     if (kcal % 1 === 0) {
       this.setState({ kcal })
     } else {
-      alert('A number is required in this field')
-      this.setState({ kcal: 0 })
+      alert('An integer is required in this field')
     }
   }
 
-  proteinsHandler = (proteins) => { this.setState({ proteins }) }
+  proteinsHandler = (proteins) => {
+    if (proteins % 1 === 0) {
+      this.setState({ proteins })
+    } else {
+      alert('An integer is required in this field')
+    }
+  }
 
-  carbohydratesHandler = (carbohydrates) => { this.setState({ carbohydrates }) }
+  carbohydratesHandler = (carbohydrates) => {
+    if (carbohydrates % 1 === 0) {
+      this.setState({ carbohydrates })
+    } else {
+      alert('An integer is required in this field')
+    }
+  }
 
-  fatHandler = (fat) => { this.setState({ fat }) }
+  fatHandler = (fat) => {
+    if (fat % 1 === 0) {
+      this.setState({ fat })
+    } else {
+      alert('An integer is required in this field')
+    }
+  }
 
   render() {
     return (
       <div>
-        <div style={style.wrapper}>
+        <Container>
           <h1>Add new product</h1>
-          <h2>Complete all this fields to add new product:</h2>
-          <span>Type name: </span>
-          <TextField
-            name={'new-product-name'}
-            hintText={'e.g. avocado'}
-            fullWidth={false}
-            onChange={(event, value) => this.nameHandler(value)}
-          />
-          <br />
-          <span> Choose category: </span>
-          <DropDownMenu
-            value={this.state.category}
-            onChange={this.dropDownCategoryHandler}
-            openImmediately={false}
-          >
-            <MenuItem value={'other'} primaryText="Other" />
-            <MenuItem value={'dairy'} primaryText="Dairy" />
-            <MenuItem value={'sweets'} primaryText="Sweets" />
-            <MenuItem value={'drinks'} primaryText="Drinks" />
-            <MenuItem value={'fruit'} primaryText="Fruit" />
-            <MenuItem value={'vegetable'} primaryText="Vegetable" />
-            <MenuItem value={'meat'} primaryText="Meat" />
-          </DropDownMenu>
-          <br />
-          <span>Mark as favorite: </span>
-          <DropDownMenu
-            value={this.state.isFavorite}
-            onChange={this.dropDownFavoriteHandler}
-            openImmediately={false}
-          >
-            <MenuItem value={true} primaryText={'Yes'} />
-            <MenuItem value={false} primaryText={'No'} />
-          </DropDownMenu>
-          <br />
-          <span>Paste image link: </span>
-          <TextField
-            name={'new-product-picture'}
-            floatingLabelText="Required .jpg or .png formats"
-            floatingLabelFixed={true}
-            hintText={'e.g https://freepik.com/...jpg'}
-            fullWidth={false}
-            onChange={(event, value) => this.pictureHandler(value)}
-            value={this.state.picture}
-          />
-          <br />
-          <span>Calories: </span>
-          <TextField
-            floatingLabelText="Number is required"
-            floatingLabelFixed={true}
-            name={'new-product-kcal'}
-            hintText={'Type calories per 100g'}
-            fullWidth={false}
-            onChange={(event, value) => { this.kcalHandler(value) }}
-            value={this.state.kcal}
-          />
-          <br />
-          <span>Proteins: </span>
-          <TextField
-            floatingLabelText="Number is required"
-            floatingLabelFixed={true}
-            name={'new-product-kcal'}
-            hintText={'Type proteins per 100g'}
-            fullWidth={false}
-            onChange={(event, value) => { this.proteinsHandler(value) }}
-            value={this.state.proteins}
-          />
-          <br />
-          <span>Carbohydrates: </span>
-          <TextField
-            floatingLabelText="Number is required"
-            floatingLabelFixed={true}
-            name={'new-product-kcal'}
-            hintText={'Type carbohydrates per 100g'}
-            fullWidth={false}
-            onChange={(event, value) => { this.carbohydratesHandler(value) }}
-            value={this.state.carbohydrates}
-          />
-          <br />
-          <span>Fat: </span>
-          <TextField
-            floatingLabelText="Number is required"
-            floatingLabelFixed={true}
-            name={'new-product-kcal'}
-            hintText={'Type fat per 100g'}
-            fullWidth={false}
-            onChange={(event, value) => { this.fatHandler(value) }}
-            value={this.state.fat}
-          />
-        </div>
-        <div style={style.wrapper}>
-          <RaisedButton
-            label={<b>Add!</b>}
-            onClick={this.addToDatabase}
-            primary={true}
-            fullWidth={true}
-          />
-        </div>
+        </Container>
+        <Container>
+          <div style={style.wrapper}>
+            <h2>Complete all this fields to add new product:</h2>
+            <span>Type name: </span>
+            <TextField
+              name={'new-product-name'}
+              hintText={'e.g. avocado'}
+              fullWidth={false}
+              onChange={(event, value) => this.nameHandler(value)}
+            />
+            <br />
+            <span> Choose category: </span>
+            <DropDownMenu
+              value={this.state.category}
+              onChange={this.dropDownCategoryHandler}
+              openImmediately={false}
+            >
+              <MenuItem value={'other'} primaryText="Other" />
+              <MenuItem value={'dairy'} primaryText="Dairy" />
+              <MenuItem value={'sweets'} primaryText="Sweets" />
+              <MenuItem value={'drinks'} primaryText="Drinks" />
+              <MenuItem value={'fruit'} primaryText="Fruit" />
+              <MenuItem value={'vegetable'} primaryText="Vegetable" />
+              <MenuItem value={'meat'} primaryText="Meat" />
+            </DropDownMenu>
+            <br />
+            <span>Mark as favorite: </span>
+            <DropDownMenu
+              value={this.state.isFavorite}
+              onChange={this.dropDownFavoriteHandler}
+              openImmediately={false}
+            >
+              <MenuItem value={true} primaryText={'Yes'} />
+              <MenuItem value={false} primaryText={'No'} />
+            </DropDownMenu>
+            <br />
+            <span>Paste image link: </span>
+            <TextField
+              name={'new-product-picture'}
+              floatingLabelText="Required .jpg or .png formats"
+              floatingLabelFixed={true}
+              hintText={'e.g https://freepik.com/...jpg'}
+              fullWidth={false}
+              onChange={(event, value) => this.pictureHandler(value)}
+              value={this.state.picture}
+            />
+            <br />
+            <span>Calories: </span>
+            <TextField
+              floatingLabelText="Number is required"
+              floatingLabelFixed={true}
+              name={'new-product-kcal'}
+              hintText={'Type calories per 100g'}
+              fullWidth={false}
+              onChange={(event, value) => { this.kcalHandler(value) }}
+              value={this.state.kcal}
+            />
+            <br />
+            <span>Proteins: </span>
+            <TextField
+              floatingLabelText="Number is required"
+              floatingLabelFixed={true}
+              name={'new-product-kcal'}
+              hintText={'Type proteins per 100g'}
+              fullWidth={false}
+              onChange={(event, value) => { this.proteinsHandler(value) }}
+              value={this.state.proteins}
+            />
+            <br />
+            <span>Carbohydrates: </span>
+            <TextField
+              floatingLabelText="Number is required"
+              floatingLabelFixed={true}
+              name={'new-product-kcal'}
+              hintText={'Type carbohydrates per 100g'}
+              fullWidth={false}
+              onChange={(event, value) => { this.carbohydratesHandler(value) }}
+              value={this.state.carbohydrates}
+            />
+            <br />
+            <span>Fat: </span>
+            <TextField
+              floatingLabelText="Number is required"
+              floatingLabelFixed={true}
+              name={'new-product-kcal'}
+              hintText={'Type fat per 100g'}
+              fullWidth={false}
+              onChange={(event, value) => { this.fatHandler(value) }}
+              value={this.state.fat}
+            />
+          </div>
+        </Container>
+
+        <Container>
+            <RaisedButton
+              label={<b>Add!</b>}
+              onClick={this.addToDatabase}
+              primary={true}
+              fullWidth={true}
+            />
+        </Container>
       </div>
     )
   }
