@@ -13,6 +13,7 @@ import SingleProductSite from './Components/SingleProductSite'
 
 import FavoriteProducts from './favorites'
 import AddProduct from './AddProduct'
+import LogOut from './Components/Auth/LogOut';
 
 class App extends React.Component {
 
@@ -72,6 +73,10 @@ class App extends React.Component {
                 <AppBar
                     title='Daily Diet App'
                     onLeftIconButtonClick={this.drawerStateHandler}
+                    iconElementRight={
+                        <LogOut />
+                    }
+                    onRightIconButtonClick={this.toggleSignUpSection}
                     style={{
                         backgroundColor: orange500,
                     }}

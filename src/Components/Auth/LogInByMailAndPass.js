@@ -1,36 +1,57 @@
 import React from 'react'
+// Redux & state
+import { connect } from 'react-redux'
+import { logInByMailAndPass } from '../../state/auth'
+// UI
 import { TextField, RaisedButton } from 'material-ui'
 
-const style = {
-  wrapped: {
-    maxWidth: '500px'
+class LogInByMailAndPass extends React.Component {
+  state = {
+    email: '',
+    password: ''
+  }
+
+  emailHandler = (e, email) =>
+    this.setState({ email })
+
+  passwordHandler = (e, password) =>
+    this.setState({ password })
+
+  render() {
+    return (
+      <div>
+          <TextField
+            onChange={this.emailHandler}
+            name={'email'}
+            type={'email'}
+            hintText={'Type your email adress here'}
+            fullWidth={true}
+          />
+          <TextField
+            onChange={this.passwordHandler}
+            name={'password'}
+            type={'password'}
+            hintText={'Type your password here'}
+            fullWidth={true}
+          />
+        <RaisedButton
+          onClick={() => this.props.logInByMailAndPass(this.state.email, this.state.password)}
+          label={'Log in!'}
+          secondary={true}
+        />
+      </div>
+    )
   }
 }
 
-export default (props) => (
-  <div
-    style={style.wrapped}
-  >
-    <TextField
-      onChange={props.textHandler}
-      value={props.emailValue}
-      name={'email'}
-      type={'email'}
-      hintText={'Type your email adress here'}
-      fullWidth={true}
-    />
-    <TextField
-      onChange={props.passwordHandler}
-      value={props.passwordValue}
-      name={'password'}
-      type={'password'}
-      hintText={'Type your password here'}
-      fullWidth={true}
-    />
-    <RaisedButton
-      onClick={props.onLogInClick}
-      label={'Log in!'}
-      secondary={true}
-    />
-  </div>
-)
+const mapStateToProps = state => ({
+})
+
+const mapDispatchToProps = dispatch => ({
+  logInByMailAndPass: (email, password) => dispatch(logInByMailAndPass(email, password))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LogInByMailAndPass)
