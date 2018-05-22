@@ -1,4 +1,4 @@
-import { auth, GoogleProvider } from '../firebase'
+import { auth, db, GoogleProvider } from '../firebase'
 
 const LOGGED_IN = 'auth/LOGGED_IN'
 const LOGGED_OUT = 'auth/LOGGED_OUT'
@@ -13,6 +13,12 @@ const loggedOut = () => ({
   type: LOGGED_OUT
 })
 
+const logUserLogIn = () => (dispatch, getState) => {
+  const userUid = getState().auth.user.uid
+  db.ref(`/users/${userUid}/loginsLogs`)
+    .push({ timestamp: Date.now() })
+}
+
 const incorrectPassword = () => ({
   type: INCORRECT_PASSWORD
 })
@@ -20,13 +26,20 @@ const incorrectPassword = () => ({
 export const initAuthUserSync = () => (dispatch, getState) => {
   auth.onAuthStateChanged(
     user => {
-      user ?
+      if (user) {
         dispatch(loggedIn(user))
-        :
+        dispatch(logUserLogIn())
+      } else {
         dispatch(loggedOut())
+      }
     }
   )
 }
+export const logOut = () => (dispatch, getState) => {
+  auth.signOut()
+    .then(() => dispatch(loggedOut()))
+}
+
 
 export const logInByGoogle = () => (dispatch, getState) => {
   auth.signInWithPopup(GoogleProvider)
@@ -44,10 +57,6 @@ export const createUser = (email, password, passwordRetyped) => (dispatch, getSt
   } else {
     dispatch(incorrectPassword())
   }
-}
-
-export const logOut = () => (dispatch, getState) => {
-  auth.signOut()
 }
 
 const initialState = {
