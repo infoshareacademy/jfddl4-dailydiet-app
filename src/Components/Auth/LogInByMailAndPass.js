@@ -35,6 +35,13 @@ class LogInByMailAndPass extends React.Component {
           hintText={'Type your password here'}
           fullWidth={true}
         />
+        <span
+          onClick={this.props.toggleRestorePassSection}
+          style={style.forgotPassLabel}
+        >
+          Forgot password?
+        </span>
+        <br />
         <RaisedButton
           onClick={() => this.props.logInByMailAndPass(this.state.email, this.state.password)}
           label={'Log in!'}

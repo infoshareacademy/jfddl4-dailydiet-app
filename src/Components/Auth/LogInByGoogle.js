@@ -1,11 +1,7 @@
 import React from 'react'
+// UI
+import style from '../../UI/style'
 import { RaisedButton } from 'material-ui'
-
-const style = {
-  buttonMargins: {
-    margin: '0.5rem 0'
-  }
-}
 
 export default (props) => (
   <div>

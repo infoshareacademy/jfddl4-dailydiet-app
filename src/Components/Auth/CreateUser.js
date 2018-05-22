@@ -30,7 +30,7 @@ class LogInByMailAndPass extends React.Component {
         <div
           style={style.wrapped}
         >
-          <h3>Fill all fields below to create an account:</h3>
+          <h3 style={style.formsHeader}>Fill all fields below to create an account and login:</h3>
           <TextField
             onChange={this.emailHandler}
             name={'email'}
@@ -65,8 +65,8 @@ class LogInByMailAndPass extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  error: state.auth.error,
-  imWithSignUpError: state.auth.imWithSignUpError
+  alert: state.auth.alert,
+  imWithError: state.auth.imWithError
 })
 
 const mapDispatchToProps = dispatch => ({

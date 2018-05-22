@@ -5,6 +5,7 @@ const LOGGED_IN = 'auth/LOGGED_IN'
 const LOGGED_OUT = 'auth/LOGGED_OUT'
 const INTERNAL_ERROR = 'auth/INTERNAL_ERROR'
 const EXTERNAL_ERROR = 'auth/EXTERNAL_ERROR'
+const EMAIL_SENT = 'auth/EMAIL_SENT'
 
 // ACTIONS
 const loggedIn = (user) => ({
@@ -24,6 +25,10 @@ const handleInternalError = (error) => ({
 const handleExternalError = (error) => ({
   type: EXTERNAL_ERROR,
   error
+})
+
+const emailSent = () => ({
+  type: EMAIL_SENT
 })
 
 // LOGIC
@@ -59,10 +64,10 @@ export const logInByMailAndPass = (email, password) => (dispatch, getState) => {
     auth.signInWithEmailAndPassword(email, password)
       .then(user => dispatch(loggedIn(user)))
       .catch(error => dispatch(handleExternalError(error)))
-  } else if (!password) {
-    dispatch(handleInternalError('Password is required'))
   } else if (!email) {
     dispatch(handleInternalError('Email is required'))
+  } else if (!password) {
+    dispatch(handleInternalError('Password is required'))
   }
 }
 
@@ -80,11 +85,19 @@ export const createUser = (email, password, passwordRetyped) => (dispatch, getSt
   }
 }
 
+export const restorePassword = (email) => (dispatch, getState) => {
+  if (email) {
+    auth.sendPasswordResetEmail(email)
+      .then(() => dispatch(emailSent()))
+      .catch(error => dispatch(handleExternalError(error)))
+  }
+}
+
 // INITIAL STATE
 const initialState = {
   isUserLoggedIn: false,
   user: null,
-  error: '',
+  alert: '',
   imWithError: false
 }
 
@@ -96,7 +109,7 @@ export default (state = initialState, action) => {
         ...state,
         isUserLoggedIn: true,
         user: action.user,
-        error: '',
+        alert: '',
         imWithError: false,
       }
     case LOGGED_OUT:
@@ -105,14 +118,21 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isUserLoggedIn: false,
-        error: action.error,
+        alert: action.error,
         imWithError: true
       }
     case EXTERNAL_ERROR:
       return {
         ...state,
         isUserLoggedIn: false,
-        error: action.error.message,
+        alert: action.error.message,
+        imWithError: true
+      }
+    case EMAIL_SENT:
+      return {
+        ...state,
+        isUserLoggedIn: false,
+        alert: 'An email has been sent :) Check your mailbox.',
         imWithError: true
       }
     default:
