@@ -1,6 +1,8 @@
-import {createStore, combineReducers, compose, applyMiddleware} from 'redux'
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-import products, {initProductSync} from './state/products'
+import {ACTIONS} from './state/productSearchList'
+import {initProductSync} from './API/index'
+import products from './state/productSearchList'
 
 
 export const reducer = combineReducers({
@@ -16,5 +18,7 @@ export const store = createStore(
         applyMiddleware(thunk)
     )
 )
+initProductSync().then((product) => {
+    store.dispatch(ACTION.set(product))
+})
 
-store.dispatch(initProductSync())
