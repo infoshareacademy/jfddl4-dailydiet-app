@@ -75,7 +75,6 @@ const Chart1 = (props) => {
 
     return (
         <div style={styles}>
-            {console.log(props.products)}
             <h3>Number of products in database</h3>
             <PieChart width={300} height={300} style={styles}>
                 <Pie

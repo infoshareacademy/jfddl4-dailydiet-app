@@ -44,7 +44,7 @@ const Dashboard = (props) => {
 
             <Row>
                 <Paper style={styles}>
-                    <h2>Macronutrients in today's meals</h2>
+                    <h2 style={{color: '#E65100'}}>Welcome to DailyDiet!</h2>
                 </Paper>
                 <Row style={styles}>
                     <Col md>
