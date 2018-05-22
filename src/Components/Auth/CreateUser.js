@@ -3,21 +3,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { createUser } from '../../state/auth'
 // UI
+import style from '../../UI/style'
 import { TextField, RaisedButton } from 'material-ui'
-
-const style = {
-  wrapped: {
-    maxWidth: '500px'
-  },
-  alignCenter: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  error: {
-    color: 'red'
-  }
-}
 
 class LogInByMailAndPass extends React.Component {
   state = {
@@ -43,7 +30,7 @@ class LogInByMailAndPass extends React.Component {
         <div
           style={style.wrapped}
         >
-        <h3>Fill all fields below to create an account:</h3>
+          <h3>Fill all fields below to create an account:</h3>
           <TextField
             onChange={this.emailHandler}
             name={'email'}
@@ -70,13 +57,8 @@ class LogInByMailAndPass extends React.Component {
           onClick={() => this.props.createUser(this.state.email, this.state.password, this.state.passwordRetyped)}
           label={'Log in!'}
           secondary={true}
+          style={style.buttonMargins}
         />
-        {
-          this.props.imWithError ?
-          <h4 style={style.error}>{this.props.error}</h4>
-          :
-          <h4>Push the button and start using Daily Diet App!</h4>
-        }
       </div>
     )
   }
@@ -84,7 +66,7 @@ class LogInByMailAndPass extends React.Component {
 
 const mapStateToProps = state => ({
   error: state.auth.error,
-  imWithError: state.auth.imWithError
+  imWithSignUpError: state.auth.imWithSignUpError
 })
 
 const mapDispatchToProps = dispatch => ({

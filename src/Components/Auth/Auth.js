@@ -8,36 +8,15 @@ import LogInByMailAndPass from './LogInByMailAndPass'
 import CreateUser from './CreateUser'
 // UI
 import Container from '../../UI/Container'
-import { AppBar, IconButton, FlatButton } from 'material-ui'
+import { AppBar, IconButton, FlatButton, Snackbar } from 'material-ui'
 import NavigationExpandLess from 'material-ui/svg-icons/navigation/expand-less'
+import style from '../../UI/style'
 import { orange500 } from 'material-ui/styles/colors'
-
-const style = {
-  header: {
-    color: '#f1edef',
-    boxSizing: 'border-box',
-    fontSize: '2.5rem',
-    fontWeight: 'bold',
-    WebkitTextStroke: '2px #005a1f',
-    textStroke: '2px #005a1f'
-  },
-  wrapped: {
-    maxWidth: '500px'
-  },
-  alignCenter: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  textMargins: {
-    display: 'block',
-    margin: '0.5rem 0'
-  }
-}
 
 class Auth extends React.Component {
   state = {
-    isSingUpOpen: false
+    isSingUpOpen: false,
+    isSnackbarOpen: false
   }
 
   toggleSignUpSection = () =>
@@ -64,6 +43,10 @@ class Auth extends React.Component {
                 style={{
                   backgroundColor: orange500,
                 }}
+              />
+              <Snackbar
+                open={this.props.imWithError}
+                message={this.props.error}
               />
               <Container centered>
                 <div
@@ -102,15 +85,13 @@ class Auth extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  isUserLoggedIn: state.auth.isUserLoggedIn
-})
-
-const mapDispatchToProps = dispatch => ({
-  logInByGoogle: () => dispatch(logInByGoogle())
-})
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  state => ({
+    isUserLoggedIn: state.auth.isUserLoggedIn,
+    imWithError: state.auth.imWithError,
+    error: state.auth.error
+  }),
+  dispatch => ({
+    logInByGoogle: () => dispatch(logInByGoogle())
+  })
 )(Auth)

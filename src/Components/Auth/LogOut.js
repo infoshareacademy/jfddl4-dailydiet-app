@@ -3,25 +3,15 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { logOut } from '../../state/auth'
 // UI
+import style from '../../UI/style'
 import { FlatButton } from 'material-ui'
-
-const style = {
-  logOutButton: {
-    color: 'white',
-    marginTop: '6px'
-  },
-  logOutLabel: {
-    fontSize: '1rem',
-    fontWeight: 'bold'
-  }
-}
 
 const LogOut = (props) => (
   <FlatButton
     label="Log out"
     labelPosition="before"
     labelStyle={style.logOutLabel}
-    onClick={() => props.onLogOutClick()}
+    onClick={props.onLogOutClick}
     style={style.logOutButton}
   />
 )

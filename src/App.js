@@ -76,7 +76,6 @@ class App extends React.Component {
                     iconElementRight={
                         <LogOut />
                     }
-                    onRightIconButtonClick={this.toggleSignUpSection}
                     style={{
                         backgroundColor: orange500,
                     }}
