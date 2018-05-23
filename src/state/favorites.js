@@ -1,14 +1,25 @@
 import { db } from '../firebase'
-import { mapObjectToArray } from '../utils'
 
 // ACTIONS TYPES
 const ACTUALIZE_FAVORITES = 'products/ACTUALIZE_FAVORITES'
+const FAVORITE_REQUEST = 'products/FAVORITE_REQUEST'
+const CLOSE_DIALOG = 'products/CLOSE_DIALOG'
 const EXTERNAL_ERROR = 'products/EXTERNAL_ERROR'
 
 // ACTIONS
-const actualizeFavorites = (favorites) => ({
+const actualizeFavorites = (keys) => ({
   type: ACTUALIZE_FAVORITES,
-  favorites
+  keys
+})
+
+export const favoriteRequest = (key, name) => ({
+  type: FAVORITE_REQUEST,
+  key,
+  name
+})
+
+export const closeDialog = () => ({
+  type: CLOSE_DIALOG
 })
 
 const handleExternalError = (error) => ({
@@ -23,35 +34,45 @@ export const getFavorites = () => (dispatch, getState) => {
     .once(
       'value',
       snapshot => {
-        const favorites = JSON.parse(snapshot.val())
-        dispatch(actualizeFavorites(favorites))
+        const favoritesKeys = JSON.parse(snapshot.val())
+        console.log('Favorites keys', favoritesKeys)
+        if (favoritesKeys) {
+          dispatch(actualizeFavorites(favoritesKeys))
+        }
       }
     )
 }
 
-export const addFavorite = (key) => (dispatch, getState) => {
+export const addFavorite = () => (dispatch, getState) => {
   const userUid = getState().auth.user.uid
-  const newFavorites = getState().favorites.concat(key)
+  const productKey = getState().favorites.requestedKey
+  const newFavorites = getState().favorites.keys.concat(productKey)
   const newFavoritesSrtingified = JSON.stringify(newFavorites)
   db.ref(`/users/${userUid}/favorites`)
     .set(newFavoritesSrtingified)
-    .then(() => dispatch(actualizeFavorites(newFavorites)))
+    .then(() => dispatch(closeDialog()))
+    .then(() => dispatch(getFavorites()))
     .catch(error => dispatch(handleExternalError(error)))
 }
 
-export const removeFavorite = (key) => (dispatch, getState) => {
+export const removeFavorite = () => (dispatch, getState) => {
   const userUid = getState().auth.user.uid
-  const newFavorites = getState().favorites.filter(el => el !== key)
+  const productKey = getState().favorites.requestedKey
+  const newFavorites = getState().favorites.keys.filter(el => el !== productKey)
   const newFavoritesSrtingified = JSON.stringify(newFavorites)
   db.ref(`/users/${userUid}/favorites`)
     .set(newFavoritesSrtingified)
-    .then(() => dispatch(actualizeFavorites(newFavorites)))
+    .then(() => dispatch(closeDialog()))
+    .then(() => dispatch(getFavorites()))
     .catch(error => dispatch(handleExternalError(error)))
 }
 
 // INITIAL STATE
 const initialState = {
-  favorites: [],
+  keys: [],
+  requestedKey: '',
+  requestedName: '',
+  isDialogOpen: false,
   error: '',
   imWithError: false
 }
@@ -61,9 +82,24 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case ACTUALIZE_FAVORITES:
       return {
-        favorites: action.favorites,
+        ...state,
+        keys: action.keys,
         error: '',
         imWithError: false
+      }
+    case FAVORITE_REQUEST:
+      return {
+        ...state,
+        requestedKey: action.key,
+        requestedName: action.name,
+        isDialogOpen: true
+      }
+    case CLOSE_DIALOG:
+      return {
+        ...state,
+        requestedKey: '',
+        requestedName: '',
+        isDialogOpen: false
       }
     case EXTERNAL_ERROR:
       return {

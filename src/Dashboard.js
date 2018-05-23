@@ -1,5 +1,8 @@
 import React from 'react'
 import { Grid, Row, Col } from 'react-flexbox-grid'
+// Redux & state
+import { connect } from 'react-redux'
+import { getFavorites } from './state/favorites'
 
 import PieChart from './Charts/PieChart'
 import LineChartPic from './Charts/LineChartPic'
@@ -23,6 +26,7 @@ class Dashboard extends React.Component {
 
     componentDidMount() {
         this.onResize()
+        this.props.getFavorites()
         window.addEventListener('resize', this.onResize)
     }
 
@@ -69,4 +73,10 @@ class Dashboard extends React.Component {
     }
 }
 
-export default Dashboard 
+export default connect(
+    state => ({
+    }),
+    dispatch => ({
+        getFavorites: () => dispatch(getFavorites())
+    })
+)(Dashboard)

@@ -2,11 +2,13 @@ import {createStore, combineReducers, compose, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 import products, {initProductSync} from './state/products'
 import auth, { initAuthUserSync} from './state/auth'
+import favorites from './state/favorites'
 
 
 export const reducer = combineReducers({
     products,
-    auth
+    auth,
+    favorites
 })
 
 

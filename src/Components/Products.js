@@ -1,10 +1,11 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
-import {List} from 'material-ui';
-import ListElement from '../ListElement';
+import { List } from 'material-ui';
+import ListElement from './ListElement'
 
-import {upper} from '../utils'
+import { upper } from '../utils'
+import DialogFavorites from '../favorites/DialogFavorites'
 
 const Library = (props) => (
     <div>
@@ -19,24 +20,22 @@ const Library = (props) => (
                                 el => {
                                     return (
                                         <ListElement
+                                            product={el}
                                             key={el.key}
-                                            productName={upper(el.name)}
-                                            productKey={el.key}
-                                            isProductFavorite={el.isFavorite}
-                                            productPicture={el.picture}
                                         />
                                     )
                                 }
                             )
                     }
-
+                    <DialogFavorites />
                 </List>
         }
     </div>
 )
 
 const mapStateToProps = state => ({
-    products: state.products
+    products: state.products,
+    isDialogOpen: state.favorites.isDialogOpen
 })
 
 const mapDispatchToProps = dispatch => ({})

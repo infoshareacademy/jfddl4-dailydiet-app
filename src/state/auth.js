@@ -52,6 +52,7 @@ export const logOut = () => (dispatch, getState) => {
 
 export const logInByGoogle = () => (dispatch, getState) => {
   auth.signInWithPopup(GoogleProvider)
+    .catch(error => dispatch(handleExternalError(error)))
 }
 
 export const logInByMailAndPass = (email, password) => (dispatch, getState) => {
