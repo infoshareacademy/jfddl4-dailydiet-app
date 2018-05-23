@@ -3,16 +3,18 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { logOut } from '../../state/auth'
 // UI
-import { IconButton } from 'material-ui'
-import ActionExitToApp from 'material-ui/svg-icons/action/exit-to-app'
-
+import style from '../../UI/style'
+import { FlatButton } from 'material-ui'
 
 const LogOut = (props) => (
-  <div>
-    <IconButton><ActionExitToApp color={'white'} /></IconButton>
-  </div>
+  <FlatButton
+    label="Log out"
+    labelPosition="before"
+    labelStyle={style.logOutLabel}
+    onClick={props.onLogOutClick}
+    style={style.logOutButton}
+  />
 )
-
 
 const mapStateToProps = state => ({
 })
