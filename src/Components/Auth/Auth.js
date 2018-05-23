@@ -7,10 +7,10 @@ import LogInByGoogle from './LogInByGoogle'
 import LogInByMailAndPass from './LogInByMailAndPass'
 import CreateUser from './CreateUser'
 // UI
+import style from '../../UI/style'
 import Container from '../../UI/Container'
 import { AppBar, IconButton, FlatButton, Snackbar } from 'material-ui'
 import NavigationExpandLess from 'material-ui/svg-icons/navigation/expand-less'
-import style from '../../UI/style'
 import { orange500 } from 'material-ui/styles/colors'
 
 class Auth extends React.Component {

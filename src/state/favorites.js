@@ -1,9 +1,11 @@
 import { db } from '../firebase'
 import { mapObjectToArray } from '../utils'
 
+// ACTIONS TYPES
 const ACTUALIZE_FAVORITES = 'products/ACTUALIZE_FAVORITES'
 const EXTERNAL_ERROR = 'products/EXTERNAL_ERROR'
 
+// ACTIONS
 const actualizeFavorites = (favorites) => ({
   type: ACTUALIZE_FAVORITES,
   favorites
@@ -14,6 +16,7 @@ const handleExternalError = (error) => ({
   error
 })
 
+// LOGIC
 export const getFavorites = () => (dispatch, getState) => {
   const userUid = getState().auth.user.uid
   db.ref(`/users/${userUid}/favorite`)
@@ -46,12 +49,14 @@ export const removeFavorite = (key) => (dispatch, getState) => {
     .catch(error => dispatch(handleExternalError(error)))
 }
 
+// INITIAL STATE
 const initialState = {
   favorites: [],
   error: '',
   imWithError: false
 }
 
+// REDUCER
 export default (state = initialState, action) => {
   switch (action.type) {
     case ACTUALIZE_FAVORITES:

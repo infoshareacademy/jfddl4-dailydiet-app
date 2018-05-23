@@ -30,5 +30,10 @@ export default {
   logOutLabel: {
     fontSize: '1rem',
     fontWeight: 'bold'
+  },
+  listElement: {
+    textDecoration: 'none',
+    width: '100%',
+    display: 'inline-block'
   }
 }
