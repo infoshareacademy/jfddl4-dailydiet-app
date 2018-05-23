@@ -1,4 +1,5 @@
 import { auth, db, GoogleProvider } from '../firebase'
+import {logInsSyncer} from './loginLogs'
 
 // ACTIONS TYPES
 const LOGGED_IN = 'auth/LOGGED_IN'
@@ -44,6 +45,7 @@ export const initAuthUserSync = () => (dispatch, getState) => {
       if (user) {
         dispatch(loggedIn(user))
         dispatch(logUserLogIn())
+        dispatch(logInsSyncer())
       } else {
         dispatch(loggedOut())
       }

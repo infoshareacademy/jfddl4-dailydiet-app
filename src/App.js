@@ -7,7 +7,7 @@ import { orange500 } from 'material-ui/styles/colors'
 // Components
 import readFromDatabase from './logic'
 import Sidebar from './Sidebar'
-import Dashboard from './Dashboard'
+import Dashboard from './Components/Dashboard'
 import Products from './Components/Products'
 import SingleProductSite from './Components/SingleProductSite'
 
