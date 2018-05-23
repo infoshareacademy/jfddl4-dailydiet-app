@@ -47,6 +47,11 @@ class LogInByMailAndPass extends React.Component {
             onChange={this.passwordHandler}
             name={'password'}
             type={'password'}
+            onKeyPress={(ev) => {
+              if ((ev.key === 'Enter') {
+                this.props.createUser(this.state.email, this.state.password, this.state.passwordRetyped)
+              }
+            }
             hintText={'Type your password here'}
             fullWidth={true}
           />
