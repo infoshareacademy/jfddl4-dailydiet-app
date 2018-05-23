@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import {upper} from '../utils'
 import SingleProductChart from '../Charts/SingleProductChart'
 import SingleProductTable from '../Tables/SingleProductTable'
+import {addProductToMeal} from '../state/addProductsToMeals'
 
 const fontSizes = {
     fontSize: '24px',
@@ -34,7 +35,7 @@ const SingleProductSite = (props) => {
                             <Row center="xs" middle="xs">
                                 <Col xs={12} md={6}>
                                     <SingleProductTable
-                                    tableProduct={product.key}/>
+                                        tableProduct={product.key}/>
                                 </Col>
                                 <Col xs={12} md={6}>
                                     <img src={product.picture} alt={product.name}
@@ -44,14 +45,14 @@ const SingleProductSite = (props) => {
                             <Row center="xs" middle="xs">
                                 <Col xs={12} md={6}>
                                     <SingleProductChart
-                                    chartProduct={product.key}/>
+                                        chartProduct={product.key}/>
                                 </Col>
                                 <Col xs={12} md={6} center="xs">
                                     <RaisedButton
                                         name={'addAProductToFavorites'}
                                         backgroundColor={'#E65100'}
                                         label={<span style={{color: 'white'}}>Add to favorites</span>}
-                                        // onClick={() => onFavoriteRequest()}
+                                        onClick={() => props.addProductToMeal(product.key)}
                                     />
                                 </Col>
                             </Row>
@@ -65,8 +66,16 @@ const SingleProductSite = (props) => {
 }
 
 
+const mapStateToProps = state => ({
+    products: state.products
+})
+
+const mapDispatchToProps = dispatch => ({
+    addProductToMeal: (myProduct) => dispatch(addProductToMeal(myProduct))
+
+})
+
 export default connect(
-    state => ({
-        products: state.products
-    })
+    mapStateToProps,
+    mapDispatchToProps
 )(SingleProductSite)

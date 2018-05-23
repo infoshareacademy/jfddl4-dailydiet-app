@@ -29,12 +29,6 @@ export const logInsSyncer = () => (dispatch, getState) => {
     )
 }
 
-// export const arrayOfTimestamps =
-
-{/*to mapuje tylko timestampy i zamienia je na wizualnie znośną datę*/
-}
-// {console.log('this ', props.loginsNumber.map(login => (moment(login.timestamp).format('DD/MM/YY'))))}
-
 const initialState = {
     loginsNumber: []
 }
@@ -103,11 +97,3 @@ export default (state = initialState, action) => {
             return state
     }
 }
-
-// wykres ile razy dany user sie logowal w ciagu
-// ostatniego tyg
-
-
-// 1. wszystkie daty tydzien wstecz
-// 2. ile jest wystapien danej daty
-// 3. wykres dni od ilosci
