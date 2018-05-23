@@ -1,11 +1,13 @@
 import React from 'react'
 import {Grid, Row, Col} from 'react-flexbox-grid'
-import RaisedButton from 'material-ui/RaisedButton'
 import {connect} from 'react-redux'
 import {upper} from '../utils'
+import {addProductToMeal, addDate} from '../state/addProductsToMeals'
 import SingleProductChart from '../Charts/SingleProductChart'
 import SingleProductTable from '../Tables/SingleProductTable'
-import {addProductToMeal} from '../state/addProductsToMeals'
+import AddProductToMeal from './AddProductToMeal'
+
+
 
 const fontSizes = {
     fontSize: '24px',
@@ -48,12 +50,8 @@ const SingleProductSite = (props) => {
                                         chartProduct={product.key}/>
                                 </Col>
                                 <Col xs={12} md={6} center="xs">
-                                    <RaisedButton
-                                        name={'addAProductToFavorites'}
-                                        backgroundColor={'#E65100'}
-                                        label={<span style={{color: 'white'}}>Add to favorites</span>}
-                                        onClick={() => props.addProductToMeal(product.key)}
-                                    />
+                                    <AddProductToMeal
+                                    product={product.key}/>
                                 </Col>
                             </Row>
                         </Grid>
@@ -71,7 +69,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    addProductToMeal: (myProduct) => dispatch(addProductToMeal(myProduct))
+    addProductToMeal: (myProduct) => dispatch(addProductToMeal(myProduct)),
+    addDate: (dateValue) => dispatch(addDate(dateValue))
 
 })
 
