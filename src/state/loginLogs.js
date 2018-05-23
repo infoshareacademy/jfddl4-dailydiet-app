@@ -40,7 +40,6 @@ export default (state = initialState, action) => {
     switch (action.type) {
 
         case UPDATE_LOGINS:
-            console.log( action.newValue.length)
 
             let splitByDays = [];
             let splitByDaysCounter = [];
@@ -51,7 +50,7 @@ export default (state = initialState, action) => {
 
             const    last = daysOfLog[daysOfLog.length-1]
             const    sevendaysbefore = last - sevendays;
-            console.log(  daysOfLog.length, sevendaysbefore, sevendays)
+            // console.log(  daysOfLog.length, sevendaysbefore, sevendays)
 
             daysOfLog = daysOfLog.filter((e)=> (e > sevendaysbefore) )
                 .map((e)=>moment(e).format('DD.MM.YYYY'))
@@ -85,7 +84,7 @@ export default (state = initialState, action) => {
             })
 
 
-                console.log(  daysOfLog.length, splitByDays, splitByDaysCounter)
+                // console.log(  daysOfLog.length, splitByDays, splitByDaysCounter)
 
             return {
                 ...state,
