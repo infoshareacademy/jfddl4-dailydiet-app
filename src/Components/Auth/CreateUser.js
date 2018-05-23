@@ -35,6 +35,11 @@ class LogInByMailAndPass extends React.Component {
             onChange={this.emailHandler}
             name={'email'}
             type={'email'}
+            onKeyPress={(ev) => {
+              if ((ev.key === 'Enter') {
+                this.props.createUser(this.state.email, this.state.password, this.state.passwordRetyped)
+              }
+            }
             hintText={'Type your email adress here'}
             fullWidth={true}
           />
@@ -49,6 +54,11 @@ class LogInByMailAndPass extends React.Component {
             onChange={this.passwordRetypedHandler}
             name={'password-retyped'}
             type={'password'}
+            onKeyPress={(ev) => {
+              if ((ev.key === 'Enter') {
+                this.props.createUser(this.state.email, this.state.password, this.state.passwordRetyped)
+              }
+            }
             hintText={'Retype your password here'}
             fullWidth={true}
           />
