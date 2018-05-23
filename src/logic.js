@@ -9,10 +9,7 @@ const readFromDatabase = (setArrayToState) => {
           const dataInArray =
             (Object.entries(snapshot.val() || {})
               .map(([key, value]) => (
-                typeof value === 'object' ?
                   { ...value, key }
-                  :
-                  { key, value }
               ))
             )
           setArrayToState(dataInArray)

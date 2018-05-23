@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { db } from './firebase'
 // Material-ui
 import AppBar from 'material-ui/AppBar'
 import { orange500 } from 'material-ui/styles/colors'
@@ -12,6 +13,7 @@ import SingleProductSite from './Components/SingleProductSite'
 
 import FavoriteProducts from './favorites'
 import AddProduct from './AddProduct'
+import LogOut from './Components/Auth/LogOut';
 
 class App extends React.Component {
 
@@ -21,7 +23,34 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        readFromDatabase(this.setArrayToState)
+        // readFromDatabase(this.setArrayToState)
+        db.ref(`/products`)
+            .once(
+                'value',
+                (snapshot) => {
+                    const dataInArray =
+                        (Object.entries(snapshot.val() || {})
+                            .map(([key, value]) => (
+                                typeof value === 'object' ?
+                                    { ...value, key }
+                                    :
+                                    { key, value }
+                            ))
+                        )
+                    this.setArrayToState(dataInArray)
+                }).then(
+                    this.state.products.map(el =>
+                        db.ref(`/products/${el.key}`).push({
+                            carbohydrates: el.carbohydrates,
+                            category: el.category,
+                            fat: el.fat,
+                            kcal: el.kcal,
+                            name: el.name,
+                            picture: el.picture,
+                            protein: el.protein
+                        })
+                    )
+                )
     }
 
     setArrayToState = (data) => {
@@ -44,6 +73,9 @@ class App extends React.Component {
                 <AppBar
                     title='Daily Diet App'
                     onLeftIconButtonClick={this.drawerStateHandler}
+                    iconElementRight={
+                        <LogOut />
+                    }
                     style={{
                         backgroundColor: orange500,
                     }}

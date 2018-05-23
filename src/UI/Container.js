@@ -2,15 +2,25 @@ import React from 'react'
 import Paper from 'material-ui/Paper'
 
 const styles = {
-    paper: {
+    default: {
+        boxSizing: 'border-box',
         margin: '15px',
         padding: '15px'
+    },
+    centered: {
+        textAlign: 'center'
     }
 }
 
 const Container = (props) => (
-    <Paper style={styles.paper}>
-        <h2>{props.title}</h2>
+    <Paper
+        style={
+            props.centered ?
+                { ...styles.default, ...styles.centered }
+                :
+                styles.default
+        }
+    >
         {props.children}
     </Paper>
 )
