@@ -86,7 +86,7 @@ export default (state = initialState, action) => {
 
                 return {
                     day:e,
-                    counter:splitByDaysCounter[k]
+                    logs:splitByDaysCounter[k]
                 }
             })
 
