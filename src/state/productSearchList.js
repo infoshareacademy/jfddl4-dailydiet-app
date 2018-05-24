@@ -14,7 +14,6 @@ const initialStateForSearchList = {
     }
 }
 
-
 const TYPES = {
     SET = 'SET',
     MAXIMUM_VALUE_OF_CALORIES_SLIDER: 'MAXIMUM_VALUE_OF_CALORIES_SLIDER',
@@ -71,7 +70,6 @@ const ACTIONS = {
             }
         }
     },
-
 }
 
 const cf = (data, filters) => { // funkja filtrująca do logic.jss
@@ -97,20 +95,15 @@ export default function reducer(state = initialStateForSearchList, action) {
 
             break
         case TYPES.FILTER_LIST:
-            //
-
             const afs = {
                 ...state.filters,
                 ...action.data
             }
-
-
             const fd = cf(state.products, afs)
             newState = {
                 ...state, filters: afs,
                 filteredListOfProduct: fd
             }
-
             break
 
         default:

@@ -75,9 +75,10 @@ class ProductsSearchList extends React.Component {
         this.setState({ isDialogOpen: !this.state.isDialogOpen })
     }
 
-    ///////////////////////////////
+    //////////////////////////////////
     //////////////TO IDZIE DO REDUCERA
-    ////////////////////////////////
+    //////////////////////////////////
+
     searchProducts = () => {
 
         const filteredArray = this.state.productsList.filter((el, i, arr) => {
@@ -101,9 +102,9 @@ class ProductsSearchList extends React.Component {
 
     }
 
-    ///////////////////////////////
+    //////////////////////////////////
     //////////////TO IDZIE DO REDUCERA
-    ////////////////////////////////
+    //////////////////////////////////
 
 
     render() {
