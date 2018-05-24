@@ -8,22 +8,11 @@ import SingleProductTable from '../Tables/SingleProductTable'
 import AddProductToMeal from './AddProductToMeal'
 
 
-
-const fontSizes = {
-    fontSize: '24px',
-}
-
 const SingleProductSite = (props) => {
     const productKey = props.match.params.product
     const product = props.products.find(
         product => product.key === productKey
     )
-    const data = product && [
-        {name: 'fat', dailyNorm: 56, product: product.fat, amt: 2400},
-        {name: 'protein', dailyNorm: 63, product: product.protein, amt: 2290},
-        {name: 'carbohydrates', dailyNorm: 282, product: product.carbohydrates, amt: 2000},
-
-    ]
 
     return (
         <div>

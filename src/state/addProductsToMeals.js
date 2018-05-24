@@ -18,7 +18,7 @@ export const addProductToMeal = (myProduct) => (dispatch, getState) => {
     const userUid = getState().auth.user.uid
     const productKey = myProduct
     const mealTime = getState().addProductsToMeals.meal
-    const newProductToMeal = db.ref(`/users/${userUid}/meals/${mealsDate}/${mealTime}`)
+    db.ref(`/users/${userUid}/meals/${mealsDate}/${mealTime}`)
         .push()
         .set({
             product: productKey
