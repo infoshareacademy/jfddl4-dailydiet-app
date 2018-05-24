@@ -6,6 +6,7 @@ import {addProductToMeal, addDate} from '../state/addProductsToMeals'
 import SingleProductChart from '../Charts/SingleProductChart'
 import SingleProductTable from '../Tables/SingleProductTable'
 import AddProductToMeal from './AddProductToMeal'
+import MealPlan from './MealPlan'
 
 
 const SingleProductSite = (props) => {
@@ -39,8 +40,14 @@ const SingleProductSite = (props) => {
                                         chartProduct={product.key}/>
                                 </Col>
                                 <Col xs={12} md={6} center="xs">
-                                    <AddProductToMeal
-                                    product={product.key}/>
+                                    <Row center="xs" middle="xs" style={{margin: '15px'}}>
+                                        <AddProductToMeal
+                                            product={product.key}/>
+                                    </Row>
+                                    <Row center="xs" middle="xs" style={{margin: '15px'}}>
+                                        <MealPlan
+                                            product={product.key}/>
+                                    </Row>
                                 </Col>
                             </Row>
                         </Grid>
