@@ -30,12 +30,11 @@ const handleExternalError = (error) => ({
 // LOGIC
 export const getFavorites = () => (dispatch, getState) => {
   const userUid = getState().auth.user.uid
-  db.ref(`/users/${userUid}/favorite`)
+  db.ref(`/users/${userUid}/favorites`)
     .once(
       'value',
       snapshot => {
         const favoritesKeys = JSON.parse(snapshot.val())
-        console.log('Favorites keys', favoritesKeys)
         if (favoritesKeys) {
           dispatch(actualizeFavorites(favoritesKeys))
         }

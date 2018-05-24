@@ -20,6 +20,10 @@ class App extends React.Component {
         isSidebarOpen: false
     }
 
+    componentDidMount() {
+        this.props.getFavorites()
+    }
+
     drawerStateHandler = () => this.setState({
         isSidebarOpen: !this.state.isSidebarOpen
     })
