@@ -29,12 +29,6 @@ export const logInsSyncer = () => (dispatch, getState) => {
     )
 }
 
-// export const arrayOfTimestamps =
-
-{/*to mapuje tylko timestampy i zamienia je na wizualnie znośną datę*/
-}
-// {console.log('this ', props.loginsNumber.map(login => (moment(login.timestamp).format('DD/MM/YY'))))}
-
 const initialState = {
     loginsNumber: []
 }
@@ -46,7 +40,6 @@ export default (state = initialState, action) => {
     switch (action.type) {
 
         case UPDATE_LOGINS:
-            console.log( action.newValue.length)
 
             let splitByDays = [];
             let splitByDaysCounter = [];
@@ -57,7 +50,6 @@ export default (state = initialState, action) => {
 
             const    last = daysOfLog[daysOfLog.length-1]
             const    sevendaysbefore = last - sevendays;
-            console.log(  daysOfLog.length, sevendaysbefore, sevendays)
 
             daysOfLog = daysOfLog.filter((e)=> (e > sevendaysbefore) )
                 .map((e)=>moment(e).format('DD.MM.YYYY'))
@@ -90,9 +82,6 @@ export default (state = initialState, action) => {
                 }
             })
 
-
-                console.log(  daysOfLog.length, splitByDays, splitByDaysCounter)
-
             return {
                 ...state,
                 loginsNumber: action.newValue,
@@ -103,11 +92,3 @@ export default (state = initialState, action) => {
             return state
     }
 }
-
-// wykres ile razy dany user sie logowal w ciagu
-// ostatniego tyg
-
-
-// 1. wszystkie daty tydzien wstecz
-// 2. ile jest wystapien danej daty
-// 3. wykres dni od ilosci

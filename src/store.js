@@ -3,9 +3,11 @@ import thunk from 'redux-thunk'
 import products, {initProductSync} from './state/products'
 import auth, {initAuthUserSync} from './state/auth'
 import loginsLogs from './state/loginLogs'
+import addProductsToMeals from './state/addProductsToMeals'
 
 
 export const reducer = combineReducers({
+    addProductsToMeals,
     loginsLogs,
     products,
     auth
