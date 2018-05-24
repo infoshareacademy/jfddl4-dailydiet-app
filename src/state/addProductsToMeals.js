@@ -30,11 +30,15 @@ export const addProductToMeal = (myProduct) => (dispatch, getState) => {
 const initialState = {}
 
 export default (state = initialState, action) => {
+
+
     switch (action.type) {
         case ADD_DATE:
+
             return {
                 ...state,
                 dateOfMeal: moment(action.dateOfMealValue).format('DD-MM-YYYY'),
+
             }
         case ADD_MEAL:
             return {

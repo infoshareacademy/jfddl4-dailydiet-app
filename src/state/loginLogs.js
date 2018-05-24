@@ -50,7 +50,6 @@ export default (state = initialState, action) => {
 
             const    last = daysOfLog[daysOfLog.length-1]
             const    sevendaysbefore = last - sevendays;
-            // console.log(  daysOfLog.length, sevendaysbefore, sevendays)
 
             daysOfLog = daysOfLog.filter((e)=> (e > sevendaysbefore) )
                 .map((e)=>moment(e).format('DD.MM.YYYY'))
@@ -82,9 +81,6 @@ export default (state = initialState, action) => {
                     logs:splitByDaysCounter[k]
                 }
             })
-
-
-                // console.log(  daysOfLog.length, splitByDays, splitByDaysCounter)
 
             return {
                 ...state,
