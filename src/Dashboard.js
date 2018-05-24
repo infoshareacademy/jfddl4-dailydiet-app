@@ -4,7 +4,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid'
 import PieChart from './Charts/PieChart'
 import LineChartPic from './Charts/LineChartPic'
 import Paper from 'material-ui/Paper'
-import ShareButtonFacebook from './ShareButtonFacebook';
+import ShareButtonFacebook from './Components/ShareButtonFacebook';
 
 const styles = {
     width: '100%',

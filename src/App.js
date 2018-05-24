@@ -12,6 +12,7 @@ import SingleProductSite from './Components/SingleProductSite'
 
 import FavoriteProducts from './favorites'
 import AddProduct from './AddProduct'
+import ProductsSearchList from './Components/ProductsSearchList';
 
 class App extends React.Component {
 
@@ -67,7 +68,7 @@ class App extends React.Component {
                         <Route
                             path={'/library'}
                             component={() => (
-                                <Products />)}
+                                <ProductsSearchList />)}
                         />
                         <Route
                             path={'/product/:product'}
