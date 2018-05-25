@@ -8,7 +8,7 @@ import AppBar from 'material-ui/AppBar'
 import { orange500 } from 'material-ui/styles/colors'
 // Components
 import Sidebar from './Sidebar'
-import Dashboard from './Dashboard'
+import Dashboard from './Components/Dashboard'
 import Products from './Components/Products'
 import SingleProductSite from './Components/SingleProductSite'
 import FavoriteProducts from './favorites'
@@ -63,8 +63,7 @@ class App extends React.Component {
 
                         <Route
                             path={'/library'}
-                            component={() => (
-                                <Products />)}
+                            component={Products}
                         />
                         <Route
                             path={'/product/:product'}

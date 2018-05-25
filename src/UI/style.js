@@ -1,6 +1,5 @@
-
 export default {
-  header: {
+  welcomeHeader: {
     color: '#f1edef',
     boxSizing: 'border-box',
     fontSize: '2.5rem',
@@ -16,9 +15,9 @@ export default {
     flexDirection: 'column',
     alignItems: 'center'
   },
-  textMargins: {
-    display: 'block',
-    margin: '0.5rem 0'
+  formsHeader: {
+    fontSize: '1rem',
+    color: '#005a1f'
   },
   error: {
     color: 'red'
@@ -35,5 +34,13 @@ export default {
     textDecoration: 'none',
     width: '100%',
     display: 'inline-block'
+  },
+  buttonMargins: {
+    margin: '0.5rem 0'
+  },
+  forgotPassLabel: {
+    color: '#005a1f',
+    fontSize: '0.9rem',
+    fontWeight: 'bold'
   }
 }

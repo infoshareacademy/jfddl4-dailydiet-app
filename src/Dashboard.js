@@ -16,7 +16,6 @@ const styles = {
 }
 
 class Dashboard extends React.Component {
-
     state = {
         LineChartPic: {
             width: 500,
@@ -34,8 +33,6 @@ class Dashboard extends React.Component {
         window.removeEventListener('resize', this.onResize)
     }
 
-
-
     onResize = () => {
         if (window.innerWidth < 540) {
             this.setState({
@@ -43,7 +40,6 @@ class Dashboard extends React.Component {
                     width: 300,
                     height: 200
                 }
-
             })
         }
     }
@@ -51,7 +47,6 @@ class Dashboard extends React.Component {
     render() {
         return (
             <Grid fluid>
-
                 <Row>
                     <Paper style={styles}>
                         <h2>Macronutrients in today's meals</h2>
@@ -68,14 +63,12 @@ class Dashboard extends React.Component {
                 </Row>
                 <ShareButtonFacebook />
             </Grid>
-
         )
     }
 }
 
 export default connect(
-    state => ({
-    }),
+    state => ({}),
     dispatch => ({
         getFavorites: () => dispatch(getFavorites())
     })
