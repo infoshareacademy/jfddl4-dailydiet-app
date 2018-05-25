@@ -39,6 +39,7 @@ class FavoriteProducts extends React.Component {
                   .map(
                     el => (
                       <ListElement
+                        key={el.key}
                         product={el}
                       />
                     )
