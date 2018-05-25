@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom'
 import ShareButtonFacebook from './ShareButtonFacebook'
 
 import { connect } from 'react-redux'
-import { searchPhrase } from '../state/productSearchList'
+import { searchPhrase, searchCalories, searchCategory } from '../state/productSearchList'
 
 
 const ITEMS_PER_PAGE = 10
@@ -28,7 +28,6 @@ class ProductsSearchList extends React.Component {
 
     state = {
 
-        lookingProduct: '',
         productsList: this.props.products || [],
         filteredListOfProduct: [],
         calories: 700, //kalorie
@@ -118,15 +117,19 @@ class ProductsSearchList extends React.Component {
                             min={0}
                             max={700}
                             step={1}
-                            value={this.state.calories}
-                            onChange={(event, value) => this.handleSlider(event, value)}
+                            value={this.props.calories} // <== maximum
+                        // onChange={(event, value) => this.props.setSearchCalories(value)}
                         />
                         <p>
                             <span>{'Value of calories: '}</span>
-                            <span>{this.state.calories}</span>
+                            <span>{this.props.calories}</span>
                         </p>
 
-                        <DropDownMenu value={this.state.valueDropMenu} onChange={this.handleChange} openImmediately={false}>
+                        <DropDownMenu
+                            value={this.props.category}
+                            onChange={(obj, e, newVal) => this.props.setSearchCategory(newVal)}
+                            openImmediately={false}>
+
                             <MenuItem value={'every'} primaryText="Every" />
                             <MenuItem value={'other'} primaryText="Other" />
                             <MenuItem value={'dairy'} primaryText="Dairy" />
@@ -204,12 +207,16 @@ class ProductsSearchList extends React.Component {
 
 const mapStateToProps = state => ({
     phrase: state.productSearchList.phrase,
-    products: state.products
+    products: state.products,
+    calories: state.productSearchList.calories,
+    category: state.productSearchList.option
 })
 
 const mapDispatchToProps = dispatch => ({
 
-    setSearchPhrase: (newValue) => dispatch(searchPhrase(newValue))
+    setSearchPhrase: (newValue) => dispatch(searchPhrase(newValue)),
+    setSearchCalories: (newValue) => dispatch(searchCalories(newValue)),
+    setSearchCategory: (newValue) => dispatch(searchCategory(newValue))
 
 })
 
