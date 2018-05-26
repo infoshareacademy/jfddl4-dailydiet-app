@@ -7,6 +7,8 @@ import DinnerTable from '../Tables/DinnerTable'
 
 import DatePicker from 'material-ui/DatePicker';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
+import Paper from 'material-ui/Paper';
+import {stylesForTables} from '../styles.js'
 
 
 class SingleSiteButtonForMealPlan extends React.Component {
@@ -20,36 +22,48 @@ class SingleSiteButtonForMealPlan extends React.Component {
     }
 
     findBreakfastInProducts = () => {
-        const arrayOfMeal = this.props.breakfast.map(products => products)
-        const arrayOfProductsKeys = this.props.products.map(key => {
-            if (key.key === arrayOfMeal.find(product => product === key.key)) {
-                this.state.myProdBreakfast.push(key)
-            }
-        })
-        const breakfastArr = [...new Set(this.state.myProdBreakfast)]
-        this.setState({myProdBreakfast: breakfastArr})
+        if (this.props.breakfast !== undefined) {
+            const arrayOfMeal = this.props.breakfast.map(products => products)
+            this.props.products.map(key => {
+                if (key.key === arrayOfMeal.find(product => product === key.key)) {
+                    this.state.myProdBreakfast.push(key)
+                }
+            })
+            const breakfastArr = [...new Set(this.state.myProdBreakfast)]
+            this.setState({myProdBreakfast: breakfastArr})
+        } else {
+            alert('you need to pick date first')
+        }
     }
 
     findLunchInProducts = () => {
-        const arrayOfMeal = this.props.lunch.map(products => products)
-        const arrayOfProductsKeys = this.props.products.map(key => {
-            if (key.key === arrayOfMeal.find(product => product === key.key)) {
-                this.state.myProdLunch.push(key)
-            }
-        })
-        const lunchArr = [...new Set(this.state.myProdLunch)]
-        this.setState({myProdLunch: lunchArr})
+        if (this.props.lunch !== undefined) {
+            const arrayOfMeal = this.props.lunch.map(products => products)
+            this.props.products.map(key => {
+                if (key.key === arrayOfMeal.find(product => product === key.key)) {
+                    this.state.myProdLunch.push(key)
+                }
+            })
+            const lunchArr = [...new Set(this.state.myProdLunch)]
+            this.setState({myProdLunch: lunchArr})
+        } else {
+            alert('you need to pick date first')
+        }
     }
 
     findDinnerInProducts = () => {
-        const arrayOfMeal = this.props.dinner.map(products => products)
-        const arrayOfProductsKeys = this.props.products.map(key => {
-            if (key.key === arrayOfMeal.find(product => product === key.key)) {
-                this.state.myProdDinner.push(key)
-            }
-        })
-        const dinnerArr = [...new Set(this.state.myProdDinner)]
-        this.setState({myProdDinner: dinnerArr})
+        if (this.props.dinner !== undefined) {
+            const arrayOfMeal = this.props.dinner.map(products => products)
+            this.props.products.map(key => {
+                if (key.key === arrayOfMeal.find(product => product === key.key)) {
+                    this.state.myProdDinner.push(key)
+                }
+            })
+            const dinnerArr = [...new Set(this.state.myProdDinner)]
+            this.setState({myProdDinner: dinnerArr})
+        } else {
+            alert('you need to pick date first')
+        }
     }
 
     handleDateOpen = () => {
@@ -67,85 +81,89 @@ class SingleSiteButtonForMealPlan extends React.Component {
 
         return (
             <div>
-                <DatePicker
-                    hintText="Pick a date to see the meal plan"
-                    mode="landscape"
-                    onClick={() => {
-                        this.setState({
-                            myProdBreakfast: [],
-                            myProdLunch: []
-                        })
-                        this.handleReduce()
-                    }
-                    }
-                    onChange={(ev, value) => {
-                        this.props.mealDate(value)
-                        this.handleDateOpen()
-                        this.props.mealSyncer()
+                <Paper style={stylesForTables}>
+                    <DatePicker
+                        style={stylesForTables}
+                        hintText="Pick a date to see the meal plan"
+                        mode="landscape"
+                        onClick={() => {
+                            this.setState({
+                                myProdBreakfast: [],
+                                myProdLunch: [],
+                                myProdDinner: [],
+                            })
+                            this.handleReduce()
+                        }
+                        }
+                        onChange={(ev, value) => {
+                            this.props.mealDate(value)
+                            this.handleDateOpen()
+                            this.props.mealSyncer()
 
-                    }}
+                        }}
 
-                >
-                </DatePicker>
-                <Card expanded={this.state.expanded}
-                      onExpandChange={() => {
-                          this.findBreakfastInProducts()
-                          this.handleExpandChange()
-                      }}
-                >
-                    <CardHeader
-                        title="Breakfast"
-                        subtitle={`${this.props.mealDateState}`}
-                        actAsExpander={true}
-                        showExpandableButton={true}
-                    />
-                    <CardText expandable={true}>
-                        <BreakfastTable
-                            productsForBreakfastTable={this.state.myProdBreakfast}
+                    >
+                    </DatePicker>
+                </Paper>
+                <Paper style={stylesForTables}>
+                    <Card expanded={this.state.expanded}
+                          onExpandChange={() => {
+                              this.findBreakfastInProducts()
+                              this.handleExpandChange()
+                          }}
+                    >
+                        <CardHeader
+                            title="Breakfast"
+                            actAsExpander={true}
+                            showExpandableButton={true}
                         />
-                    </CardText>
-                </Card>
+                        <CardText expandable={true}>
+                            <BreakfastTable
+                                productsForBreakfastTable={this.state.myProdBreakfast}
+                            />
+                        </CardText>
+                    </Card>
+                </Paper>
+                <Paper style={stylesForTables}>
+                    <Card expanded={this.state.expanded}
+                          onExpandChange={() => {
+                              this.findLunchInProducts()
+                              this.handleExpandChange()
 
-                <Card expanded={this.state.expanded}
-                      onExpandChange={() => {
-                          this.findLunchInProducts()
-                          this.handleExpandChange()
-
-                      }}
-                >
-                    <CardHeader
-                        title="Lunch"
-                        subtitle={`${this.props.mealDateState}`}
-                        actAsExpander={true}
-                        showExpandableButton={true}
-                    />
-                    <CardText expandable={true}>
-                        <LunchTable
-                            productsForLunchTable={this.state.myProdLunch}
+                          }}
+                    >
+                        <CardHeader
+                            title="Lunch"
+                            actAsExpander={true}
+                            showExpandableButton={true}
                         />
-                    </CardText>
-                </Card>
-                <Card expanded={this.state.expanded}
-                      onExpandChange={() => {
-                          this.findDinnerInProducts()
-                          this.handleExpandChange()
+                        <CardText expandable={true}>
+                            <LunchTable
+                                productsForLunchTable={this.state.myProdLunch}
+                            />
+                        </CardText>
+                    </Card>
+                </Paper>
+                <Paper style={stylesForTables}>
+                    <Card expanded={this.state.expanded}
+                          onExpandChange={() => {
+                              this.findDinnerInProducts()
+                              this.handleExpandChange()
 
-                      }}
-                >
-                    <CardHeader
-                        title="Dinner"
-                        subtitle={`${this.props.mealDateState}`}
-                        actAsExpander={true}
-                        showExpandableButton={true}
-                    />
-                    <CardText expandable={true}>
-                        <DinnerTable
-                            productsForDinnerTable={this.state.myProdDinner}
+                          }}
+                    >
+                        <CardHeader
+                            title="Dinner"
+                            actAsExpander={true}
+                            showExpandableButton={true}
                         />
-                    </CardText>
-                </Card>
-
-
+                        <CardText expandable={true}>
+                            <DinnerTable
+                                productsForDinnerTable={this.state.myProdDinner}
+                            />
+                        </CardText>
+                    </Card>
+                </Paper>
             </div>
         )
     }
