@@ -26,29 +26,10 @@ class SingleSiteButtonForMealPlan extends React.Component {
                 this.state.myProdBreakfast.push(key)
             }
         })
+        const breakfastArr = [...new Set(this.state.myProdBreakfast)]
+        this.setState({myProdBreakfast: breakfastArr})
     }
-    removeDuplicatesBreakfast = () => {
-        const checkDuplicates = this.state.myProdBreakfast
-        const sorted = checkDuplicates
-        let end = checkDuplicates.length - 1
-        let left = 0
-        let right = 0
-        while (left < end && right <= end) {
-            if (right < end) {
-                right++
-            }
-            if (sorted[left] === sorted[right]) {
-                sorted.splice(right, 1)
-                right--
-                end--
-            }
-            if ((right === end) && (left !== end)) {
-                left++
-                right = left
-            }
-        }
-        return sorted
-    }
+
     findLunchInProducts = () => {
         const arrayOfMeal = this.props.lunch.map(products => products)
         const arrayOfProductsKeys = this.props.products.map(key => {
@@ -56,29 +37,10 @@ class SingleSiteButtonForMealPlan extends React.Component {
                 this.state.myProdLunch.push(key)
             }
         })
+        const lunchArr = [...new Set(this.state.myProdLunch)]
+        this.setState({myProdLunch: lunchArr})
     }
-    removeDuplicatesLunch = () => {
-        const checkDuplicates = this.state.myProdLunch
-        const sorted = checkDuplicates
-        let end = checkDuplicates.length - 1
-        let left = 0
-        let right = 0
-        while (left < end && right <= end) {
-            if (right < end) {
-                right++
-            }
-            if (sorted[left] === sorted[right]) {
-                sorted.splice(right, 1)
-                right--
-                end--
-            }
-            if ((right === end) && (left !== end)) {
-                left++
-                right = left
-            }
-        }
-        return sorted
-    }
+
     findDinnerInProducts = () => {
         const arrayOfMeal = this.props.dinner.map(products => products)
         const arrayOfProductsKeys = this.props.products.map(key => {
@@ -86,28 +48,8 @@ class SingleSiteButtonForMealPlan extends React.Component {
                 this.state.myProdDinner.push(key)
             }
         })
-    }
-    removeDuplicatesDinner = () => {
-        const checkDuplicates = this.state.myProdDinner
-        const sorted = checkDuplicates
-        let end = checkDuplicates.length - 1
-        let left = 0
-        let right = 0
-        while (left < end && right <= end) {
-            if (right < end) {
-                right++
-            }
-            if (sorted[left] === sorted[right]) {
-                sorted.splice(right, 1)
-                right--
-                end--
-            }
-            if ((right === end) && (left !== end)) {
-                left++
-                right = left
-            }
-        }
-        return sorted
+        const dinnerArr = [...new Set(this.state.myProdDinner)]
+        this.setState({myProdDinner: dinnerArr})
     }
 
     handleDateOpen = () => {
@@ -148,7 +90,6 @@ class SingleSiteButtonForMealPlan extends React.Component {
                 <Card expanded={this.state.expanded}
                       onExpandChange={() => {
                           this.findBreakfastInProducts()
-                          this.removeDuplicatesBreakfast()
                           this.handleExpandChange()
                       }}
                 >
@@ -168,7 +109,6 @@ class SingleSiteButtonForMealPlan extends React.Component {
                 <Card expanded={this.state.expanded}
                       onExpandChange={() => {
                           this.findLunchInProducts()
-                          this.removeDuplicatesLunch()
                           this.handleExpandChange()
 
                       }}
@@ -188,7 +128,6 @@ class SingleSiteButtonForMealPlan extends React.Component {
                 <Card expanded={this.state.expanded}
                       onExpandChange={() => {
                           this.findDinnerInProducts()
-                          this.removeDuplicatesDinner()
                           this.handleExpandChange()
 
                       }}
