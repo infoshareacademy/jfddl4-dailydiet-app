@@ -6,7 +6,7 @@ import {addProductToMeal, addDate} from '../state/addProductsToMeals'
 import SingleProductChart from '../Charts/SingleProductChart'
 import SingleProductTable from '../Tables/SingleProductTable'
 import AddProductToMeal from './AddProductToMeal'
-import MealPlan from './MealPlan'
+import SingleSiteButtonForMealPlan from './SingleSiteButtonForMealPlan'
 
 
 const SingleProductSite = (props) => {
@@ -45,8 +45,6 @@ const SingleProductSite = (props) => {
                                             product={product.key}/>
                                     </Row>
                                     <Row center="xs" middle="xs" style={{margin: '15px'}}>
-                                        <MealPlan
-                                            product={product.key}/>
                                     </Row>
                                 </Col>
                             </Row>

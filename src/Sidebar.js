@@ -90,6 +90,19 @@ const Sidebar = (props) => (
         </p>
       </MenuItem>
     </Link>
+      <Link
+          to={'/meal-plan'}
+          style={styles.link}
+      >
+          <MenuItem
+              onClick={props.close}
+          >
+              <p style={styles.flex}>
+                  <AvLibraryAdd style={styles.block}/>
+                  &nbsp;Meal Plan
+              </p>
+          </MenuItem>
+      </Link>
 
   </Drawer>
 

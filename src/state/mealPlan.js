@@ -38,10 +38,12 @@ export default (state = initialState, action) => {
             }
 
         case MEAL_PLAN_TO_GET_FROM_DB :
+
             const meals = action.acceptToSeeMealPlan
             const breakfast = meals.breakfast
             const lunch = meals.lunch
             const dinner = meals.dinner
+
             const justBreakfastProducts = mapObjectToArray(breakfast).map(el => {
                 return el.product
             })
@@ -57,8 +59,7 @@ export default (state = initialState, action) => {
                 meals,
                 breakfast: justBreakfastProducts,
                 lunch: justLunchProducts,
-                dinner: justDinnerProducts,
-            }
+                dinner: justDinnerProducts,}
 
         default:
             return state
