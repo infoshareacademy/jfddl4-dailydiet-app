@@ -1,5 +1,6 @@
-import {auth, db, GoogleProvider} from '../firebase'
+import {db} from '../firebase'
 import moment from "moment/moment";
+import {mapObjectToArray} from "../utils";
 
 const MEAL_DATE = 'mealPlan/MEAL_DATE'
 const MEAL_PLAN_TO_GET_FROM_DB = 'mealPlan/MEAL_PLAN_TO_GET_FROM_DB'
@@ -41,12 +42,22 @@ export default (state = initialState, action) => {
             const breakfast = meals.breakfast
             const lunch = meals.lunch
             const dinner = meals.dinner
+            const justBreakfastProducts = mapObjectToArray(breakfast).map(el => {
+                return el.product
+            })
+            const justLunchProducts = mapObjectToArray(lunch).map(el => {
+                return el.product
+            })
+            const justDinnerProducts = mapObjectToArray(dinner).map(el => {
+                return el.product
+            })
+
             return {
                 ...state,
                 meals,
-                breakfast,
-                lunch,
-                dinner
+                breakfast: justBreakfastProducts,
+                lunch: justLunchProducts,
+                dinner: justDinnerProducts,
             }
 
         default:
