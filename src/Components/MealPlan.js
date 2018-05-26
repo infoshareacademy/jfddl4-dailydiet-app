@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from "react-redux";
-import {mealDate, mealTime, mealSyncer} from '../state/mealPlan'
+import {mealDate, mealSyncer, getLunch, getBreakfast, getDinner} from '../state/mealPlan'
 import DatePicker from 'material-ui/DatePicker';
 import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog';
@@ -23,24 +23,12 @@ class MealPlan extends React.Component {
 
 
     render() {
-        const radios = [];
-        const values = ['breakfast', 'lunch', 'dinner']
-        for (let i = 0; i < 3; i++) {
-            radios.push(
-                <RadioButton
-                    key={i}
-                    value={`${values[i]}`}
-                    label={`${values[i]}`}
-                    onClick={() => this.props.mealTime(values[i])}
-                />
-            );
-        }
+
         return (
             <div>
                 <DatePicker
                     hintText="Landscape Dialog"
                     mode="landscape"
-                    value={{}}
                     onChange={(ev, value) => {
                         this.props.mealDate(value)
                         this.handleOpen()
@@ -50,51 +38,30 @@ class MealPlan extends React.Component {
                         name={'showMealPlan'}
                         backgroundColor={'#E65100'}
                         label={<span style={{color: 'white'}}>Show meal plan</span>}
+                        onClick={() => {
+                            this.props.mealSyncer()
+                            this.props.getBreakfast()
+                            this.props.getLunch()
+                            this.props.getDinner()
+                            this.handleClose()
+                        }
+                        }
                     />
                 </DatePicker>
 
-                <Dialog
-                    title="Choose a meal time"
-                    actions={[
-                        <FlatButton
-                            label="Cancel"
-                            primary={true}
-                            onClick={this.handleClose}
-                        />,
-                        <FlatButton
-                            label="Submit"
-                            primary={true}
-                            keyboardFocused={true}
-                            value={{}}
-                            onClick={() => {
-                                this.props.mealSyncer()
-                                this.handleClose()
-                            }
-                            }
-                        />,
-                    ]}
-                    modal={false}
-                    open={this.state.open}
-                    onRequestClose={this.handleClose}
-                    autoScrollBodyContent={true}
-                >
-                    <RadioButtonGroup name="shipSpeed" defaultSelected="not_light">
-                        {radios}
-                    </RadioButtonGroup>
-                </Dialog>
             </div>
         )
     }
 }
 
-const mapStateToProps = state => ({
-
-})
+const mapStateToProps = state => ({})
 
 const mapDispatchToProps = dispatch => ({
     mealDate: (theValue) => dispatch(mealDate(theValue)),
-    mealTime: (theValue) => dispatch(mealTime(theValue)),
-    mealSyncer: () => dispatch(mealSyncer())
+    mealSyncer: () => dispatch(mealSyncer()),
+    getBreakfast: () => dispatch(getBreakfast()),
+    getLunch: () => dispatch(getLunch()),
+    getDinner: () => dispatch(getDinner()),
 })
 
 export default connect(
