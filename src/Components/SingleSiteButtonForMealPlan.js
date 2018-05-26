@@ -13,23 +13,112 @@ class SingleSiteButtonForMealPlan extends React.Component {
     state = {
         dateOpen: false,
         cardOpen: false,
-        myProd: []
-
-
+        myProdBreakfast: [],
+        myProdLunch: [],
+        myProdDinner: [],
+        expanded: false
     }
 
     findBreakfastInProducts = () => {
         const arrayOfMeal = this.props.breakfast.map(products => products)
         const arrayOfProductsKeys = this.props.products.map(key => {
             if (key.key === arrayOfMeal.find(product => product === key.key)) {
-                this.state.myProd.push(key)
+                this.state.myProdBreakfast.push(key)
             }
         })
     }
-
+    removeDuplicatesBreakfast = () => {
+        const checkDuplicates = this.state.myProdBreakfast
+        const sorted = checkDuplicates
+        let end = checkDuplicates.length - 1
+        let left = 0
+        let right = 0
+        while (left < end && right <= end) {
+            if (right < end) {
+                right++
+            }
+            if (sorted[left] === sorted[right]) {
+                sorted.splice(right, 1)
+                right--
+                end--
+            }
+            if ((right === end) && (left !== end)) {
+                left++
+                right = left
+            }
+        }
+        return sorted
+    }
+    findLunchInProducts = () => {
+        const arrayOfMeal = this.props.lunch.map(products => products)
+        const arrayOfProductsKeys = this.props.products.map(key => {
+            if (key.key === arrayOfMeal.find(product => product === key.key)) {
+                this.state.myProdLunch.push(key)
+            }
+        })
+    }
+    removeDuplicatesLunch = () => {
+        const checkDuplicates = this.state.myProdLunch
+        const sorted = checkDuplicates
+        let end = checkDuplicates.length - 1
+        let left = 0
+        let right = 0
+        while (left < end && right <= end) {
+            if (right < end) {
+                right++
+            }
+            if (sorted[left] === sorted[right]) {
+                sorted.splice(right, 1)
+                right--
+                end--
+            }
+            if ((right === end) && (left !== end)) {
+                left++
+                right = left
+            }
+        }
+        return sorted
+    }
+    findDinnerInProducts = () => {
+        const arrayOfMeal = this.props.dinner.map(products => products)
+        const arrayOfProductsKeys = this.props.products.map(key => {
+            if (key.key === arrayOfMeal.find(product => product === key.key)) {
+                this.state.myProdDinner.push(key)
+            }
+        })
+    }
+    removeDuplicatesDinner = () => {
+        const checkDuplicates = this.state.myProdDinner
+        const sorted = checkDuplicates
+        let end = checkDuplicates.length - 1
+        let left = 0
+        let right = 0
+        while (left < end && right <= end) {
+            if (right < end) {
+                right++
+            }
+            if (sorted[left] === sorted[right]) {
+                sorted.splice(right, 1)
+                right--
+                end--
+            }
+            if ((right === end) && (left !== end)) {
+                left++
+                right = left
+            }
+        }
+        return sorted
+    }
 
     handleDateOpen = () => {
         this.setState({dateOpen: true});
+    }
+    handleReduce = () => {
+        this.setState({expanded: false});
+    }
+
+    handleExpandChange = (expanded) => {
+        this.setState({expanded: expanded});
     }
 
     render() {
@@ -39,16 +128,29 @@ class SingleSiteButtonForMealPlan extends React.Component {
                 <DatePicker
                     hintText="Pick a date to see the meal plan"
                     mode="landscape"
+                    onClick={() => {
+                        this.setState({
+                            myProdBreakfast: [],
+                            myProdLunch: []
+                        })
+                        this.handleReduce()
+                    }
+                    }
                     onChange={(ev, value) => {
                         this.props.mealDate(value)
                         this.handleDateOpen()
                         this.props.mealSyncer()
+
                     }}
 
                 >
                 </DatePicker>
-                <Card
-                    onExpandChange={() => this.findBreakfastInProducts()}
+                <Card expanded={this.state.expanded}
+                      onExpandChange={() => {
+                          this.findBreakfastInProducts()
+                          this.removeDuplicatesBreakfast()
+                          this.handleExpandChange()
+                      }}
                 >
                     <CardHeader
                         title="Breakfast"
@@ -58,11 +160,19 @@ class SingleSiteButtonForMealPlan extends React.Component {
                     />
                     <CardText expandable={true}>
                         <BreakfastTable
-                            productsForBreakfastTable={this.state.myProd}
+                            productsForBreakfastTable={this.state.myProdBreakfast}
                         />
                     </CardText>
                 </Card>
-                <Card>
+
+                <Card expanded={this.state.expanded}
+                      onExpandChange={() => {
+                          this.findLunchInProducts()
+                          this.removeDuplicatesLunch()
+                          this.handleExpandChange()
+
+                      }}
+                >
                     <CardHeader
                         title="Lunch"
                         subtitle={`${this.props.mealDateState}`}
@@ -71,10 +181,18 @@ class SingleSiteButtonForMealPlan extends React.Component {
                     />
                     <CardText expandable={true}>
                         <LunchTable
-                            lunch={this.props.lunch}/>
+                            productsForLunchTable={this.state.myProdLunch}
+                        />
                     </CardText>
                 </Card>
-                <Card>
+                <Card expanded={this.state.expanded}
+                      onExpandChange={() => {
+                          this.findDinnerInProducts()
+                          this.removeDuplicatesDinner()
+                          this.handleExpandChange()
+
+                      }}
+                >
                     <CardHeader
                         title="Dinner"
                         subtitle={`${this.props.mealDateState}`}
@@ -83,7 +201,8 @@ class SingleSiteButtonForMealPlan extends React.Component {
                     />
                     <CardText expandable={true}>
                         <DinnerTable
-                            dinner={this.props.dinner}/>
+                            productsForDinnerTable={this.state.myProdDinner}
+                        />
                     </CardText>
                 </Card>
 
@@ -111,4 +230,3 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(SingleSiteButtonForMealPlan)
-

@@ -32,7 +32,7 @@ class AddProductToMeal extends React.Component {
                     key={i}
                     value={`${values[i]}`}
                     label={`${values[i]}`}
-                    onClick={ () => this.props.addMeal(values[i]) }
+                    onClick={() => this.props.addMeal(values[i])}
                 />
             );
         }

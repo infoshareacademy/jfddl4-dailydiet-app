@@ -5,13 +5,12 @@ const DinnerTable = (props) => {
     return (
         <Table>
             <TableBody displayRowCheckbox={false}>
-                {props.dinner.map((product, key) => {
-                    return (<TableRow key={key}>
-                            <TableRowColumn>
-                                {product}
-                            </TableRowColumn>
-                        </TableRow>
-                    )
+                {props.productsForDinnerTable.map((product, key) => {
+                    return <TableRow key={key}>
+                        <TableRowColumn>
+                            {product.name}
+                        </TableRowColumn>
+                    </TableRow>
                 })}
             </TableBody>
         </Table>

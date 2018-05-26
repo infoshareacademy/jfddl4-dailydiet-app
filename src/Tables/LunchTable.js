@@ -2,16 +2,16 @@ import React from 'react'
 import {Table, TableBody, TableRow, TableRowColumn} from 'material-ui/Table';
 
 const LunchTable = (props) => {
+
     return (
         <Table>
             <TableBody displayRowCheckbox={false}>
-                {props.lunch.map((product, key) => {
-                    return (<TableRow key={key}>
-                            <TableRowColumn>
-                                {product}
-                            </TableRowColumn>
-                        </TableRow>
-                    )
+                {props.productsForLunchTable.map((product, key) => {
+                    return <TableRow key={key}>
+                        <TableRowColumn>
+                            {product.name}
+                        </TableRowColumn>
+                    </TableRow>
                 })}
             </TableBody>
         </Table>
