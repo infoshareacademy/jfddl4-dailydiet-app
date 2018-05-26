@@ -1,12 +1,10 @@
 import { auth, db, GoogleProvider } from '../firebase'
-import {logInsSyncer} from './loginLogs'
+import { logInsSyncer } from './loginLogs'
+import { handleSuccess, handleInternalError, handleExternalError } from './alerts'
 
 // ACTIONS TYPES
 const LOGGED_IN = 'auth/LOGGED_IN'
 const LOGGED_OUT = 'auth/LOGGED_OUT'
-const INTERNAL_ERROR = 'auth/INTERNAL_ERROR'
-const EXTERNAL_ERROR = 'auth/EXTERNAL_ERROR'
-const EMAIL_SENT = 'auth/EMAIL_SENT'
 
 // ACTIONS
 const loggedIn = (user) => ({
@@ -16,20 +14,6 @@ const loggedIn = (user) => ({
 
 const loggedOut = () => ({
   type: LOGGED_OUT
-})
-
-const handleInternalError = (error) => ({
-  type: INTERNAL_ERROR,
-  error
-})
-
-const handleExternalError = (error) => ({
-  type: EXTERNAL_ERROR,
-  error
-})
-
-const emailSent = () => ({
-  type: EMAIL_SENT
 })
 
 // LOGIC
@@ -91,7 +75,7 @@ export const createUser = (email, password, passwordRetyped) => (dispatch, getSt
 export const restorePassword = (email) => (dispatch, getState) => {
   if (email) {
     auth.sendPasswordResetEmail(email)
-      .then(() => dispatch(emailSent()))
+      .then(() => dispatch(handleSuccess('An email has been sent :) Check your mailbox.')))
       .catch(error => dispatch(handleExternalError(error)))
   }
 }
@@ -99,9 +83,7 @@ export const restorePassword = (email) => (dispatch, getState) => {
 // INITIAL STATE
 const initialState = {
   isUserLoggedIn: false,
-  user: null,
-  alert: '',
-  imWithError: false
+  user: null
 }
 
 // REDUCER
@@ -117,27 +99,6 @@ export default (state = initialState, action) => {
       }
     case LOGGED_OUT:
       return initialState
-    case INTERNAL_ERROR:
-      return {
-        ...state,
-        isUserLoggedIn: false,
-        alert: action.error,
-        imWithError: true
-      }
-    case EXTERNAL_ERROR:
-      return {
-        ...state,
-        isUserLoggedIn: false,
-        alert: action.error.message,
-        imWithError: true
-      }
-    case EMAIL_SENT:
-      return {
-        ...state,
-        isUserLoggedIn: false,
-        alert: 'An email has been sent :) Check your mailbox.',
-        imWithError: true
-      }
     default:
       return state
   }

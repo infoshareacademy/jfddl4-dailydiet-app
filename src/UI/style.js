@@ -30,6 +30,21 @@ export default {
     fontSize: '1rem',
     fontWeight: 'bold'
   },
+  link: {
+    textDecoration: 'none'
+  },
+  topBar: {
+    height: '64px',
+    width: '100%',
+    background: '#FF9800'
+  },
+  sidebarItem: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  block: {
+    display: 'inline-block'
+  },
   listElement: {
     textDecoration: 'none',
     width: '100%',
@@ -42,5 +57,14 @@ export default {
     color: '#005a1f',
     fontSize: '0.9rem',
     fontWeight: 'bold'
+  },
+  addProductDropDown: {
+    width: '100%',
+    textAlign: 'right'
+  },
+  addProductInput: {
+    width: 'calc(100% - 2rem)',
+    marginLeft: '2rem',
+    marginTop: '0'
   }
 }

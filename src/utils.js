@@ -8,7 +8,10 @@ export const mapObjectToArray = (obj) => (
         ))
 )
 
-
 export const upper = word => {
     return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+}
+
+export const lower = word => {
+    return word.toLowerCase()
 }

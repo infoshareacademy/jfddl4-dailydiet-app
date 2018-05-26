@@ -11,8 +11,8 @@ import Sidebar from './Sidebar'
 import Dashboard from './Components/Dashboard'
 import Products from './Components/Products'
 import SingleProductSite from './Components/SingleProductSite'
-import FavoriteProducts from './favorites'
-import AddProduct from './AddProduct'
+import FavoriteProducts from './Components/Favorites'
+import AddProduct from './Components/AddProduct'
 import LogOut from './Components/Auth/LogOut'
 
 class App extends React.Component {
@@ -35,20 +35,21 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <AppBar
-                    title='Daily Diet App'
-                    onLeftIconButtonClick={this.drawerStateHandler}
-                    iconElementRight={
-                        <LogOut />
-                    }
-                    style={{
-                        backgroundColor: orange500,
-                    }}
-                />
 
                 <Router>
 
                     <div>
+
+                        <AppBar
+                            title='Daily Diet App'
+                            onLeftIconButtonClick={this.drawerStateHandler}
+                            iconElementRight={
+                                <LogOut />
+                            }
+                            style={{
+                                backgroundColor: orange500,
+                            }}
+                        />
 
                         <Sidebar
                             open={this.state.isSidebarOpen}
@@ -95,10 +96,10 @@ class App extends React.Component {
 }
 
 export default connect(
-  state => ({
-    products: state.products
-  }),
-  dispatch => ({
-    getFavorites: () => dispatch(getFavorites())
-  })
+    state => ({
+        products: state.products
+    }),
+    dispatch => ({
+        getFavorites: () => dispatch(getFavorites())
+    })
 )(App)

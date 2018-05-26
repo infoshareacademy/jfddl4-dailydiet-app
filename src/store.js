@@ -5,13 +5,15 @@ import auth, {initAuthUserSync} from './state/auth'
 import loginsLogs from './state/loginLogs'
 import addProductsToMeals from './state/addProductsToMeals'
 import favorites from './state/favorites'
+import alerts from './state/alerts'
 
 export const reducer = combineReducers({
     addProductsToMeals,
     loginsLogs,
     products,
     auth,
-    favorites
+    favorites,
+    alerts
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

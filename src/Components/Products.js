@@ -1,14 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
-import { List } from 'material-ui';
+// Components
 import ListElement from './ListElement'
-
+import DialogFavorites from './Favorites/DialogFavorites'
+import ShareButtonFacebook from '../ShareButtonFacebook'
+// UI
+import { List } from 'material-ui';
 import { upper } from '../utils'
-import DialogFavorites from '../favorites/DialogFavorites'
+import Container from '../UI/Container'
 
 const Library = (props) => (
     <div>
+        <Container>
+            <h1>Library</h1>
+        </Container>
+        <Container>
         {
             !props.products.length ?
                 'Loading...'
@@ -29,7 +35,9 @@ const Library = (props) => (
                     }
                     <DialogFavorites />
                 </List>
-        }
+            }
+        </Container>
+        <ShareButtonFacebook />
     </div>
 )
 

@@ -12,12 +12,11 @@ import Container from '../../UI/Container'
 import { AppBar, IconButton, FlatButton, Snackbar } from 'material-ui'
 import NavigationExpandLess from 'material-ui/svg-icons/navigation/expand-less'
 import { orange500 } from 'material-ui/styles/colors'
-import RestorePassword from './RestorePassword';
+import RestorePassword from './RestorePassword'
 
 class Auth extends React.Component {
   state = {
     isSingUpOpen: false,
-    isSnackbarOpen: false,
     isRestorePasswordOpen: false
   }
 
@@ -48,10 +47,6 @@ class Auth extends React.Component {
                 style={{
                   backgroundColor: orange500,
                 }}
-              />
-              <Snackbar
-                open={this.props.imWithError}
-                message={this.props.alert}
               />
               <Container centered>
                 <div
@@ -91,6 +86,10 @@ class Auth extends React.Component {
                   :
                   <div></div>
               }
+              <Snackbar
+                open={this.props.imWithAlert}
+                message={this.props.alert}
+              />
             </div>
         }
       </div>
@@ -101,8 +100,8 @@ class Auth extends React.Component {
 export default connect(
   state => ({
     isUserLoggedIn: state.auth.isUserLoggedIn,
-    imWithError: state.auth.imWithError,
-    alert: state.auth.alert
+    imWithAlert: state.alerts.imWithAlert,
+    alert: state.alerts.alert
   }),
   dispatch => ({
     logInByGoogle: () => dispatch(logInByGoogle())
