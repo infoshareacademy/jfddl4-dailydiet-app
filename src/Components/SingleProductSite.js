@@ -7,8 +7,6 @@ import SingleProductChart from '../Charts/SingleProductChart'
 import SingleProductTable from '../Tables/SingleProductTable'
 import AddProductToMeal from './AddProductToMeal'
 import RaisedButton from 'material-ui/RaisedButton'
-import {favoriteRequest} from "../state/favorites";
-
 
 
 const SingleProductSite = (props) => {
@@ -51,8 +49,7 @@ const SingleProductSite = (props) => {
                                             name={'addAProductToFavorites'}
                                             backgroundColor={'#E65100'}
                                             label={<span style={{color: 'white'}}>Add to favorites</span>}
-                                           //todo
-                                            // onClick={() => props.favoriteRequest(product.key, product.name)}
+                                            onClick={() => ()}
                                         />
                                     </Row>
                                 </Col>
@@ -68,14 +65,13 @@ const SingleProductSite = (props) => {
 
 
 const mapStateToProps = state => ({
+    favoritesKeys: state.favorites.keys,
     products: state.products
 })
 
 const mapDispatchToProps = dispatch => ({
     addProductToMeal: (myProduct) => dispatch(addProductToMeal(myProduct)),
     addDate: (dateValue) => dispatch(addDate(dateValue)),
-    favoriteRequest: (key, name) => dispatch(favoriteRequest(key, name))
-
 })
 
 export default connect(
