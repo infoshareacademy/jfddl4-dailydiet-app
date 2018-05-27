@@ -1,4 +1,4 @@
-import {db} from '../firebase'
+import { db } from '../firebase'
 import { mapObjectToArray } from '../utils'
 
 const SET = 'products/SET'
@@ -11,18 +11,21 @@ const set = (products) => ({
 export const initProductSync = () => (dispatch, getState) => {
     db.ref('/products').on(
         'value',
-        (snapshot) => dispatch(
-            set(
-                mapObjectToArray(snapshot.val())
+        (snapshot) => {
+            dispatch(
+                set(
+                    mapObjectToArray(snapshot.val())
+                )
             )
-        )
+       
+        }
     )
 }
 
 const initialState = []
 
 export default (state = initialState, action) => {
-    switch(action.type){
+    switch (action.type) {
         case SET:
             return action.products
         default:

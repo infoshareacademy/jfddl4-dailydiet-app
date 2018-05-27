@@ -1,7 +1,8 @@
-import {createStore, combineReducers, compose, applyMiddleware} from 'redux'
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-import products, {initProductSync} from './state/products'
-import productSearchList from './state/productSearchList'
+import products, { initProductSync } from './state/products'
+import productSearchList, {getKcalProperty} from './state/productSearchList'
+
 
 export const reducer = combineReducers({
     products,

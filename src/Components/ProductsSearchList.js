@@ -1,21 +1,22 @@
 import React from 'react'
 import TextField from 'material-ui/TextField'
 import Container from '../UI/Container'
-import Slider from 'material-ui/Slider';
+import Slider from 'material-ui/Slider'
 // Firebase
 import { db } from '../firebase'
-import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
-import { List } from 'material-ui';
-import ListElement from '../ListElement';
-import DialogFavorites from '../favorites/DialogFavorites';
-import ReactPaginate from 'react-paginate';
+import DropDownMenu from 'material-ui/DropDownMenu'
+import MenuItem from 'material-ui/MenuItem'
+import { List } from 'material-ui'
+import ListElement from '../ListElement'
+import DialogFavorites from '../favorites/DialogFavorites'
+import ReactPaginate from 'react-paginate'
 import { Link } from 'react-router-dom'
 
 import ShareButtonFacebook from './ShareButtonFacebook'
 
 import { connect } from 'react-redux'
-import { searchPhrase, searchCalories, searchCategory } from '../state/productSearchList'
+import { searchPhrase, searchCalories, searchCategory,getKcalProperty } from '../state/productSearchList'
+
 
 
 const ITEMS_PER_PAGE = 10
@@ -107,18 +108,29 @@ class ProductsSearchList extends React.Component {
         return (
             <div>
                 <Container>
-                    <TextField
-                        hintText={'Type name of looking product'}
-                        fullWidth={true}
-                        onChange={(event, newValue) => this.props.setSearchPhrase(newValue)}// w onChange-u filter
-                    />
                     <Container>
+                        <TextField
+                            hintText={'Type name of looking product'}
+                            fullWidth={true}
+                            onChange={(event, newValue) => this.props.setSearchPhrase(newValue)}// w onChange-u filter
+                        />
+                    </Container>
+                    <button
+                    onClick={() => this.props.getKcal()}
+                    >pobierz</button>
+                    <Container>
+                        <div style={{display: 'flex',
+                        justifyContent: "space-between"
+                        }}>
+                            <span>0</span>
+                            <span>100</span>
+                        </div>
                         <Slider
                             min={0}
-                            max={700}
+                            max={700} // <== maximum
                             step={1}
-                            value={this.props.calories} // <== maximum
-                        // onChange={(event, value) => this.props.setSearchCalories(value)}
+                            value={this.props.calories}
+                            onChange={(event, value) => this.props.setSearchCalories(value)}
                         />
                         <p>
                             <span>{'Value of calories: '}</span>
@@ -127,7 +139,11 @@ class ProductsSearchList extends React.Component {
 
                         <DropDownMenu
                             value={this.props.category}
-                            onChange={(obj, e, newVal) => this.props.setSearchCategory(newVal)}
+                            onChange={(obj, e, newVal) => {
+                                console.log(newVal)
+                                console.log(this.props.category)
+                                this.props.setSearchCategory(newVal)
+                            }}
                             openImmediately={false}>
 
                             <MenuItem value={'every'} primaryText="Every" />
@@ -138,6 +154,7 @@ class ProductsSearchList extends React.Component {
                             <MenuItem value={'fruit'} primaryText="Fruit" />
                             <MenuItem value={'vegetable'} primaryText="Vegetable" />
                             <MenuItem value={'meat'} primaryText="Meat" />
+
                         </DropDownMenu>
                     </Container>
                     <Container>
@@ -216,8 +233,8 @@ const mapDispatchToProps = dispatch => ({
 
     setSearchPhrase: (newValue) => dispatch(searchPhrase(newValue)),
     setSearchCalories: (newValue) => dispatch(searchCalories(newValue)),
-    setSearchCategory: (newValue) => dispatch(searchCategory(newValue))
-
+    setSearchCategory: (newValue) => dispatch(searchCategory(newValue)),
+    getKcal: () => dispatch(getKcalProperty())
 })
 
 export default connect(
