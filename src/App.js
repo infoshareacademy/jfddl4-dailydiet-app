@@ -12,6 +12,8 @@ import Sidebar from './Sidebar'
 import Dashboard from './Components/Dashboard'
 import Products from './Components/Products'
 import SingleProductSite from './Components/SingleProductSite'
+import SingleSiteButtonForMealPlan from './Components/SingleSiteButtonForMealPlan'
+
 
 import FavoriteProducts from './favorites'
 import AddProduct from './AddProduct'

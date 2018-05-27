@@ -54,9 +54,11 @@ export default (state = initialState, action) => {
                 return el.product
             })
 
+
+
             return {
                 ...state,
-                meals,
+                meals: justBreakfastProducts.concat(justLunchProducts, justDinnerProducts),
                 breakfast: justBreakfastProducts,
                 lunch: justLunchProducts,
                 dinner: justDinnerProducts,}

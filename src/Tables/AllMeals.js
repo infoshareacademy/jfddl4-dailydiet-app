@@ -2,24 +2,25 @@ import React from 'react'
 import {Table, TableBody, TableRow, TableRowColumn, TableHeader, TableHeaderColumn,} from 'material-ui/Table'
 import Avatar from 'material-ui/Avatar'
 
-const BreakfastTable = (props) => {
+const AllMealsTable = (props) => {
 
     return (
         <Table>
+
             <TableHeader displaySelectAll={false}
                          adjustForCheckbox={false}>
                 <TableRow>
-                    <TableHeaderColumn style={{fontSize: '16px'}}>Img</TableHeaderColumn>
-                    <TableHeaderColumn style={{fontSize: '16px'}}>Category</TableHeaderColumn>
-                    <TableHeaderColumn style={{fontSize: '16px'}}>Name</TableHeaderColumn>
-                    <TableHeaderColumn style={{fontSize: '16px'}}>Kcal</TableHeaderColumn>
-                    <TableHeaderColumn style={{fontSize: '16px'}}>Fat</TableHeaderColumn>
-                    <TableHeaderColumn style={{fontSize: '16px'}}>Carbohydrates</TableHeaderColumn>
-                    <TableHeaderColumn style={{fontSize: '16px'}}>Protein</TableHeaderColumn>
+                    <TableHeaderColumn>Img</TableHeaderColumn>
+                    <TableHeaderColumn>Category</TableHeaderColumn>
+                    <TableHeaderColumn>Name</TableHeaderColumn>
+                    <TableHeaderColumn>Kcal</TableHeaderColumn>
+                    <TableHeaderColumn>Fat</TableHeaderColumn>
+                    <TableHeaderColumn>Carbohydrates</TableHeaderColumn>
+                    <TableHeaderColumn>Protein</TableHeaderColumn>
                 </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={false}>
-                {props.productsForBreakfastTable.map((product, key) => {
+                {props.summaryProducts.map((product, key) => {
                     return <TableRow key={key}>
                         <TableRowColumn>
                             <Avatar
@@ -58,7 +59,7 @@ const BreakfastTable = (props) => {
                         All together:
                     </TableRowColumn>
                     <TableRowColumn>
-                        {props.productsForBreakfastTable.map(product => product.kcal)
+                        {props.summaryProducts.map(product => product.kcal)
                             .reduce(function (result, products) {
                                 products = products * 1
                                 return result += products
@@ -66,7 +67,7 @@ const BreakfastTable = (props) => {
                         }
                     </TableRowColumn>
                     <TableRowColumn>
-                        {props.productsForBreakfastTable.map(product => product.fat)
+                        {props.summaryProducts.map(product => product.fat)
                             .reduce(function (result, products) {
                                 products = products * 1
                                 return result += products
@@ -74,7 +75,7 @@ const BreakfastTable = (props) => {
                         }
                     </TableRowColumn>
                     <TableRowColumn>
-                        {props.productsForBreakfastTable.map(product => product.carbohydrates)
+                        {props.summaryProducts.map(product => product.carbohydrates)
                             .reduce(function (result, products) {
                                 products = products * 1
                                 return result += products
@@ -82,7 +83,7 @@ const BreakfastTable = (props) => {
                         }
                     </TableRowColumn>
                     <TableRowColumn>
-                        {props.productsForBreakfastTable.map(product => product.protein)
+                        {props.summaryProducts.map(product => product.protein)
                             .reduce(function (result, products) {
                                 products = products * 1
                                 return result += products
@@ -95,5 +96,5 @@ const BreakfastTable = (props) => {
     )
 }
 
-export default (BreakfastTable)
 
+export default (AllMealsTable)

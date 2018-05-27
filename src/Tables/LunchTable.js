@@ -48,6 +48,49 @@ const LunchTable = (props) => {
                         </TableRowColumn>
                     </TableRow>
                 })}
+                <TableRow>
+                    <TableRowColumn>
+                        {}
+                    </TableRowColumn>
+                    <TableRowColumn>
+                        {}
+                    </TableRowColumn>
+                    <TableRowColumn style={{fontWeight: 'bold'}}>
+                        All together:
+                    </TableRowColumn>
+                    <TableRowColumn>
+                        {props.productsForLunchTable.map(product => product.kcal)
+                            .reduce(function (result, products) {
+                                products = products * 1
+                                return result += products
+                            }, 0)
+                        }
+                    </TableRowColumn>
+                    <TableRowColumn>
+                        {props.productsForLunchTable.map(product => product.fat)
+                            .reduce(function (result, products) {
+                                products = products * 1
+                                return result += products
+                            }, 0)
+                        }
+                    </TableRowColumn>
+                    <TableRowColumn>
+                        {props.productsForLunchTable.map(product => product.carbohydrates)
+                            .reduce(function (result, products) {
+                                products = products * 1
+                                return result += products
+                            }, 0)
+                        }
+                    </TableRowColumn>
+                    <TableRowColumn>
+                        {props.productsForLunchTable.map(product => product.protein)
+                            .reduce(function (result, products) {
+                                products = products * 1
+                                return result += products
+                            }, 0)
+                        }
+                    </TableRowColumn>
+                </TableRow>
             </TableBody>
         </Table>
     )

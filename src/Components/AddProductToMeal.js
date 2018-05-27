@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from "react-redux";
 import {addDate, addProductToMeal, addMeal} from "../state/addProductsToMeals";
+import {textFieldStyle} from "../styles";
 
 import DatePicker from 'material-ui/DatePicker';
 import RaisedButton from 'material-ui/RaisedButton'
@@ -13,6 +14,7 @@ class AddProductToMeal extends React.Component {
     state = {
         open: false,
     }
+
 
     handleOpen = () => {
         this.setState({open: true});
@@ -39,6 +41,7 @@ class AddProductToMeal extends React.Component {
         return (
             <div>
                 <DatePicker
+                    textFieldStyle={textFieldStyle}
                     hintText="Landscape Dialog"
                     mode="landscape"
                     value={{}}
@@ -48,7 +51,7 @@ class AddProductToMeal extends React.Component {
                     }}
                 >
                     <RaisedButton
-                        name={'addAProductToFavorites'}
+                        name={'addAProductToCalendar'}
                         backgroundColor={'#E65100'}
                         label={<span style={{color: 'white'}}>Add to calendar</span>}
                     />

@@ -4,6 +4,7 @@ import {mealDate, mealSyncer} from '../state/mealPlan'
 import BreakfastTable from '../Tables/BreakfastTable'
 import LunchTable from '../Tables/LunchTable'
 import DinnerTable from '../Tables/DinnerTable'
+import AllMeals from '../Tables/AllMeals'
 
 import DatePicker from 'material-ui/DatePicker';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
@@ -18,7 +19,8 @@ class SingleSiteButtonForMealPlan extends React.Component {
         myProdBreakfast: [],
         myProdLunch: [],
         myProdDinner: [],
-        expanded: false
+        expanded: false,
+        allMeals: [],
     }
 
     findBreakfastInProducts = () => {
@@ -65,6 +67,20 @@ class SingleSiteButtonForMealPlan extends React.Component {
             alert('you need to pick date first')
         }
     }
+    findAllMeals = () => {
+        if (this.props.meals !== undefined) {
+            const arrayOfMeal = this.props.meals.map(products => products)
+            this.props.products.map(key => {
+                if (key.key === arrayOfMeal.find(product => product === key.key)) {
+                    this.state.allMeals.push(key)
+                }
+            })
+            const allArr = [...new Set(this.state.allMeals)]
+            this.setState({allMeals: allArr})
+        } else {
+            alert('you need to pick date first')
+        }
+    }
 
     handleDateOpen = () => {
         this.setState({dateOpen: true});
@@ -84,7 +100,7 @@ class SingleSiteButtonForMealPlan extends React.Component {
                 <Paper style={stylesForTables}>
                     <DatePicker
                         style={stylesForTables}
-                        hintText="Pick a date to see the meal plan"
+                        hintText="Pick a date"
                         mode="landscape"
                         onClick={() => {
                             this.setState({
@@ -164,6 +180,26 @@ class SingleSiteButtonForMealPlan extends React.Component {
                         </CardText>
                     </Card>
                 </Paper>
+                <Paper style={stylesForTables}>
+                    <Card expanded={this.state.expanded}
+                          onExpandChange={() => {
+                              this.findAllMeals()
+                              this.handleExpandChange()
+
+                          }}
+                    >
+                        <CardHeader
+                            title="All meals"
+                            actAsExpander={true}
+                            showExpandableButton={true}
+                        />
+                        <CardText expandable={true}>
+                            <AllMeals
+                                summaryProducts={this.state.allMeals}
+                            />
+                        </CardText>
+                    </Card>
+                </Paper>
             </div>
         )
     }
@@ -171,6 +207,7 @@ class SingleSiteButtonForMealPlan extends React.Component {
 
 const mapStateToProps = state => ({
     mealDateState: state.mealPlan.mealDate,
+    meals: state.mealPlan.meals,
     breakfast: state.mealPlan.breakfast,
     lunch: state.mealPlan.lunch,
     dinner: state.mealPlan.dinner,
