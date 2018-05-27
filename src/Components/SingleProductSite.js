@@ -33,7 +33,7 @@ const SingleProductSite = (props) => {
                                 </Col>
                                 <Col xs={12} md={6}>
                                     <img src={product.picture} alt={product.name}
-                                         width={'250vw'}/>
+                                         width={'200vw'}/>
                                 </Col>
                             </Row>
                             <Row center="xs" middle="xs">

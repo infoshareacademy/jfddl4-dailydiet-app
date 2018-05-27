@@ -1,29 +1,29 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
 }
 
 .activePage {
-  background: rgb(255,152,0);
-  border-radius: 10%;
+    background: rgb(255, 152, 0);
+    border-radius: 10%;
 }
 
-.pagination li{
-  display: inline-flex;
-  padding: 10px;
-  cursor: pointer;
+.pagination li {
+    display: inline-flex;
+    padding: 10px;
+    cursor: pointer;
 }
 
-.pagination{
-  text-align: center;
+.pagination {
+    text-align: center;
 }
+
 .recharts-wrapper {
-  margin: auto;
+    margin: 0;
 }
 
 a, a:hover, a:active, a:visited, a:focus {
-  text-decoration: none;
-  color: black
+    text-decoration: none;
+    color: black
 }
-

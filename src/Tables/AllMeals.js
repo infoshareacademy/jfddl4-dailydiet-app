@@ -1,6 +1,5 @@
 import React from 'react'
 import {Table, TableBody, TableRow, TableRowColumn, TableHeader, TableHeaderColumn,} from 'material-ui/Table'
-import Avatar from 'material-ui/Avatar'
 
 const AllMealsTable = (props) => {
 
@@ -13,7 +12,7 @@ const AllMealsTable = (props) => {
                     <TableHeaderColumn>Name</TableHeaderColumn>
                     <TableHeaderColumn>Kcal</TableHeaderColumn>
                     <TableHeaderColumn>Fat</TableHeaderColumn>
-                    <TableHeaderColumn>Carb.s</TableHeaderColumn>
+                    <TableHeaderColumn>Carbs.</TableHeaderColumn>
                     <TableHeaderColumn>Prot.</TableHeaderColumn>
                 </TableRow>
             </TableHeader>

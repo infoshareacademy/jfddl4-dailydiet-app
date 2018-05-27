@@ -41,7 +41,7 @@ class AddProductToMeal extends React.Component {
         return (
             <div>
                 <DatePicker
-                    underlineStyle={{ borderColor: "#E65100" }}
+                    underlineStyle={{borderColor: "#E65100"}}
                     textFieldStyle={textFieldStyle}
                     hintText="Landscape Dialog"
                     mode="landscape"

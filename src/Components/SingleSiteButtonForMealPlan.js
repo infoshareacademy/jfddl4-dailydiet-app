@@ -12,7 +12,7 @@ import Dialog from 'material-ui/Dialog';
 
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
-import {stylesForTables,styleForDatePicker} from '../styles.js'
+import {stylesForTables, styleForDatePicker} from '../styles.js'
 import {Grid, Row, Col} from 'react-flexbox-grid'
 
 
@@ -82,14 +82,21 @@ class SingleSiteButtonForMealPlan extends React.Component {
         }
     }
     findAllMeals = () => {
+
         if (this.props.meals !== undefined) {
-            const arrayOfMeal = this.props.meals.map(products => products)
-            this.props.products.map(key => {
-                if (key.key === arrayOfMeal.find(product => product === key.key)) {
-                    this.state.allMeals.push(key)
+            const arrayOfMeal = this.props.meals
+            const allMeals = []
+            arrayOfMeal.forEach(key => {
+                const productFiltered = this.props.products.filter(product => key === product.key)
+                if (productFiltered.length) {
+                    allMeals.push(productFiltered[0])
+                    console.log('allMeals', allMeals)
+                    console.log('product', productFiltered)
                 }
             })
-        } else {
+            this.setState({allMeals})
+        }
+        else {
             alert('you need to pick date first')
         }
     }
@@ -133,114 +140,115 @@ class SingleSiteButtonForMealPlan extends React.Component {
                         >
                             Click below to pick a date.
                             <DatePicker
-                                        style={styleForDatePicker}
-                                        underlineStyle={{ borderColor: "#E65100", width: '80%'}}
-                                        hintText="Pick a date"
-                                        mode="portrait"
-                                        onClick={() => {
-                                            this.setState({
-                                                myProdBreakfast: [],
-                                                myProdLunch: [],
-                                                myProdDinner: [],
-                                                allMeals: [],
+                                style={styleForDatePicker}
+                                underlineStyle={{borderColor: "#E65100", width: '80%'}}
+                                hintText="Pick a date"
+                                mode="portrait"
+                                onClick={() => {
+                                    this.setState({
+                                        myProdBreakfast: [],
+                                        myProdLunch: [],
+                                        myProdDinner: [],
+                                        allMeals: [],
 
-                                            })
-                                            this.handleReduce()
-                                        }
-                                        }
-                                        onChange={(ev, value) => {
-                                            this.props.mealDate(value)
-                                            this.handleDateOpen()
-                                            this.props.mealSyncer()
+                                    })
+                                    this.handleReduce()
+                                }
+                                }
+                                onChange={(ev, value) => {
+                                    this.props.mealDate(value)
+                                    this.handleDateOpen()
+                                    this.props.mealSyncer()
 
 
-                                        }}
+                                }}
 
                             />
                         </Dialog>
 
                     </Paper>
                 </Row>
-                    <Paper style={stylesForTables}>
-                        <Card expanded={this.state.expanded}
-                              onExpandChange={() => {
-                                  this.handleExpandChange()
-                              }}
-                        >
-                            <CardHeader
-                                title="Breakfast"
-                                actAsExpander={true}
-                                showExpandableButton={true}
+                <Paper style={stylesForTables}>
+                    <Card expanded={this.state.expanded}
+                          onExpandChange={() => {
+                              this.handleExpandChange()
+                          }}
+                    >
+                        <CardHeader
+                            title="Breakfast"
+                            actAsExpander={true}
+                            showExpandableButton={true}
+                        />
+                        <CardText expandable={true}>
+                            <BreakfastTable
+                                productsForBreakfastTable={this.state.myProdBreakfast}
                             />
-                            <CardText expandable={true}>
-                                <BreakfastTable
-                                    productsForBreakfastTable={this.state.myProdBreakfast}
-                                />
-                            </CardText>
-                        </Card>
-                    </Paper>
-                    <Paper style={stylesForTables}>
-                        <Card expanded={this.state.expanded}
-                              onExpandChange={() => {
-                                  this.handleExpandChange()
+                        </CardText>
+                    </Card>
+                </Paper>
+                <Paper style={stylesForTables}>
+                    <Card expanded={this.state.expanded}
+                          onExpandChange={() => {
+                              this.handleExpandChange()
 
-                              }}
-                        >
-                            <CardHeader
-                                title="Lunch"
-                                actAsExpander={true}
-                                showExpandableButton={true}
+                          }}
+                    >
+                        <CardHeader
+                            title="Lunch"
+                            actAsExpander={true}
+                            showExpandableButton={true}
+                        />
+                        <CardText expandable={true}>
+                            <LunchTable
+                                productsForLunchTable={this.state.myProdLunch}
                             />
-                            <CardText expandable={true}>
-                                <LunchTable
-                                    productsForLunchTable={this.state.myProdLunch}
-                                />
-                            </CardText>
-                        </Card>
-                    </Paper>
-                    <Paper style={stylesForTables}>
-                        <Card expanded={this.state.expanded}
-                              onExpandChange={() => {
-                                  this.handleExpandChange()
+                        </CardText>
+                    </Card>
+                </Paper>
+                <Paper style={stylesForTables}>
+                    <Card expanded={this.state.expanded}
+                          onExpandChange={() => {
+                              this.handleExpandChange()
 
-                              }}
-                        >
-                            <CardHeader
-                                title="Dinner"
-                                actAsExpander={true}
-                                showExpandableButton={true}
+                          }}
+                    >
+                        <CardHeader
+                            title="Dinner"
+                            actAsExpander={true}
+                            showExpandableButton={true}
+                        />
+                        <CardText expandable={true}>
+                            <DinnerTable
+                                productsForDinnerTable={this.state.myProdDinner}
                             />
-                            <CardText expandable={true}>
-                                <DinnerTable
-                                    productsForDinnerTable={this.state.myProdDinner}
-                                />
-                            </CardText>
-                        </Card>
-                    </Paper>
-                    <Paper style={stylesForTables}>
-                        <Card expanded={this.state.expanded}
-                              onExpandChange={() => {
-                                  this.handleExpandChange()
-                              }}
-                        >
-                            <CardHeader
-                                title="All meals"
-                                actAsExpander={true}
-                                showExpandableButton={true}
+                        </CardText>
+                    </Card>
+                </Paper>
+                <Paper style={stylesForTables}>
+                    <Card expanded={this.state.expanded}
+                          onExpandChange={() => {
+                              this.handleExpandChange()
+                          }}
+                    >
+                        <CardHeader
+                            title="All meals"
+                            actAsExpander={true}
+                            showExpandableButton={true}
+                        />
+                        <CardText expandable={true}>
+                            <AllMeals
+                                summaryProducts={this.state.allMeals}
                             />
-                            <CardText expandable={true}>
-                                <AllMeals
-                                    summaryProducts={this.state.allMeals}
-                                />
-                            </CardText>
-                        </Card>
-                    </Paper>
+                        </CardText>
+                    </Card>
+                </Paper>
             </div>
-    )
+        )
     }
-    }
+}
 
-    const mapStateToProps = state => ({
+const
+    mapStateToProps = state => ({
         mealDateState: state.mealPlan.mealDate,
         meals: state.mealPlan.meals,
         breakfast: state.mealPlan.breakfast,
@@ -250,12 +258,13 @@ class SingleSiteButtonForMealPlan extends React.Component {
 
     })
 
-    const mapDispatchToProps = dispatch => ({
+const
+    mapDispatchToProps = dispatch => ({
         mealDate: (theValue) => dispatch(mealDate(theValue)),
         mealSyncer: () => dispatch(mealSyncer()),
     })
 
-    export default connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
-    )(SingleSiteButtonForMealPlan)
+)(SingleSiteButtonForMealPlan)
