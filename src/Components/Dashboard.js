@@ -53,7 +53,6 @@ const Dashboard = (props) => {
                     <Col md center={"true"}>
                         <LineChartPic
                             widthOfLineChart={onResizeWidthOfLineChart()}
-
                             heightOfLineChart={onResizeHeightOfLineChart()}/>
                     </Col>
                 </Row>

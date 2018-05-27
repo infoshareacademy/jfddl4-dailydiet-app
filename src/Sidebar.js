@@ -5,7 +5,7 @@ import Drawer from 'material-ui/Drawer'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
 import MenuItem from 'material-ui/MenuItem'
 import IconButton from 'material-ui/IconButton'
-import { ActionHome, AvLibraryBooks, ActionFavorite, AvLibraryAdd } from 'material-ui/svg-icons'
+import { ActionHome, AvLibraryBooks, ActionFavorite, AvLibraryAdd, ActionEvent } from 'material-ui/svg-icons'
 
 const styles = {
   link: {
@@ -98,7 +98,7 @@ const Sidebar = (props) => (
               onClick={props.close}
           >
               <p style={styles.flex}>
-                  <AvLibraryAdd style={styles.block}/>
+                  <ActionEvent style={styles.block}/>
                   &nbsp;Meal Plan
               </p>
           </MenuItem>
