@@ -10,30 +10,21 @@ const AllMealsTable = (props) => {
             <TableHeader displaySelectAll={false}
                          adjustForCheckbox={false}>
                 <TableRow>
-                    <TableHeaderColumn>Img</TableHeaderColumn>
-                    <TableHeaderColumn>Category</TableHeaderColumn>
                     <TableHeaderColumn>Name</TableHeaderColumn>
                     <TableHeaderColumn>Kcal</TableHeaderColumn>
                     <TableHeaderColumn>Fat</TableHeaderColumn>
-                    <TableHeaderColumn>Carbohydrates</TableHeaderColumn>
-                    <TableHeaderColumn>Protein</TableHeaderColumn>
+                    <TableHeaderColumn>Carb.s</TableHeaderColumn>
+                    <TableHeaderColumn>Prot.</TableHeaderColumn>
                 </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={false}>
                 {props.summaryProducts.map((product, key) => {
                     return <TableRow key={key}>
-                        <TableRowColumn>
-                            <Avatar
-                                src={`${product.picture}`}
-                                size={40}
-                            />
-                        </TableRowColumn>
+
                         <TableRowColumn>
                             {product.name}
                         </TableRowColumn>
-                        <TableRowColumn>
-                            {product.category}
-                        </TableRowColumn>
+
                         <TableRowColumn>
                             {product.kcal}
                         </TableRowColumn>
@@ -49,12 +40,7 @@ const AllMealsTable = (props) => {
                     </TableRow>
                 })}
                 <TableRow>
-                    <TableRowColumn>
-                        {}
-                    </TableRowColumn>
-                    <TableRowColumn>
-                        {}
-                    </TableRowColumn>
+
                     <TableRowColumn style={{fontWeight: 'bold'}}>
                         All together:
                     </TableRowColumn>

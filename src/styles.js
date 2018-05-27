@@ -25,3 +25,9 @@ export const textFieldStyle = {
     backgroundClor: 'rgb(230, 81, 0)',
     textAlign: 'center',
 }
+export const styleForDatePicker = {
+    margin: 'auto',
+    textAlign: 'center',
+    padding: '10px',
+    overflow: 'hidden'
+}

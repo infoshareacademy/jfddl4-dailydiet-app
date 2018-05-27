@@ -9,29 +9,19 @@ const BreakfastTable = (props) => {
             <TableHeader displaySelectAll={false}
                          adjustForCheckbox={false}>
                 <TableRow>
-                    <TableHeaderColumn style={{fontSize: '16px'}}>Img</TableHeaderColumn>
-                    <TableHeaderColumn style={{fontSize: '16px'}}>Category</TableHeaderColumn>
-                    <TableHeaderColumn style={{fontSize: '16px'}}>Name</TableHeaderColumn>
-                    <TableHeaderColumn style={{fontSize: '16px'}}>Kcal</TableHeaderColumn>
-                    <TableHeaderColumn style={{fontSize: '16px'}}>Fat</TableHeaderColumn>
-                    <TableHeaderColumn style={{fontSize: '16px'}}>Carbohydrates</TableHeaderColumn>
-                    <TableHeaderColumn style={{fontSize: '16px'}}>Protein</TableHeaderColumn>
+                    <TableHeaderColumn >Name</TableHeaderColumn>
+                    <TableHeaderColumn >Kcal</TableHeaderColumn>
+                    <TableHeaderColumn >Fat</TableHeaderColumn>
+                    <TableHeaderColumn >Carb.</TableHeaderColumn>
+                    <TableHeaderColumn >Prot.</TableHeaderColumn>
                 </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={false}>
                 {props.productsForBreakfastTable.map((product, key) => {
                     return <TableRow key={key}>
-                        <TableRowColumn>
-                            <Avatar
-                                src={`${product.picture}`}
-                                size={40}
-                            />
-                        </TableRowColumn>
+
                         <TableRowColumn>
                             {product.name}
-                        </TableRowColumn>
-                        <TableRowColumn>
-                            {product.category}
                         </TableRowColumn>
                         <TableRowColumn>
                             {product.kcal}
@@ -48,14 +38,9 @@ const BreakfastTable = (props) => {
                     </TableRow>
                 })}
                 <TableRow>
-                    <TableRowColumn>
-                        {}
-                    </TableRowColumn>
-                    <TableRowColumn>
-                        {}
-                    </TableRowColumn>
+
                     <TableRowColumn style={{fontWeight: 'bold'}}>
-                        All together:
+                        All :
                     </TableRowColumn>
                     <TableRowColumn>
                         {props.productsForBreakfastTable.map(product => product.kcal)
