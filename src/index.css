@@ -20,7 +20,7 @@ body {
 }
 
 .recharts-wrapper {
-  margin: auto;
+    margin: 0;
 }
 
 a, a:hover, a:active, a:visited, a:focus {

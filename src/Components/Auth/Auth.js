@@ -2,6 +2,7 @@ import React from 'react'
 // Redux & state
 import { connect } from 'react-redux'
 import { logInByGoogle } from '../../state/auth'
+import { clearError } from '../../state/alerts'
 // Components
 import LogInByGoogle from './LogInByGoogle'
 import LogInByMailAndPass from './LogInByMailAndPass'
@@ -107,6 +108,7 @@ export default connect(
     alert: state.alerts.alert
   }),
   dispatch => ({
-    logInByGoogle: () => dispatch(logInByGoogle())
+    logInByGoogle: () => dispatch(logInByGoogle()),
+    clearError: () => dispatch(clearError())
   })
 )(Auth)

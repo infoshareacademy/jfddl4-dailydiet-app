@@ -7,7 +7,7 @@ import Drawer from 'material-ui/Drawer'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
 import MenuItem from 'material-ui/MenuItem'
 import IconButton from 'material-ui/IconButton'
-import { ActionHome, AvLibraryBooks, ActionFavorite, AvLibraryAdd } from 'material-ui/svg-icons'
+import { ActionHome, AvLibraryBooks, ActionFavorite, AvLibraryAdd, ActionEvent } from 'material-ui/svg-icons'
 
 const Sidebar = (props) => (
   <Drawer
@@ -74,6 +74,19 @@ const Sidebar = (props) => (
         </p>
       </MenuItem>
     </Link>
+      <Link
+          to={'/meal-plan'}
+          style={style.link}
+      >
+          <MenuItem
+              onClick={props.close}
+          >
+              <p style={style.flex}>
+                  <ActionEvent style={style.block}/>
+                  &nbsp;Meal Plan
+              </p>
+          </MenuItem>
+      </Link>
 
   </Drawer>
 

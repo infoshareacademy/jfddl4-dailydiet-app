@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Table, TableBody, TableRow, TableRowColumn} from 'material-ui/Table';
 
+
 const fontSizes = {
     fontSize: '24px',
 }

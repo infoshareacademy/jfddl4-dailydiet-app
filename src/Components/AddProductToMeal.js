@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from "react-redux";
 import {addDate, addProductToMeal, addMeal} from "../state/addProductsToMeals";
-
+import {textFieldStyle} from "../UI/styles";
+import Snackbar from 'material-ui/Snackbar'
 import DatePicker from 'material-ui/DatePicker';
 import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog';
@@ -12,8 +13,20 @@ import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 class AddProductToMeal extends React.Component {
     state = {
         open: false,
+        snackBarOpen: false,
     }
 
+    snackbarHandleClick = () => {
+        this.setState({
+            snackBarOpen: true,
+        })
+    }
+
+    snackBarHandleRequestClose = () => {
+        this.setState({
+            snackBarOpen: false,
+        })
+    }
     handleOpen = () => {
         this.setState({open: true});
     }
@@ -32,15 +45,17 @@ class AddProductToMeal extends React.Component {
                     key={i}
                     value={`${values[i]}`}
                     label={`${values[i]}`}
-                    onClick={ () => this.props.addMeal(values[i]) }
+                    onClick={() => this.props.addMeal(values[i])}
                 />
             );
         }
         return (
             <div>
                 <DatePicker
-                    hintText="Landscape Dialog"
-                    mode="landscape"
+                    underlineStyle={{borderColor: "#E65100"}}
+                    textFieldStyle={textFieldStyle}
+                    hintText="Pick a date"
+                    mode="portrait"
                     value={{}}
                     onChange={(ev, value) => {
                         this.props.addDate(value)
@@ -48,7 +63,7 @@ class AddProductToMeal extends React.Component {
                     }}
                 >
                     <RaisedButton
-                        name={'addAProductToFavorites'}
+                        name={'addAProductToCalendar'}
                         backgroundColor={'#E65100'}
                         label={<span style={{color: 'white'}}>Add to calendar</span>}
                     />
@@ -69,6 +84,7 @@ class AddProductToMeal extends React.Component {
                             onClick={() => {
                                 this.props.addProductToMeal(this.props.product)
                                 this.handleClose()
+                                this.snackbarHandleClick()
                             }
                             }
                         />,
@@ -82,6 +98,13 @@ class AddProductToMeal extends React.Component {
                         {radios}
                     </RadioButtonGroup>
                 </Dialog>
+                <Snackbar
+                    open={this.state.snackBarOpen}
+                    message={`Product has been added to calendar!`}
+                    autoHideDuration={4000}
+                    onRequestClose={this.snackBarHandleRequestClose}
+                    bodyStyle={{backgroundColor: "#E65100", textAlign: 'center', fontWeight: 'bold'}}
+                />
             </div>
         )
     }

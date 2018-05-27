@@ -23,7 +23,6 @@ export const addProductToMeal = (myProduct) => (dispatch, getState) => {
         .set({
             product: productKey
         })
-        .then(alert(`Item was succesfully added to your calendar`))
 }
 
 
