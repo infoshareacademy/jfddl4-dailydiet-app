@@ -6,13 +6,15 @@ import loginsLogs from './state/loginLogs'
 import addProductsToMeals from './state/addProductsToMeals'
 import mealPlan from './state/mealPlan'
 
+import favorites from './state/favorites'
 
 export const reducer = combineReducers({
     mealPlan,
     addProductsToMeals,
     loginsLogs,
     products,
-    auth
+    auth,
+    favorites
 })
 
 

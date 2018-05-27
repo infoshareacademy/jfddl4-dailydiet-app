@@ -1,6 +1,8 @@
 import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { db } from './firebase'
+// Redux & state
+import { connect } from 'react-redux'
+import { getFavorites } from './state/favorites'
 // Material-ui
 import AppBar from 'material-ui/AppBar'
 import { orange500 } from 'material-ui/styles/colors'
@@ -10,7 +12,6 @@ import Sidebar from './Sidebar'
 import Dashboard from './Components/Dashboard'
 import Products from './Components/Products'
 import SingleProductSite from './Components/SingleProductSite'
-import SingleSiteButtonForMealPlan from './Components/SingleSiteButtonForMealPlan'
 
 import FavoriteProducts from './favorites'
 import AddProduct from './AddProduct'
@@ -24,40 +25,7 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        // readFromDatabase(this.setArrayToState)
-        db.ref(`/products`)
-            .once(
-                'value',
-                (snapshot) => {
-                    const dataInArray =
-                        (Object.entries(snapshot.val() || {})
-                            .map(([key, value]) => (
-                                typeof value === 'object' ?
-                                    { ...value, key }
-                                    :
-                                    { key, value }
-                            ))
-                        )
-                    this.setArrayToState(dataInArray)
-                }).then(
-                    this.state.products.map(el =>
-                        db.ref(`/products/${el.key}`).push({
-                            carbohydrates: el.carbohydrates,
-                            category: el.category,
-                            fat: el.fat,
-                            kcal: el.kcal,
-                            name: el.name,
-                            picture: el.picture,
-                            protein: el.protein
-                        })
-                    )
-                )
-    }
-
-    setArrayToState = (data) => {
-        this.setState({
-            products: data
-        })
+        this.props.getFavorites()
     }
 
     drawerStateHandler = () => this.setState({
@@ -99,8 +67,7 @@ class App extends React.Component {
 
                         <Route
                             path={'/library'}
-                            component={() => (
-                                <Products />)}
+                            component={Products}
                         />
                         <Route
                             path={'/product/:product'}
@@ -110,14 +77,14 @@ class App extends React.Component {
                             path={'/favorites'}
                             component={() => (
                                 <FavoriteProducts
-                                    products={this.state.products}
+                                    products={this.props.products}
                                 />)}
                         />
                         <Route
                             path={'/add-product'}
                             component={() => (
                                 <AddProduct
-                                    products={this.state.products}
+                                    products={this.props.products}
                                 />)}
                         />
                         <Route
@@ -136,4 +103,11 @@ class App extends React.Component {
     }
 }
 
-export default App
+export default connect(
+  state => ({
+    products: state.products
+  }),
+  dispatch => ({
+    getFavorites: () => dispatch(getFavorites())
+  })
+)(App)
