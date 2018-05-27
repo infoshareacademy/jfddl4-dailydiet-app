@@ -9,11 +9,11 @@ const BreakfastTable = (props) => {
             <TableHeader displaySelectAll={false}
                          adjustForCheckbox={false}>
                 <TableRow>
-                    <TableHeaderColumn >Name</TableHeaderColumn>
-                    <TableHeaderColumn >Kcal</TableHeaderColumn>
-                    <TableHeaderColumn >Fat</TableHeaderColumn>
-                    <TableHeaderColumn >Carb.</TableHeaderColumn>
-                    <TableHeaderColumn >Prot.</TableHeaderColumn>
+                    <TableHeaderColumn>Name</TableHeaderColumn>
+                    <TableHeaderColumn>Kcal</TableHeaderColumn>
+                    <TableHeaderColumn>Fat</TableHeaderColumn>
+                    <TableHeaderColumn>Carb.</TableHeaderColumn>
+                    <TableHeaderColumn>Prot.</TableHeaderColumn>
                 </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={false}>
@@ -42,7 +42,7 @@ const BreakfastTable = (props) => {
                     <TableRowColumn style={{fontWeight: 'bold'}}>
                         All :
                     </TableRowColumn>
-                    <TableRowColumn>
+                    <TableRowColumn style={{fontWeight: 'bold'}}>
                         {props.productsForBreakfastTable.map(product => product.kcal)
                             .reduce(function (result, products) {
                                 products = products * 1
@@ -50,7 +50,7 @@ const BreakfastTable = (props) => {
                             }, 0)
                         }
                     </TableRowColumn>
-                    <TableRowColumn>
+                    <TableRowColumn style={{fontWeight: 'bold'}}>
                         {props.productsForBreakfastTable.map(product => product.fat)
                             .reduce(function (result, products) {
                                 products = products * 1
@@ -58,7 +58,7 @@ const BreakfastTable = (props) => {
                             }, 0)
                         }
                     </TableRowColumn>
-                    <TableRowColumn>
+                    <TableRowColumn style={{fontWeight: 'bold'}}>
                         {props.productsForBreakfastTable.map(product => product.carbohydrates)
                             .reduce(function (result, products) {
                                 products = products * 1
@@ -66,7 +66,7 @@ const BreakfastTable = (props) => {
                             }, 0)
                         }
                     </TableRowColumn>
-                    <TableRowColumn>
+                    <TableRowColumn style={{fontWeight: 'bold'}}>
                         {props.productsForBreakfastTable.map(product => product.protein)
                             .reduce(function (result, products) {
                                 products = products * 1

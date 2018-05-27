@@ -41,7 +41,7 @@ const LunchTable = (props) => {
                     <TableRowColumn style={{fontWeight: 'bold'}}>
                         All:
                     </TableRowColumn>
-                    <TableRowColumn>
+                    <TableRowColumn style={{fontWeight: 'bold'}}>
                         {props.productsForLunchTable.map(product => product.kcal)
                             .reduce(function (result, products) {
                                 products = products * 1
@@ -49,7 +49,7 @@ const LunchTable = (props) => {
                             }, 0)
                         }
                     </TableRowColumn>
-                    <TableRowColumn>
+                    <TableRowColumn style={{fontWeight: 'bold'}}>
                         {props.productsForLunchTable.map(product => product.fat)
                             .reduce(function (result, products) {
                                 products = products * 1
@@ -57,7 +57,7 @@ const LunchTable = (props) => {
                             }, 0)
                         }
                     </TableRowColumn>
-                    <TableRowColumn>
+                    <TableRowColumn style={{fontWeight: 'bold'}}>
                         {props.productsForLunchTable.map(product => product.carbohydrates)
                             .reduce(function (result, products) {
                                 products = products * 1
@@ -65,7 +65,7 @@ const LunchTable = (props) => {
                             }, 0)
                         }
                     </TableRowColumn>
-                    <TableRowColumn>
+                    <TableRowColumn style={{fontWeight: 'bold'}}>
                         {props.productsForLunchTable.map(product => product.protein)
                             .reduce(function (result, products) {
                                 products = products * 1

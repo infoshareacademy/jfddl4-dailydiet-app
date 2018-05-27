@@ -30,7 +30,9 @@ export const styleForDatePicker = {
     padding: '10px',
     overflow: 'hidden'
 }
-
+export const mealPlanCardTitleFont = {
+    fontSize: '24px'
+}
 
 const styles = {
     default: {
@@ -42,11 +44,12 @@ const styles = {
     }
 }
 
+
 const PaperRefined = (props) => (
     <Paper
         style={
             props.centered ?
-                { ...styles.default, ...styles.centered }
+                {...styles.default, ...styles.centered}
                 :
                 styles.default
         }

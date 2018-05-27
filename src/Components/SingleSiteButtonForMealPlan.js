@@ -10,10 +10,10 @@ import DatePicker from 'material-ui/DatePicker';
 import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog';
 
-import {Card, CardHeader, CardText} from 'material-ui/Card';
-import Paper from 'material-ui/Paper';
-import PaperRefined, {stylesForTables, styleForDatePicker} from '../styles.js'
-import {Grid, Row, Col} from 'react-flexbox-grid'
+import {Card, CardHeader, CardText, CardTitle} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+import PaperRefined, {stylesForTables, styleForDatePicker, mealPlanCardTitleFont} from '../styles.js'
+import {Row} from 'react-flexbox-grid'
 
 
 class SingleSiteButtonForMealPlan extends React.Component {
@@ -101,7 +101,18 @@ class SingleSiteButtonForMealPlan extends React.Component {
     }
 
     render() {
-
+        const actions = [
+            <FlatButton
+                label="Ok"
+                primary={true}
+                onClick={() => {
+                    this.handleModalClose()
+                    this.findBreakfastInProducts()
+                    this.findLunchInProducts()
+                    this.findDinnerInProducts()
+                    this.findAllMeals()
+                }}
+            />,]
         return (
             <div>
                 <Row center="xs" middle="xs">
@@ -114,6 +125,7 @@ class SingleSiteButtonForMealPlan extends React.Component {
                         />
                         <Dialog
                             modal={false}
+                            actions={actions}
                             open={this.state.modalOpen}
                             onRequestClose={() => {
                                 this.handleModalClose()
@@ -141,16 +153,12 @@ class SingleSiteButtonForMealPlan extends React.Component {
 
                                     })
                                     this.handleReduce()
-                                }
-                                }
+                                }}
                                 onChange={(ev, value) => {
                                     this.props.mealDate(value)
                                     this.handleDateOpen()
                                     this.props.mealSyncer()
-
-
                                 }}
-
                             />
                         </Dialog>
                     </PaperRefined>
@@ -166,7 +174,8 @@ class SingleSiteButtonForMealPlan extends React.Component {
                           }
                       }}
                 >
-                    <CardHeader
+                    <CardTitle
+                        style={styleForDatePicker}
                         title="Breakfast"
                         actAsExpander={true}
                         showExpandableButton={true}
@@ -187,7 +196,8 @@ class SingleSiteButtonForMealPlan extends React.Component {
                           }
                       }}
                 >
-                    <CardHeader
+                    <CardTitle
+                        style={styleForDatePicker}
                         title="Lunch"
                         actAsExpander={true}
                         showExpandableButton={true}
@@ -208,7 +218,8 @@ class SingleSiteButtonForMealPlan extends React.Component {
                           }
                       }}
                 >
-                    <CardHeader
+                    <CardTitle
+                        style={styleForDatePicker}
                         title="Dinner"
                         actAsExpander={true}
                         showExpandableButton={true}
@@ -221,7 +232,7 @@ class SingleSiteButtonForMealPlan extends React.Component {
                 </Card>
                 <Card expanded={this.state.expanded}
                       onExpandChange={() => {
-                          if (this.props.allMeals !== undefined) {
+                          if (this.props.meals !== undefined) {
                               this.handleExpandChange()
                           }
                           else {
@@ -229,7 +240,8 @@ class SingleSiteButtonForMealPlan extends React.Component {
                           }
                       }}
                 >
-                    <CardHeader
+                    <CardTitle
+                        style={styleForDatePicker}
                         title="All meals"
                         actAsExpander={true}
                         showExpandableButton={true}
