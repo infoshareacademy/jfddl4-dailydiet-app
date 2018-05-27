@@ -7,17 +7,23 @@ import { getFavorites } from './state/favorites'
 import AppBar from 'material-ui/AppBar'
 import { orange500 } from 'material-ui/styles/colors'
 // Components
+import readFromDatabase from './logic'
 import Sidebar from './Sidebar'
 import Dashboard from './Components/Dashboard'
 import Products from './Components/Products'
 import SingleProductSite from './Components/SingleProductSite'
+import SingleSiteButtonForMealPlan from './Components/SingleSiteButtonForMealPlan'
+
+
 import FavoriteProducts from './favorites'
 import AddProduct from './AddProduct'
-import LogOut from './Components/Auth/LogOut'
+import LogOut from './Components/Auth/LogOut';
 
 class App extends React.Component {
+
     state = {
-        isSidebarOpen: false
+        isSidebarOpen: false,
+        products: []
     }
 
     componentDidMount() {
@@ -82,6 +88,11 @@ class App extends React.Component {
                                 <AddProduct
                                     products={this.props.products}
                                 />)}
+                        />
+                        <Route
+                            path={'/meal-plan'}
+                            component={() => (
+                                <SingleSiteButtonForMealPlan/>)}
                         />
 
 
