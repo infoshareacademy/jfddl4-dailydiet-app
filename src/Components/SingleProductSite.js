@@ -5,8 +5,10 @@ import {upper} from '../utils'
 import {addProductToMeal, addDate} from '../state/addProductsToMeals'
 import SingleProductChart from '../Charts/SingleProductChart'
 import SingleProductTable from '../Tables/SingleProductTable'
+import DialogFavorites from '../favorites/DialogFavorites'
 import AddProductToMeal from './AddProductToMeal'
 import RaisedButton from 'material-ui/RaisedButton'
+import {favoriteRequest} from "../state/favorites";
 
 
 const SingleProductSite = (props) => {
@@ -48,12 +50,22 @@ const SingleProductSite = (props) => {
                                         <RaisedButton
                                             name={'addAProductToFavorites'}
                                             backgroundColor={'#E65100'}
-                                            label={<span style={{color: 'white'}}>Add to favorites</span>}
-                                            onClick={() => ()}
+                                            label={<span style={{color: 'white'}}>
+                                                {
+                                                    props.favoritesKeys.filter(key => key === product.key).length ?
+
+                                                        "Remove from favorites"
+                                                        :
+                                                        "Add to favorites"
+                                                }
+                                                </span>}
+                                            onClick={() => props.favoriteRequest(product.key, product.name)
+                                            }
                                         />
                                     </Row>
                                 </Col>
                             </Row>
+                            <DialogFavorites/>
                         </Grid>
                     </div>
                     :
@@ -65,13 +77,14 @@ const SingleProductSite = (props) => {
 
 
 const mapStateToProps = state => ({
+    requestedKey: state.favorites.requestedKey,
     favoritesKeys: state.favorites.keys,
     products: state.products
 })
 
 const mapDispatchToProps = dispatch => ({
     addProductToMeal: (myProduct) => dispatch(addProductToMeal(myProduct)),
-    addDate: (dateValue) => dispatch(addDate(dateValue)),
+    favoriteRequest: (key, name) => dispatch(favoriteRequest(key, name)),
 })
 
 export default connect(
