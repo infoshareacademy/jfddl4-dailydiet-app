@@ -30,6 +30,11 @@ export default {
     fontSize: '1rem',
     fontWeight: 'bold'
   },
+  listElement: {
+    textDecoration: 'none',
+    width: '100%',
+    display: 'inline-block'
+  },
   buttonMargins: {
     margin: '0.5rem 0'
   },

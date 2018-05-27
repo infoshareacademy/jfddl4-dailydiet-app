@@ -1,33 +1,16 @@
 import React from 'react'
-// Firebase
-import { db } from './../firebase'
+// Redux & state
+import { connect } from 'react-redux'
 // Material-ui
 import { List } from 'material-ui/List'
-
+// Components
 import DialogFavorites from './DialogFavorites'
-import ListElement from './../ListElement'
-import ShareButtonFacebook from '../ShareButtonFacebook';
-import Container from '../UI/Container';
+import ListElement from '../Components/ListElement'
+import ShareButtonFacebook from '../ShareButtonFacebook'
+import Container from '../UI/Container'
 class FavoriteProducts extends React.Component {
   state = {
-    products: this.props.products,
-    isDialogOpen: false,
-    productName: '',
-    productKey: '',
-    productIsFavorite: null
-  }
-
-  onFavoriteRequest = (name, key, isFavorite) => (
-    this.setState({ productName: name, productKey: key, productIsFavorite: isFavorite }, this.isDialogOpenToggler)
-  )
-
-  toggleFavorite = () => {
-    db.ref(`/products/${this.state.productKey}/isFavorite`)
-      .set(!this.state.productIsFavorite)
-  }
-
-  isDialogOpenToggler = () => {
-    this.setState({ isDialogOpen: !this.state.isDialogOpen })
+    products: this.props.products
   }
 
   render() {
@@ -43,30 +26,28 @@ class FavoriteProducts extends React.Component {
             :
             <List>
               {
+                this.props.favoritesKeys.length ?
                 this.state.products
-                  .filter(el =>
-                    el.isFavorite
+                  .filter(el => {
+                    if (this.props.favoritesKeys.filter(
+                      favoriteKey => el.key === favoriteKey)
+                      .length) {
+                        return true
+                    } else return false
+                  }
                   )
                   .map(
                     el => (
                       <ListElement
                         key={el.key}
-                        productName={el.name}
-                        productKey={el.key}
-                        isProductFavorite={el.isFavorite}
-                        productPicture={el.picture}
-                        onFavoriteRequest={this.onFavoriteRequest}
+                        product={el}
                       />
                     )
                   )
+                :
+                'Not sure if loading or you have no favorites yet'
               }
-              <DialogFavorites
-                openToggler={this.isDialogOpenToggler}
-                favoriteToggler={this.toggleFavorite}
-                isOpen={this.state.isDialogOpen}
-                productIsFavorite={this.state.productIsFavorite}
-                productName={this.state.productName}
-              />
+              <DialogFavorites/>
             </List>
         }
         </Container>
@@ -76,4 +57,10 @@ class FavoriteProducts extends React.Component {
   }
 }
 
-export default FavoriteProducts
+export default connect(
+  state => ({
+    favoritesKeys: state.favorites.keys,
+    isDialogOpen: state.favorites.isDialogOpen
+  }),
+  dispatch => ({})
+)(FavoriteProducts)

@@ -1,4 +1,7 @@
 import React from 'react'
+// Redux & state
+import { connect } from 'react-redux'
+import { addFavorite, removeFavorite, closeDialog } from '../state/favorites'
 // Material-ui
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
@@ -10,29 +13,43 @@ const DialogFavorites = (props) => (
       <FlatButton
         label="Cancel"
         primary={true}
-        onClick={props.openToggler}
+        onClick={props.closeDialog}
       />,
       <FlatButton
         label="Confirm"
         primary={true}
         keyboardFocused={true}
-        onClick={() => {
-          props.openToggler()
-          props.favoriteToggler()
-        }}
-      />,
+        onClick={
+          !props.favoritesKeys.filter(key => key === props.requestedKey).length ?
+            () => props.addFavorite(props.requestedKey)
+            :
+            () => props.removeFavorite(props.requestedKey)
+        }
+      />
     ]}
-    modal={false}
-    open={props.isOpen}
-    onRequestClose={props.openToggler}
+    modal={true}
+    open={props.isDialogOpen}
+    onRequestClose={props.closeDialog}
   >
     {
-      !props.productIsFavorite ?
-        `Add ${props.productName} to favorites?`
+      !props.favoritesKeys.filter(key => key === props.requestedKey).length ?
+        `Add ${props.requestedName} to favorites?`
         :
-        `Remove ${props.productName} from favorites?`
+        `Remove ${props.requestedName} from favorites?`
     }
   </Dialog>
 )
 
-export default DialogFavorites
+export default connect(
+  state => ({
+    favoritesKeys: state.favorites.keys,
+    requestedKey: state.favorites.requestedKey,
+    requestedName: state.favorites.requestedName,
+    isDialogOpen: state.favorites.isDialogOpen
+  }),
+  dispatch => ({
+    addFavorite: () => dispatch(addFavorite()),
+    removeFavorite: () => dispatch(removeFavorite()),
+    closeDialog: () => dispatch(closeDialog())
+  })
+)(DialogFavorites)

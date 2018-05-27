@@ -1,16 +1,18 @@
 import React from 'react'
-import TextField from 'material-ui/TextField'
-import Container from './UI/Container'
-import Slider from 'material-ui/Slider';
+import { Link } from 'react-router-dom'
+import ReactPaginate from 'react-paginate'
 // Firebase
-import {db} from './firebase'
-import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
-import {List} from 'material-ui';
-import ListElement from './ListElement';
-import DialogFavorites from './favorites/DialogFavorites';
-import ReactPaginate from 'react-paginate';
-import {Link} from 'react-router-dom'
+import { db } from './firebase'
+// Components
+import ListElement from './Components/ListElement'
+import DialogFavorites from './favorites/DialogFavorites'
+// UI
+import Container from './UI/Container'
+import TextField from 'material-ui/TextField'
+import Slider from 'material-ui/Slider'
+import DropDownMenu from 'material-ui/DropDownMenu'
+import MenuItem from 'material-ui/MenuItem'
+import { List } from 'material-ui'
 
 import ShareButtonFacebook from './ShareButtonFacebook'
 
@@ -28,10 +30,6 @@ class ProductsSearchList extends React.Component {
         filteredListOfProduct: [], // lista produktów przefiltrowana przez wyszukiwarkę po nazwie
         calories: 700, //kalorie
         valueDropMenu: 'every',
-        isDialogOpen: false,
-        productName: '',
-        productKey: '',
-        productIsFavorite: null,
         activePage: 0
     }
 
@@ -46,29 +44,17 @@ class ProductsSearchList extends React.Component {
     }
 
     handleSlider = (event, value) => {
-        this.setState({calories: value}, () => this.searchProducts());
+        this.setState({ calories: value }, () => this.searchProducts());
 
     }
 
     handleTextField = (event, newValue) => {
-        this.setState({lookingProduct: newValue}, () => this.searchProducts())
+        this.setState({ lookingProduct: newValue }, () => this.searchProducts())
 
     }
 
     handleChange = (event, index, value) => {
-        this.setState({valueDropMenu: value}, () => this.searchProducts());
-    }
-    onFavoriteRequest = (name, key, isFavorite) => (
-        this.setState({productName: name, productKey: key, productIsFavorite: isFavorite}, this.isDialogOpenToggler)
-    )
-
-    toggleFavorite = () => {
-        db.ref(`/products/${this.state.productKey}/isFavorite`)
-            .set(!this.state.productIsFavorite)
-    }
-
-    isDialogOpenToggler = () => {
-        this.setState({isDialogOpen: !this.state.isDialogOpen})
+        this.setState({ valueDropMenu: value }, () => this.searchProducts());
     }
 
     searchProducts = () => {
@@ -92,9 +78,7 @@ class ProductsSearchList extends React.Component {
             numberOfPages: Math.ceil(filteredArray.length / ITEMS_PER_PAGE)
         })
 
-
     }
-
 
     render() {
 
@@ -119,79 +103,72 @@ class ProductsSearchList extends React.Component {
                             <span>{this.state.calories}</span>
                         </p>
 
-                    <DropDownMenu value={this.state.valueDropMenu} onChange={this.handleChange} openImmediately={false}>
-                        <MenuItem value={'every'} primaryText="Every"/>
-                        <MenuItem value={'other'} primaryText="Other"/>
-                        <MenuItem value={'dairy'} primaryText="Dairy"/>
-                        <MenuItem value={'sweets'} primaryText="Sweets"/>
-                        <MenuItem value={'drinks'} primaryText="Drinks"/>
-                        <MenuItem value={'fruit'} primaryText="Fruit"/>
-                        <MenuItem value={'vegetable'} primaryText="Vegetable"/>
-                        <MenuItem value={'meat'} primaryText="Meat"/>
-                    </DropDownMenu>
-                </Container>
-                <Container>
-                    {
-                        !this.state.filteredListOfProduct.length ?
-                            'Loading...'
-                            :
-                            <List>
-                                {
-                                    this.state.filteredListOfProduct
-                                        .filter((aProduct, index) => {
+                        <DropDownMenu value={this.state.valueDropMenu} onChange={this.handleChange} openImmediately={false}>
+                            <MenuItem value={'every'} primaryText="Every" />
+                            <MenuItem value={'other'} primaryText="Other" />
+                            <MenuItem value={'dairy'} primaryText="Dairy" />
+                            <MenuItem value={'sweets'} primaryText="Sweets" />
+                            <MenuItem value={'drinks'} primaryText="Drinks" />
+                            <MenuItem value={'fruit'} primaryText="Fruit" />
+                            <MenuItem value={'vegetable'} primaryText="Vegetable" />
+                            <MenuItem value={'meat'} primaryText="Meat" />
+                        </DropDownMenu>
+                    </Container>
+                    <Container>
+                        {
+                            !this.state.filteredListOfProduct.length ?
+                                'Loading...'
+                                :
+                                <List>
+                                    {
+                                        this.state.filteredListOfProduct
+                                            .filter((aProduct, index) => {
 
-                                            return (
-                                                this.state.activePage * ITEMS_PER_PAGE <= index
-                                                &&
-                                                (this.state.activePage + 1) * ITEMS_PER_PAGE > index
-                                            )
-                                        })
-                                        .map(
-                                            el => {
                                                 return (
-                                                    <ListElement
-                                                        key={el.key}
-                                                        productName={upper(el.name)}
-                                                        productKey={el.key}
-                                                        isProductFavorite={el.isFavorite}
-                                                        productPicture={el.picture}
-                                                    />
+                                                    this.state.activePage * ITEMS_PER_PAGE <= index
+                                                    &&
+                                                    (this.state.activePage + 1) * ITEMS_PER_PAGE > index
                                                 )
-                                            }
-                                        )
-                                }
-                                <DialogFavorites
-                                    openToggler={this.isDialogOpenToggler}
-                                    favoriteToggler={this.toggleFavorite}
-                                    isOpen={this.state.isDialogOpen}
-                                    productIsFavorite={this.state.productIsFavorite}
-                                    productName={this.state.productName}
-                                />
+                                            })
+                                            .map(
+                                                el => {
+                                                    return (
+                                                        <ListElement
+                                                            product={el}
+                                                        />
+                                                    )
+                                                }
+                                            )
+                                    }
+                                    <DialogFavorites/>
 
                                 </List>
                         }
 
-                    <ReactPaginate
-                        previousLabel={"previous"}
-                        nextLabel={"next"}
-                        breakLabel={<a href="">...</a>}
-                        breakClassName={"break-me"}
-                        pageCount={this.state.numberOfPages}
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={5}
-                        onPageChange={this.handlePageClick}
-                        containerClassName={"pagination"}
-                        subContainerClassName={"pages pagination"}
-                        activeClassName={"activePage"}
-                    />
+                        <ReactPaginate
+                            previousLabel={"previous"}
+                            nextLabel={"next"}
+                            breakLabel={<a href="">...</a>}
+                            breakClassName={"break-me"}
+                            pageCount={this.state.numberOfPages}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            onPageChange={this.handlePageClick}
+                            containerClassName={"pagination"}
+                            subContainerClassName={"pages pagination"}
+                            activeClassName={"activePage"}
+                        />
 
                     </Container>
                 </Container>
-                <ShareButtonFacebook/>
+                <ShareButtonFacebook />
             </div>
         )
     }
 
 }
 
-export default ProductsSearchList
+export default connect(
+    state => ({}),
+    () => ({})
+)(ProductsSearchList)
