@@ -9,7 +9,7 @@ export const clearState = (self) =>
     fat: 0
   })
 
-export const nameHandler = (self, stateProp, val) => (self.setState({ [stateProp]: val }))
+export const nameHandler = (self, stateProp, val) => (self.setState({ [stateProp]: val },))
 
 export const pictureHandler = (self, stateProp, val) => (self.setState({ [stateProp]: val }))
 

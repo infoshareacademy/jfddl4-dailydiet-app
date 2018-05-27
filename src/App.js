@@ -3,8 +3,10 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 // Redux & state
 import { connect } from 'react-redux'
 import { getFavorites } from './state/favorites'
+import { clearError } from './state/alerts'
 // Material-ui
 import AppBar from 'material-ui/AppBar'
+import Snackbar from 'material-ui/Snackbar'
 import { orange500 } from 'material-ui/styles/colors'
 // Components
 import Sidebar from './Sidebar'
@@ -90,6 +92,14 @@ class App extends React.Component {
 
                 </Router>
 
+                <Snackbar
+                    autoHideDuration={4000}
+                    open={this.props.imWithAlert}
+                    message={this.props.alert}
+                    bodyStyle={{ backgroundColor: "#E65100", textAlign: 'center' }}
+                    onRequestClose={this.props.clearError}
+                />
+
             </div>
         )
     }
@@ -97,9 +107,12 @@ class App extends React.Component {
 
 export default connect(
     state => ({
-        products: state.products
+        products: state.products,
+        imWithAlert: state.alerts.imWithAlert,
+        alert: state.alerts.alert
     }),
     dispatch => ({
-        getFavorites: () => dispatch(getFavorites())
+        getFavorites: () => dispatch(getFavorites()),
+        clearError: () => dispatch(clearError())
     })
 )(App)

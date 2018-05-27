@@ -1,4 +1,4 @@
-import {auth, db, GoogleProvider} from '../firebase'
+import { db } from '../firebase'
 import moment from "moment/moment";
 
 const ADD_DATE = 'addProductsToMeals/ADD_DATE'

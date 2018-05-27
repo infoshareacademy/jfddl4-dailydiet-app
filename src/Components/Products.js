@@ -6,7 +6,6 @@ import DialogFavorites from './Favorites/DialogFavorites'
 import ShareButtonFacebook from '../ShareButtonFacebook'
 // UI
 import { List } from 'material-ui';
-import { upper } from '../utils'
 import Container from '../UI/Container'
 
 const Library = (props) => (
@@ -15,26 +14,26 @@ const Library = (props) => (
             <h1>Library</h1>
         </Container>
         <Container>
-        {
-            !props.products.length ?
-                'Loading...'
-                :
-                <List>
-                    {
-                        props.products
-                            .map(
-                                el => {
-                                    return (
-                                        <ListElement
-                                            product={el}
-                                            key={el.key}
-                                        />
-                                    )
-                                }
-                            )
-                    }
-                    <DialogFavorites />
-                </List>
+            {
+                !props.products.length ?
+                    'Loading...'
+                    :
+                    <List>
+                        {
+                            props.products
+                                .map(
+                                    el => {
+                                        return (
+                                            <ListElement
+                                                product={el}
+                                                key={el.key}
+                                            />
+                                        )
+                                    }
+                                )
+                        }
+                        <DialogFavorites />
+                    </List>
             }
         </Container>
         <ShareButtonFacebook />

@@ -17,7 +17,7 @@ const AddProductPart = (props) => (
         onChange={(event, value) => props.nameHandler(value)}
       />
     <br />
-    <span> Choose category: </span>
+    <span>Choose category:</span>
     <br />
     <div
       style={style.addProductDropDown}
@@ -25,7 +25,7 @@ const AddProductPart = (props) => (
       <DropDownMenu
         style={style.addProductInput}
         value={props.categoryState}
-        onChange={props.categoryHandler}
+        onChange={() => {props.categoryHandler}}
         openImmediately={false}
       >
         <MenuItem value={'other'} primaryText="Other" />

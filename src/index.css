@@ -1,23 +1,24 @@
 body {
   margin: 0;
-  padding: 0;
+  padding: 0 0 48px 0;
   font-family: sans-serif;
 }
 
 .activePage {
-  background: rgb(255,152,0);
+  background: rgb(255, 152, 0);
   border-radius: 10%;
 }
 
-.pagination li{
+.pagination li {
   display: inline-flex;
   padding: 10px;
   cursor: pointer;
 }
 
-.pagination{
+.pagination {
   text-align: center;
 }
+
 .recharts-wrapper {
   margin: auto;
 }
@@ -26,4 +27,3 @@ a, a:hover, a:active, a:visited, a:focus {
   text-decoration: none;
   color: black
 }
-

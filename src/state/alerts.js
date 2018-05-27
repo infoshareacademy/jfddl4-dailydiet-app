@@ -2,6 +2,7 @@
 const SUCCESS = 'alert/SUCCESS'
 const INTERNAL_ERROR = 'alert/INTERNAL_ERROR'
 const EXTERNAL_ERROR = 'alert/EXTERNAL_ERROR'
+const CLEAR_ERROR = 'alert/CLEAR_ERROR'
 
 // ACTIONS
 export const handleSuccess = (message) => ({
@@ -17,6 +18,10 @@ export const handleInternalError = (error) => ({
 export const handleExternalError = (error) => ({
   type: EXTERNAL_ERROR,
   error
+})
+
+export const clearError = () => ({
+  type: CLEAR_ERROR
 })
 
 // INITIAL STATE
@@ -45,6 +50,12 @@ export default (state = initialState, action) => {
         ...state,
         alert: action.error.message,
         imWithAlert: true
+      }
+    case CLEAR_ERROR:
+      return {
+        ...state,
+        alert: '',
+        imWithAlert: false
       }
     default:
       return state

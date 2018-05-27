@@ -87,8 +87,11 @@ class Auth extends React.Component {
                   <div></div>
               }
               <Snackbar
+                autoHideDuration={4000}
                 open={this.props.imWithAlert}
                 message={this.props.alert}
+                bodyStyle={{ backgroundColor: "#E65100", textAlign: 'center' }}
+                onRequestClose={this.props.clearError}
               />
             </div>
         }

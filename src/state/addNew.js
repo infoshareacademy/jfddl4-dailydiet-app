@@ -1,4 +1,7 @@
 import { db } from '../firebase'
+import { getFavorites } from './favorites'
+import { handleSuccess } from './alerts'
+import { upper } from '../utils'
 
 // ACTIONS TYPES
 const NEW_PRODUCT_ADDED = 'addNew/NEW_PRODUCT_ADDED'
@@ -32,8 +35,18 @@ export const addNewToDatabase = (
   isFavorite
 ) => (dispatch, getState) => {
   const newProductKey = db.ref(`/products`).push().key
+  if (isFavorite) {
+    const userUid = getState().auth.user.uid
+    const newFavorites = getState().favorites.keys.concat(newProductKey)
+    const newFavoritesSrtingified = JSON.stringify(newFavorites)
+    db.ref(`/users/${userUid}/favorites`)
+      .set(newFavoritesSrtingified)
+      .then(dispatch(getFavorites()))
+      .then(() => dispatch(handleSuccess(`${upper(name)} was succesfully added!`)))
+      .catch(error => dispatch(handleExternalError(error)))
+  }
   db.ref(`/products/${newProductKey}`)
-    .push({
+    .set({
       name,
       category,
       picture,
@@ -44,14 +57,6 @@ export const addNewToDatabase = (
     })
     .then(() => dispatch(newProductAdded()))
     .catch(error => dispatch(handleExternalError(error)))
-  if (isFavorite) {
-    const userUid = getState().auth.user.uid
-    const newFavorites = getState().favorites.keys.concat(newProductKey)
-    const newFavoritesSrtingified = JSON.stringify(newFavorites)
-    db.ref(`/users/${userUid}/favorites`)
-      .set(newFavoritesSrtingified)
-      .catch(error => dispatch(handleExternalError(error)))
-  }
 }
 
 // INITIAL STATE

@@ -2,7 +2,7 @@ import React from 'react'
 // Redux & state
 import { connect } from 'react-redux'
 import { addNewToDatabase } from '../../state/addNew'
-import { handleInternalError } from '../../state/alerts'
+import { handleInternalError, clearError } from '../../state/alerts'
 // Components
 import AddProductForm from './AddProductForm'
 // Logic
@@ -28,39 +28,42 @@ class AddProduct extends React.Component {
   }
 
   newProductValidation = () => {
-    this.props.products.filter(el =>
+    console.log('validation')
+    if (this.props.products.filter(el =>
       el.name === lower(this.state.name)
-    ).length ?
+    ).length) {
       this.props.handleInternalError(`${this.state.name} is already in base.`)
-      :
-      !this.state.name.length ?
-        this.props.handleInternalError(`You have to type a name.`)
-        :
-        this.state.calories !== null || typeof (this.state.calories) !== 'number' ?
-          this.props.handleInternalError(`The calories value must be an integer.`)
-          :
-          this.state.proteins !== null || typeof (this.state.proteins) !== 'number' ?
-            this.props.handleInternalError(`The proteins value must be an integer.`)
-            :
-            this.state.carbohydrates !== null || typeof (this.state.carbohydrates) !== 'number' ?
-              this.props.handleInternalError(`The carbohydrates value must be an integer.`)
-              :
-              this.state.fat !== null || typeof (this.state.fat) !== 'number' ?
-                this.props.handleInternalError(`The fat value must be an integer.`)
-                :
-                () => {
-                  this.props.addNewToDatabase(
-                    this.state.name,
-                    this.state.category,
-                    this.state.picture,
-                    this.state.calories,
-                    this.state.proteins,
-                    this.state.carbohydrates,
-                    this.state.fat,
-                    this.state.isFavorite
-                  )
-                  logic.clearState()
-                }
+    } else if (this.state.name.length) {
+      if (this.state.calories * 1 > 0) {
+        if (!this.state.proteins || !isNaN(this.state.proteins * 1)) {
+          if (!this.state.carbohydrates || !isNaN(this.state.carbohydrates * 1)) {
+            if (!this.state.fat || !isNaN(this.state.fat * 1)) {
+                this.props.addNewToDatabase(
+                  lower(this.state.name),
+                  this.state.category,
+                  this.state.picture,
+                  this.state.calories,
+                  this.state.proteins,
+                  this.state.carbohydrates,
+                  this.state.fat,
+                  this.state.isFavorite
+                )
+                logic.clearState(this)
+            } else {
+              this.props.handleInternalError(`The fat value must be an integer.`)
+            }
+          } else {
+            this.props.handleInternalError(`The carbohydrates value must be an integer.`)
+          }
+        } else {
+          this.props.handleInternalError(`The proteins value must be an integer.`)
+        }
+      } else {
+        this.props.handleInternalError(`The calories value must be an integer.`)
+      }
+    } else {
+      this.props.handleInternalError(`You have to type a name.`)
+    }
   }
 
   dropDownCategoryHandler = (event, index, value) => {
@@ -81,20 +84,20 @@ class AddProduct extends React.Component {
           <div style={style.wrapped}>
             <h2>Complete all this fields to add new product:</h2>
             <AddProductForm
-              nameHandler={(val) => logic.nameHandler(this, 'name', val)}
+              nameHandler={(val) => { logic.nameHandler(this, 'name', val); this.props.clearError() }}
               categoryState={this.state.category}
               categoryHandler={this.dropDownCategoryHandler}
               favoriteState={this.state.isFavorite}
               favoriteHandler={this.dropDownFavoriteHandler}
               pictureState={this.state.picture}
-              pictureHandler={(val) => logic.pictureHandler(this, 'picture', val)}
-              caloriesHandler={(val) => logic.nutrientsHandler(this, 'calories', val)}
+              pictureHandler={(val) => { logic.pictureHandler(this, 'picture', val); this.props.clearError() }}
+              caloriesHandler={(val) => { logic.nutrientsHandler(this, 'calories', val); this.props.clearError() }}
               caloriesState={this.state.calories}
-              proteinsHandler={(val) => logic.nutrientsHandler(this, 'proteins', val)}
+              proteinsHandler={(val) => { logic.nutrientsHandler(this, 'proteins', val); this.props.clearError() }}
               proteinsState={this.state.proteins}
-              carbohydratesHandler={(val) => logic.nutrientsHandler(this, 'carbohydrates', val)}
+              carbohydratesHandler={(val) => { logic.nutrientsHandler(this, 'carbohydrates', val); this.props.clearError() }}
               carbohydratesState={this.state.carbohydrates}
-              fatHandler={(val) => logic.nutrientsHandler(this, 'fat', val)}
+              fatHandler={(val) => { logic.nutrientsHandler(this, 'fat', val); this.props.clearError() }}
               fatState={this.state.fat}
             />
           </div>
@@ -102,14 +105,17 @@ class AddProduct extends React.Component {
         <Container>
           <RaisedButton
             label={<b>Add!</b>}
-            onClick={() => this.newProductValidation()}
-            primary={true}
+            onClick={this.newProductValidation}
+            secondary={true}
             fullWidth={true}
           />
         </Container>
         <Snackbar
+          autoHideDuration={4000}
           open={this.props.imWithAlert}
           message={this.props.alert}
+          bodyStyle={{ backgroundColor: "#E65100", textAlign: 'center' }}
+          onRequestClose={this.props.clearError}
         />
       </div>
     )
@@ -141,6 +147,7 @@ export default connect(
       fat,
       isFavorite
     )),
-    handleInternalError: (error) => dispatch(handleInternalError(error))
+    handleInternalError: (error) => dispatch(handleInternalError(error)),
+    clearError: () => dispatch(clearError())
   })
 )(AddProduct)
