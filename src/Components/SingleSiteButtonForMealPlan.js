@@ -1,18 +1,18 @@
 import React from 'react'
-import {connect} from "react-redux";
+import {connect} from "react-redux"
 import {mealDate, mealSyncer} from '../state/mealPlan'
 import BreakfastTable from '../Tables/BreakfastTable'
 import LunchTable from '../Tables/LunchTable'
 import DinnerTable from '../Tables/DinnerTable'
 import AllMeals from '../Tables/AllMeals'
 
-import DatePicker from 'material-ui/DatePicker';
+import DatePicker from 'material-ui/DatePicker'
 import RaisedButton from 'material-ui/RaisedButton'
-import Dialog from 'material-ui/Dialog';
-
-import {Card, CardHeader, CardText, CardTitle} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
-import PaperRefined, {stylesForTables, styleForDatePicker, mealPlanCardTitleFont} from '../styles.js'
+import Dialog from 'material-ui/Dialog'
+import Snackbar from 'material-ui/Snackbar'
+import {Card, CardText, CardTitle} from 'material-ui/Card'
+import FlatButton from 'material-ui/FlatButton'
+import PaperRefined, {stylesForTables, styleForDatePicker} from '../styles.js'
 import {Row} from 'react-flexbox-grid'
 
 
@@ -26,16 +26,28 @@ class SingleSiteButtonForMealPlan extends React.Component {
         expanded: false,
         allMeals: [],
         modalOpen: false,
+        snackBarOpen: false,
     }
 
     handleModalOpen = () => {
         this.setState({modalOpen: true});
-    };
+    }
 
     handleModalClose = () => {
         this.setState({modalOpen: false});
-    };
+    }
 
+    snackbarHandleClick = () => {
+        this.setState({
+            snackBarOpen: true,
+        })
+    }
+
+    snackBarHandleRequestClose = () => {
+        this.setState({
+            snackBarOpen: false,
+        })
+    }
 
     findBreakfastInProducts = () => {
         if (this.props.breakfast !== undefined) {
@@ -170,7 +182,7 @@ class SingleSiteButtonForMealPlan extends React.Component {
                               this.handleExpandChange()
                           }
                           else {
-                              alert('pick a date first')
+                              this.snackbarHandleClick()
                           }
                       }}
                 >
@@ -192,7 +204,7 @@ class SingleSiteButtonForMealPlan extends React.Component {
                               this.handleExpandChange()
                           }
                           else {
-                              alert('pick a date first')
+                              this.snackbarHandleClick()
                           }
                       }}
                 >
@@ -214,7 +226,7 @@ class SingleSiteButtonForMealPlan extends React.Component {
                               this.handleExpandChange()
                           }
                           else {
-                              alert('pick a date first')
+                              this.snackbarHandleClick()
                           }
                       }}
                 >
@@ -236,7 +248,7 @@ class SingleSiteButtonForMealPlan extends React.Component {
                               this.handleExpandChange()
                           }
                           else {
-                              alert('pick a date first')
+                              this.snackbarHandleClick()
                           }
                       }}
                 >
@@ -252,6 +264,13 @@ class SingleSiteButtonForMealPlan extends React.Component {
                         />
                     </CardText>
                 </Card>
+                <Snackbar
+                    open={this.state.snackBarOpen}
+                    message="You need to pick a date first"
+                    autoHideDuration={4000}
+                    onRequestClose={this.snackBarHandleRequestClose}
+                    bodyStyle={{backgroundColor: "#E65100", textAlign: 'center', fontWeight: 'bold'}}
+                />
             </div>
         )
     }

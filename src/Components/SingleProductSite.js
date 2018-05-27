@@ -53,7 +53,6 @@ const SingleProductSite = (props) => {
                                             label={<span style={{color: 'white'}}>
                                                 {
                                                     props.favoritesKeys.filter(key => key === product.key).length ?
-
                                                         "Remove from favorites"
                                                         :
                                                         "Add to favorites"
