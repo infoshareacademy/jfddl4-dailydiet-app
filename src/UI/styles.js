@@ -30,9 +30,6 @@ export const styleForDatePicker = {
     padding: '10px',
     overflow: 'hidden'
 }
-export const mealPlanCardTitleFont = {
-    fontSize: '24px'
-}
 
 const styles = {
     default: {

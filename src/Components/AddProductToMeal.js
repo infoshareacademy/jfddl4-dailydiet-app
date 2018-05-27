@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from "react-redux";
 import {addDate, addProductToMeal, addMeal} from "../state/addProductsToMeals";
-import {textFieldStyle} from "../styles";
+import {textFieldStyle} from "../UI/styles";
 import Snackbar from 'material-ui/Snackbar'
 import DatePicker from 'material-ui/DatePicker';
 import RaisedButton from 'material-ui/RaisedButton'

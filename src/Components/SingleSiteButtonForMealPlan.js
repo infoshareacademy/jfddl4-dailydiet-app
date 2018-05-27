@@ -12,7 +12,7 @@ import Dialog from 'material-ui/Dialog'
 import Snackbar from 'material-ui/Snackbar'
 import {Card, CardText, CardTitle} from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
-import PaperRefined, {stylesForTables, styleForDatePicker} from '../styles.js'
+import PaperRefined, {stylesForTables, styleForDatePicker} from '../UI/styles.js'
 import {Row} from 'react-flexbox-grid'
 
 
