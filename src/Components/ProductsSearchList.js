@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom'
 import ShareButtonFacebook from './ShareButtonFacebook'
 
 import { connect } from 'react-redux'
-import { searchPhrase, searchCalories, searchCategory } from '../state/productSearchList'
+import { searchCalories, searchCategory } from '../state/productSearchList'
 
 
 
@@ -28,10 +28,17 @@ const upper = word => {
 class ProductsSearchList extends React.Component {
 
     state = {
+        searchPhrase: '',
         numberOfPages: 0,
         isDialogOpen: false,
         activePage: 0,
         filteredListOfProduct: this.props.products
+    }
+
+    setSearchPhrase = (newValue) => {
+        this.setState({
+            searchPhrase: newValue
+        }, () => this.filteredListOfProduct())
     }
 
     handlePageClick = (e) => {
@@ -44,13 +51,12 @@ class ProductsSearchList extends React.Component {
 
         let arrayOfKcal = this.props.products.map((el) => el.kcal)
         let max = Math.max.apply(null, arrayOfKcal)
-        // if (max !== 'number') return 1000
         return max
     }
 
     filteredListOfProduct = () => {
         let filteredListOfProduct = this.props.products.filter((el) => {
-            if (el.kcal < this.props.calories && el.name.indexOf(this.props.phrase) !== -1) {
+            if (el.kcal < this.props.calories && el.name.includes(this.state.searchPhrase.toLowerCase())) {
                 return true
             }
             else return false
@@ -88,9 +94,9 @@ class ProductsSearchList extends React.Component {
                 <Container>
                     <Container>
                         <TextField
-                            hintText={'What product are you looking for'}
+                            hintText={'What product are you looking for?'}
                             fullWidth={true}
-                            onChange={(event, newValue) => this.props.setSearchPhrase(newValue)}
+                            onChange={(event, newValue) => this.setSearchPhrase(newValue)}
                         />
                     </Container>
 
@@ -194,7 +200,6 @@ class ProductsSearchList extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    phrase: state.productSearchList.phrase,
     products: state.products,
     calories: state.productSearchList.calories,
     category: state.productSearchList.option
@@ -202,7 +207,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
 
-    setSearchPhrase: (newValue) => dispatch(searchPhrase(newValue)),
     setSearchCalories: (newValue) => dispatch(searchCalories(newValue)),
     setSearchCategory: (newValue) => dispatch(searchCategory(newValue))
 
