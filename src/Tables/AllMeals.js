@@ -47,7 +47,7 @@ const AllMealsTable = (props) => {
                         {props.summaryProducts.map(product => product.kcal)
                             .reduce(function (result, products) {
                                 products = products * 1
-                                return parseInt(result += products)
+                                return result += products
                             }, 0)
                         }
                     </TableRowColumn>
@@ -55,7 +55,7 @@ const AllMealsTable = (props) => {
                         {props.summaryProducts.map(product => product.fat)
                             .reduce(function (result, products) {
                                 products = products * 1
-                                return parseInt(result += products)
+                                return result += products
                             }, 0)
                         }
                     </TableRowColumn>
@@ -63,7 +63,7 @@ const AllMealsTable = (props) => {
                         {props.summaryProducts.map(product => product.carbohydrates)
                             .reduce(function (result, products) {
                                 products = products * 1
-                                return parseInt(result += products)
+                                return result += products
                             }, 0)
                         }
                     </TableRowColumn>
@@ -71,7 +71,7 @@ const AllMealsTable = (props) => {
                         {props.summaryProducts.map(product => product.protein)
                             .reduce(function (result, products) {
                                 products = products * 1
-                                return parseInt(result += products)
+                                return result += products
                             }, 0)
                         }
                     </TableRowColumn>
