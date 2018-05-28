@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom'
 import ShareButtonFacebook from './ShareButtonFacebook'
 
 import { connect } from 'react-redux'
-import { searchPhrase, searchCalories, searchCategory,getKcalProperty } from '../state/productSearchList'
+import { searchPhrase, searchCalories, searchCategory } from '../state/productSearchList'
 
 
 
@@ -28,22 +28,10 @@ const upper = word => {
 class ProductsSearchList extends React.Component {
 
     state = {
-
-        productsList: this.props.products || [],
-        filteredListOfProduct: [],
-        calories: 700, //kalorie
-        valueDropMenu: 'every',
-
-
+        numberOfPages: 0,
         isDialogOpen: false,
-        productName: '',
-        productKey: '',
-        productIsFavorite: null,
-        activePage: 0
-    }
-
-    componentDidMount() { // pobranie danych i zamiana na tablice obiektów
-        this.searchProducts()
+        activePage: 0,
+        filteredListOfProduct: this.props.products
     }
 
     handlePageClick = (e) => {
@@ -52,19 +40,34 @@ class ProductsSearchList extends React.Component {
         })
     }
 
-    handleSlider = (event, value) => {
-        this.setState({ calories: value }, () => this.searchProducts());
+    maxSliderValue = () => {
 
+        let arrayOfKcal = this.props.products.map((el) => el.kcal)
+        let max = Math.max.apply(null, arrayOfKcal)
+        // if (max !== 'number') return 1000
+        return max
     }
 
-    handleTextField = (event, newValue) => {
-        this.setState({ lookingProduct: newValue }, () => this.searchProducts())
+    filteredListOfProduct = () => {
+        let filteredListOfProduct = this.props.products.filter((el) => {
+            if (el.kcal < this.props.calories && el.name.indexOf(this.props.phrase) !== -1) {
+                return true
+            }
+            else return false
+        }).filter((el) => {
+            if (this.props.category === 'every') return true
+            else if (el.category === this.props.category) return true
+            else return false
+        })
 
+        let numberOfPages = Math.ceil(filteredListOfProduct.length / ITEMS_PER_PAGE)
+
+        this.setState({
+            filteredListOfProduct,
+            numberOfPages
+        })
     }
 
-    handleChange = (event, index, value) => {
-        this.setState({ valueDropMenu: value }, () => this.searchProducts());
-    }
     onFavoriteRequest = (name, key, isFavorite) => (
         this.setState({ productName: name, productKey: key, productIsFavorite: isFavorite }, this.isDialogOpenToggler)
     )
@@ -78,31 +81,6 @@ class ProductsSearchList extends React.Component {
         this.setState({ isDialogOpen: !this.state.isDialogOpen })
     }
 
-    searchProducts = () => {
-        //wyświetl całą
-
-        const filteredArray = this.state.productsList.filter((el, i, arr) => {
-            if (el.kcal < this.state.calories && el.name.indexOf(this.state.lookingProduct) !== -1) {
-                return true
-            }
-            else return false
-        })
-            .filter((el) => {
-                if (this.state.valueDropMenu === 'every') return true
-                else if (el.category === this.state.valueDropMenu) return true
-                else return false
-            })
-
-
-        this.setState({
-            filteredListOfProduct: filteredArray,
-            numberOfPages: Math.ceil(filteredArray.length / ITEMS_PER_PAGE)
-        })
-
-
-    }
-
-
     render() {
 
         return (
@@ -110,52 +88,49 @@ class ProductsSearchList extends React.Component {
                 <Container>
                     <Container>
                         <TextField
-                            hintText={'Type name of looking product'}
+                            hintText={'What product are you looking for'}
                             fullWidth={true}
-                            onChange={(event, newValue) => this.props.setSearchPhrase(newValue)}// w onChange-u filter
+                            onChange={(event, newValue) => this.props.setSearchPhrase(newValue)}
                         />
                     </Container>
-                    <button
-                    onClick={() => this.props.getKcal()}
-                    >pobierz</button>
+
                     <Container>
-                        <div style={{display: 'flex',
-                        justifyContent: "space-between"
-                        }}>
-                            <span>0</span>
-                            <span>100</span>
-                        </div>
-                        <Slider
-                            min={0}
-                            max={700} // <== maximum
-                            step={1}
-                            value={this.props.calories}
-                            onChange={(event, value) => this.props.setSearchCalories(value)}
-                        />
-                        <p>
-                            <span>{'Value of calories: '}</span>
-                            <span>{this.props.calories}</span>
-                        </p>
+                        {this.props.products.length ? <div>
+                            <div style={{
+                                display: 'flex',
+                                justifyContent: "space-between"
+                            }}>
+                                <span>0 kcal</span>
+                                <span> {this.maxSliderValue()} kcal</span>
+                            </div>
+                            <Slider
+                                min={0}
+                                max={this.props.products.length ? this.maxSliderValue() : 1000}
+                                step={1}
+                                value={this.props.products.length ? this.props.calories : this.maxSliderValue()}
+                                onChange={(event, value) => this.props.setSearchCalories(value)}
+                            />
+                            <p>
+                                <span>{'Value of calories: '}</span>
+                                <span>{this.props.calories} kcal</span>
+                            </p>
 
-                        <DropDownMenu
-                            value={this.props.category}
-                            onChange={(obj, e, newVal) => {
-                                console.log(newVal)
-                                console.log(this.props.category)
-                                this.props.setSearchCategory(newVal)
-                            }}
-                            openImmediately={false}>
+                            <DropDownMenu
+                                value={this.props.category}
+                                onChange={(obj, e, newVal) => { this.props.setSearchCategory(newVal) }}
+                                openImmediately={false}>
 
-                            <MenuItem value={'every'} primaryText="Every" />
-                            <MenuItem value={'other'} primaryText="Other" />
-                            <MenuItem value={'dairy'} primaryText="Dairy" />
-                            <MenuItem value={'sweets'} primaryText="Sweets" />
-                            <MenuItem value={'drinks'} primaryText="Drinks" />
-                            <MenuItem value={'fruit'} primaryText="Fruit" />
-                            <MenuItem value={'vegetable'} primaryText="Vegetable" />
-                            <MenuItem value={'meat'} primaryText="Meat" />
+                                <MenuItem value={'every'} primaryText="Every" />
+                                <MenuItem value={'other'} primaryText="Other" />
+                                <MenuItem value={'dairy'} primaryText="Dairy" />
+                                <MenuItem value={'sweets'} primaryText="Sweets" />
+                                <MenuItem value={'drinks'} primaryText="Drinks" />
+                                <MenuItem value={'fruit'} primaryText="Fruit" />
+                                <MenuItem value={'vegetable'} primaryText="Vegetable" />
+                                <MenuItem value={'meat'} primaryText="Meat" />
 
-                        </DropDownMenu>
+                            </DropDownMenu></div>
+                            : 'Loading...'}
                     </Container>
                     <Container>
                         {
@@ -166,7 +141,6 @@ class ProductsSearchList extends React.Component {
                                     {
                                         this.state.filteredListOfProduct
                                             .filter((aProduct, index) => {
-
                                                 return (
                                                     this.state.activePage * ITEMS_PER_PAGE <= index
                                                     &&
@@ -211,16 +185,13 @@ class ProductsSearchList extends React.Component {
                             subContainerClassName={"pages pagination"}
                             activeClassName={"activePage"}
                         />
-
                     </Container>
                 </Container>
                 <ShareButtonFacebook />
             </div>
         )
     }
-
 }
-
 
 const mapStateToProps = state => ({
     phrase: state.productSearchList.phrase,
@@ -233,8 +204,8 @@ const mapDispatchToProps = dispatch => ({
 
     setSearchPhrase: (newValue) => dispatch(searchPhrase(newValue)),
     setSearchCalories: (newValue) => dispatch(searchCalories(newValue)),
-    setSearchCategory: (newValue) => dispatch(searchCategory(newValue)),
-    getKcal: () => dispatch(getKcalProperty())
+    setSearchCategory: (newValue) => dispatch(searchCategory(newValue))
+
 })
 
 export default connect(

@@ -1,7 +1,7 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import products, { initProductSync } from './state/products'
-import productSearchList, {getKcalProperty} from './state/productSearchList'
+import productSearchList from './state/productSearchList'
 
 
 export const reducer = combineReducers({

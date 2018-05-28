@@ -1,7 +1,3 @@
-
-
-
-
 const SEARCH_PHRASE = 'productSearchList/SEARCH_PHRASE'
 const SEARCH_CALORIES = 'productSearchList/SEARCH_CALORIES'
 const SEARCH_CATEGORY = 'productSearchList/SEARCH_CATEGORY'
@@ -27,17 +23,14 @@ export const searchCategory = (option) => ({
 export const setSliderMaxValue = (sliderMaxValue) => ({
     type: SLIDER_MAX_VALUE,
     sliderMaxValue
-
 })
 
 export const getKcalProperty = () => (dispatch, getState) => {
-
   dispatch(setSliderMaxValue(getState().products))
- //()=>dispatch(setSliderMaxValue(getState().products))
 }
 
 
-const initialState = { phrase: '', calories: 700, option: 'every', sliderMaxValue: [] }
+const initialState = { phrase: '', calories: 699, option: 'every' }
 
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -53,12 +46,7 @@ export default (state = initialState, action) => {
             return (
                 { ...state, option: action.option }
             )
-        case SLIDER_MAX_VALUE:
-            return (
-                {
-                    ...state, sliderMaxValue: action.sliderMaxValue.map((el)=>el.kcal)
-                }
-            )
+        
         default:
             return state
 
