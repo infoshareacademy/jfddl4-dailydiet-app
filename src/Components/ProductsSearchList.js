@@ -40,7 +40,7 @@ class ProductsSearchList extends React.Component {
     setSearchPhrase = (newValue) => {
         this.setState({
             searchPhrase: newValue
-        }, () => this.filteredListOfProduct())
+        })
     }
 
     handlePageClick = (e) => {
@@ -53,29 +53,7 @@ class ProductsSearchList extends React.Component {
 
         let arrayOfKcal = this.props.products.map((el) => el.kcal)
         let max = Math.max.apply(null, arrayOfKcal)
-        this.setState({maxSliderValue: max})
-    }
-
-    filteredListOfProduct = () => {
-        const filteredListOfProduct = this.props.products.filter((el) => {
-            if (el.kcal < this.props.calories && el.name.includes(this.state.searchPhrase.toLowerCase())) {
-                return true
-            }
-            else return false
-        }).filter((el) => {
-            if (this.props.category === 'every') return true
-            else if (el.category === this.props.category) return true
-            else return false
-        })
-
-        let numberOfPages = Math.ceil(filteredListOfProduct.length / ITEMS_PER_PAGE)
-
-        this.setState({
-            filteredListOfProduct,
-            numberOfPages,
-            optionDropMenu: this.props.category
-
-        })
+        this.setState({ maxSliderValue: max })
     }
 
     onFavoriteRequest = (name, key, isFavorite) => (
@@ -92,6 +70,18 @@ class ProductsSearchList extends React.Component {
     }
 
     render() {
+        const filteredListOfProduct = this.props.products.filter((el) => {
+            if (el.kcal < this.props.calories && el.name.includes(this.state.searchPhrase.toLowerCase())) {
+                return true
+            }
+            else return false
+        }).filter((el) => {
+            if (this.props.category === 'every') return true
+            else if (el.category === this.props.category) return true
+            else return false
+        })
+
+        const numberOfPages = Math.ceil(filteredListOfProduct.length / ITEMS_PER_PAGE)
 
         return (
             <div>
@@ -120,9 +110,8 @@ class ProductsSearchList extends React.Component {
                                 value={this.props.products.length ? this.props.calories : this.maxSliderValue()}
                                 onChange={(event, value) => {
                                     this.props.setSearchCalories(value)
-                                   this.filteredListOfProduct()
                                 }
-                            }
+                                }
                             />
                             <p>
                                 <span>{'Value of calories: '}</span>
@@ -131,10 +120,12 @@ class ProductsSearchList extends React.Component {
 
                             <DropDownMenu
                                 value={this.props.category}
-                                onChange={(obj, e, newVal) => { {
-                                    this.props.setSearchCategory(newVal)
-                                    this.filteredListOfProduct()
-                                } }}
+                                onChange={(obj, e, newVal) => {
+                                    {
+                                        this.props.setSearchCategory(newVal)
+                                       
+                                    }
+                                }}
                                 openImmediately={false}>
 
                                 <MenuItem value={'every'} primaryText="Every" />
@@ -151,12 +142,12 @@ class ProductsSearchList extends React.Component {
                     </Container>
                     <Container>
                         {
-                            !this.state.filteredListOfProduct.length ?
+                            !filteredListOfProduct.length ?
                                 'Loading...'
                                 :
                                 <List>
                                     {
-                                        this.state.filteredListOfProduct
+                                        filteredListOfProduct
                                             .filter((aProduct, index) => {
                                                 return (
                                                     this.state.activePage * ITEMS_PER_PAGE <= index
@@ -170,12 +161,12 @@ class ProductsSearchList extends React.Component {
                                                         <ListElement
                                                             key={el.key}
                                                             product={el}
-                                                       />
+                                                        />
                                                     )
                                                 }
                                             )
                                     }
-                                    <DialogFavorites/>
+                                    <DialogFavorites />
 
                                 </List>
                         }
@@ -185,7 +176,7 @@ class ProductsSearchList extends React.Component {
                             nextLabel={"next"}
                             breakLabel={<a href="">...</a>}
                             breakClassName={"break-me"}
-                            pageCount={this.state.numberOfPages}
+                            pageCount={numberOfPages}
                             marginPagesDisplayed={2}
                             pageRangeDisplayed={5}
                             onPageChange={this.handlePageClick}
