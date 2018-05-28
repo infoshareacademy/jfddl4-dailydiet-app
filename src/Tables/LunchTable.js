@@ -1,6 +1,5 @@
 import React from 'react'
 import {Table, TableBody, TableRow, TableRowColumn, TableHeader, TableHeaderColumn,} from 'material-ui/Table'
-import Avatar from 'material-ui/Avatar'
 
 const LunchTable = (props) => {
 

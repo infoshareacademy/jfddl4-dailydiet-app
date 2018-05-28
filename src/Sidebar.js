@@ -1,29 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+// UI
+import style from './UI/style'
 import AppBar from 'material-ui/AppBar'
 import Drawer from 'material-ui/Drawer'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
 import MenuItem from 'material-ui/MenuItem'
 import IconButton from 'material-ui/IconButton'
 import { ActionHome, AvLibraryBooks, ActionFavorite, AvLibraryAdd, ActionEvent } from 'material-ui/svg-icons'
-
-const styles = {
-  link: {
-    textDecoration: 'none'
-  },
-  topBar: {
-    height: '64px',
-    width: '100%',
-    background: '#FF9800'
-  },
-  flex: {
-    display: 'flex',
-    alignItems: 'center'
-  },
-  block: {
-    display: 'inline-block'
-  }
-}
 
 const Sidebar = (props) => (
   <Drawer
@@ -40,65 +24,65 @@ const Sidebar = (props) => (
     />
     <Link
       to={'/'}
-      style={styles.link}
+      style={style.link}
     >
       <MenuItem
         onClick={props.close}
       >
-        <p style={styles.flex}>
-          <ActionHome style={styles.block} />
+        <p style={style.sidebarItem}>
+          <ActionHome style={style.block} />
           &nbsp;Home
         </p>
       </MenuItem>
     </Link>
     <Link
       to={'/library'}
-      style={styles.link}
+      style={style.link}
     >
       <MenuItem
         onClick={props.close}
       >
-        <p style={styles.flex}>
-          <AvLibraryBooks style={styles.block} />
+        <p style={style.sidebarItem}>
+          <AvLibraryBooks style={style.block} />
           &nbsp;Library
         </p>
       </MenuItem>
     </Link>
     <Link
       to={'/favorites'}
-      style={styles.link}
+      style={style.link}
     >
       <MenuItem
         onClick={props.close}
       >
-        <p style={styles.flex}>
-          <ActionFavorite style={styles.block} />
+        <p style={style.sidebarItem}>
+          <ActionFavorite style={style.block} />
           &nbsp;Favorite Products
         </p>
       </MenuItem>
     </Link>
     <Link
       to={'/add-product'}
-      style={styles.link}
+      style={style.link}
     >
       <MenuItem
         onClick={props.close}
       >
-        <p style={styles.flex}>
-          <AvLibraryAdd style={styles.block} />
+        <p style={style.sidebarItem}>
+          <AvLibraryAdd style={style.block} />
           &nbsp;Add New Product
         </p>
       </MenuItem>
     </Link>
       <Link
           to={'/meal-plan'}
-          style={styles.link}
+          style={style.link}
       >
           <MenuItem
               onClick={props.close}
           >
-              <p style={styles.flex}>
-                  <ActionEvent style={styles.block}/>
+              <p style={style.flex}>
+                  <ActionEvent style={style.block}/>
                   &nbsp;Meal Plan
               </p>
           </MenuItem>

@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 // Redux & state
 import { connect } from 'react-redux'
 import { favoriteRequest } from '../state/favorites'
+// Utils
+import {upper} from '../utils'
 // Material-ui
 import style from '../UI/style'
 import { ListItem, IconButton } from 'material-ui'
@@ -31,7 +33,7 @@ const ListElement = (props) => (
 			</IconButton >
 		}
 	>
-		<Link style={style.listElement} to={`/product/${props.product.key}`}>{props.product.name}</Link>
+		<Link style={style.listElement} to={`/product/${props.product.key}`}>{upper(props.product.name)}</Link>
 	</ListItem >
 )
 

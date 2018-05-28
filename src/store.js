@@ -7,6 +7,7 @@ import addProductsToMeals from './state/addProductsToMeals'
 import mealPlan from './state/mealPlan'
 
 import favorites from './state/favorites'
+import alerts from './state/alerts'
 
 export const reducer = combineReducers({
     mealPlan,
@@ -14,7 +15,8 @@ export const reducer = combineReducers({
     loginsLogs,
     products,
     auth,
-    favorites
+    favorites,
+    alerts
 })
 
 

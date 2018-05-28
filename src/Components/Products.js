@@ -1,35 +1,42 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
-import { List } from 'material-ui';
+// Components
 import ListElement from './ListElement'
-
-import { upper } from '../utils'
-import DialogFavorites from '../favorites/DialogFavorites'
+import DialogFavorites from './Favorites/DialogFavorites'
+import ShareButtonFacebook from '../ShareButtonFacebook'
+// UI
+import { List } from 'material-ui';
+import Container from '../UI/Container'
 
 const Library = (props) => (
     <div>
-        {
-            !props.products.length ?
-                'Loading...'
-                :
-                <List>
-                    {
-                        props.products
-                            .map(
-                                el => {
-                                    return (
-                                        <ListElement
-                                            product={el}
-                                            key={el.key}
-                                        />
-                                    )
-                                }
-                            )
-                    }
-                    <DialogFavorites />
-                </List>
-        }
+        <Container>
+            <h1>Library</h1>
+        </Container>
+        <Container>
+            {
+                !props.products.length ?
+                    'Loading...'
+                    :
+                    <List>
+                        {
+                            props.products
+                                .map(
+                                    el => {
+                                        return (
+                                            <ListElement
+                                                product={el}
+                                                key={el.key}
+                                            />
+                                        )
+                                    }
+                                )
+                        }
+                        <DialogFavorites />
+                    </List>
+            }
+        </Container>
+        <ShareButtonFacebook />
     </div>
 )
 

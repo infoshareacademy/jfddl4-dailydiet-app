@@ -2,6 +2,7 @@ import React from 'react'
 // Redux & state
 import { connect } from 'react-redux'
 import { logInByGoogle } from '../../state/auth'
+import { clearError } from '../../state/alerts'
 // Components
 import LogInByGoogle from './LogInByGoogle'
 import LogInByMailAndPass from './LogInByMailAndPass'
@@ -12,12 +13,11 @@ import Container from '../../UI/Container'
 import { AppBar, IconButton, FlatButton, Snackbar } from 'material-ui'
 import NavigationExpandLess from 'material-ui/svg-icons/navigation/expand-less'
 import { orange500 } from 'material-ui/styles/colors'
-import RestorePassword from './RestorePassword';
+import RestorePassword from './RestorePassword'
 
 class Auth extends React.Component {
   state = {
     isSingUpOpen: false,
-    isSnackbarOpen: false,
     isRestorePasswordOpen: false
   }
 
@@ -48,10 +48,6 @@ class Auth extends React.Component {
                 style={{
                   backgroundColor: orange500,
                 }}
-              />
-              <Snackbar
-                open={this.props.imWithError}
-                message={this.props.alert}
               />
               <Container centered>
                 <div
@@ -91,6 +87,13 @@ class Auth extends React.Component {
                   :
                   <div></div>
               }
+              <Snackbar
+                autoHideDuration={4000}
+                open={this.props.imWithAlert}
+                message={this.props.alert}
+                bodyStyle={{ backgroundColor: "#E65100", textAlign: 'center' }}
+                onRequestClose={this.props.clearError}
+              />
             </div>
         }
       </div>
@@ -101,10 +104,11 @@ class Auth extends React.Component {
 export default connect(
   state => ({
     isUserLoggedIn: state.auth.isUserLoggedIn,
-    imWithError: state.auth.imWithError,
-    alert: state.auth.alert
+    imWithAlert: state.alerts.imWithAlert,
+    alert: state.alerts.alert
   }),
   dispatch => ({
-    logInByGoogle: () => dispatch(logInByGoogle())
+    logInByGoogle: () => dispatch(logInByGoogle()),
+    clearError: () => dispatch(clearError())
   })
 )(Auth)

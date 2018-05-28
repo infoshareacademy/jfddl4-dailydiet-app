@@ -1,4 +1,4 @@
-import {auth, db, GoogleProvider} from '../firebase'
+import { db } from '../firebase'
 import moment from "moment/moment";
 
 
@@ -8,9 +8,9 @@ export const mapObjectToArray = (obj) => (
     Object.entries(obj || {})
         .map(([key, value]) => (
             typeof value === 'object' ?
-                {...value, key}
+                { ...value, key }
                 :
-                {key, value}
+                { key, value }
         ))
 )
 
@@ -46,39 +46,39 @@ export default (state = initialState, action) => {
 
 
             let daysOfLog = action.newValue
-                .map(login =>  login.timestamp )
+                .map(login => login.timestamp)
 
-            const    last = daysOfLog[daysOfLog.length-1]
-            const    sevendaysbefore = last - sevendays;
+            const last = daysOfLog[daysOfLog.length - 1]
+            const sevendaysbefore = last - sevendays;
 
-            daysOfLog = daysOfLog.filter((e)=> (e > sevendaysbefore) )
-                .map((e)=>moment(e).format('DD.MM.YYYY'))
-                .map((e,k)=>{
-                    if(!splitByDays.includes(e)){
+            daysOfLog = daysOfLog.filter((e) => (e > sevendaysbefore))
+                .map((e) => moment(e).format('DD.MM.YYYY'))
+                .map((e, k) => {
+                    if (!splitByDays.includes(e)) {
                         splitByDays.push(e)
                     }
-                return e;
+                    return e;
 
-            })
+                })
 
 
-            daysOfLog.map((e)=>{
+            daysOfLog.map((e) => {
                 const _i = splitByDays.indexOf(e);
 
-                if(!splitByDaysCounter[_i]){
+                if (!splitByDaysCounter[_i]) {
                     splitByDaysCounter[_i] = 1
                 }
-                else{
+                else {
                     splitByDaysCounter[_i]++
 
                 }
             })
 
-            splitByDays = splitByDays.map((e,k)=>{
+            splitByDays = splitByDays.map((e, k) => {
 
                 return {
-                    day:e,
-                    logs:splitByDaysCounter[k]
+                    day: e,
+                    logs: splitByDaysCounter[k]
                 }
             })
 

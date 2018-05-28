@@ -1,7 +1,7 @@
 import React from 'react'
 // Redux & state
 import { connect } from 'react-redux'
-import { addFavorite, removeFavorite, closeDialog } from '../state/favorites'
+import { addFavorite, removeFavorite, closeDialog } from '../../state/favorites'
 // Material-ui
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
