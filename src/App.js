@@ -1,18 +1,22 @@
 import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+// Redux & state
+import { connect } from 'react-redux'
+import { getFavorites } from './state/favorites'
+import { clearError } from './state/alerts'
 // Material-ui
 import AppBar from 'material-ui/AppBar'
+import Snackbar from 'material-ui/Snackbar'
 import { orange500 } from 'material-ui/styles/colors'
 // Components
-import readFromDatabase from './logic'
 import Sidebar from './Sidebar'
-import Dashboard from './Dashboard'
-import Products from './Components/Products'
+import Dashboard from './Components/Dashboard'
 import SingleProductSite from './Components/SingleProductSite'
-
-import FavoriteProducts from './favorites'
-import AddProduct from './AddProduct'
 import ProductsSearchList from './Components/ProductsSearchList';
+import SingleSiteButtonForMealPlan from './Components/SingleSiteButtonForMealPlan'
+import FavoriteProducts from './Components/Favorites'
+import AddProduct from './Components/AddProduct'
+import LogOut from './Components/Auth/LogOut';
 
 class App extends React.Component {
 
@@ -22,13 +26,7 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        readFromDatabase(this.setArrayToState)
-    }
-
-    setArrayToState = (data) => {
-        this.setState({
-            products: data
-        })
+        this.props.getFavorites()
     }
 
     drawerStateHandler = () => this.setState({
@@ -42,17 +40,21 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <AppBar
-                    title='Daily Diet App'
-                    onLeftIconButtonClick={this.drawerStateHandler}
-                    style={{
-                        backgroundColor: orange500,
-                    }}
-                />
 
                 <Router>
 
                     <div>
+
+                        <AppBar
+                            title='Daily Diet App'
+                            onLeftIconButtonClick={this.drawerStateHandler}
+                            iconElementRight={
+                                <LogOut />
+                            }
+                            style={{
+                                backgroundColor: orange500,
+                            }}
+                        />
 
                         <Sidebar
                             open={this.state.isSidebarOpen}
@@ -78,15 +80,20 @@ class App extends React.Component {
                             path={'/favorites'}
                             component={() => (
                                 <FavoriteProducts
-                                    products={this.state.products}
+                                    products={this.props.products}
                                 />)}
                         />
                         <Route
                             path={'/add-product'}
                             component={() => (
                                 <AddProduct
-                                    products={this.state.products}
+                                    products={this.props.products}
                                 />)}
+                        />
+                        <Route
+                            path={'/meal-plan'}
+                            component={() => (
+                                <SingleSiteButtonForMealPlan/>)}
                         />
 
 
@@ -94,9 +101,27 @@ class App extends React.Component {
 
                 </Router>
 
+                <Snackbar
+                    autoHideDuration={4000}
+                    open={this.props.imWithAlert}
+                    message={this.props.alert}
+                    bodyStyle={{ backgroundColor: "#E65100", textAlign: 'center' }}
+                    onRequestClose={this.props.clearError}
+                />
+
             </div>
         )
     }
 }
 
-export default App
+export default connect(
+    state => ({
+        products: state.products,
+        imWithAlert: state.alerts.imWithAlert,
+        alert: state.alerts.alert
+    }),
+    dispatch => ({
+        getFavorites: () => dispatch(getFavorites()),
+        clearError: () => dispatch(clearError())
+    })
+)(App)

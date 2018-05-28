@@ -7,8 +7,8 @@ import { db } from '../firebase'
 import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 import { List } from 'material-ui'
-import ListElement from '../ListElement'
-import DialogFavorites from '../favorites/DialogFavorites'
+import ListElement from './ListElement'
+import DialogFavorites from './Favorites/DialogFavorites'
 import ReactPaginate from 'react-paginate'
 import { Link } from 'react-router-dom'
 
@@ -29,10 +29,12 @@ class ProductsSearchList extends React.Component {
 
     state = {
         searchPhrase: '',
+        maxSliderValue: this.props.calories,
         numberOfPages: 0,
         isDialogOpen: false,
         activePage: 0,
-        filteredListOfProduct: this.props.products
+        filteredListOfProduct: this.props.products,
+        optionDropMenu: this.props.category
     }
 
     setSearchPhrase = (newValue) => {
@@ -51,11 +53,11 @@ class ProductsSearchList extends React.Component {
 
         let arrayOfKcal = this.props.products.map((el) => el.kcal)
         let max = Math.max.apply(null, arrayOfKcal)
-        return max
+        this.setState({maxSliderValue: max})
     }
 
     filteredListOfProduct = () => {
-        let filteredListOfProduct = this.props.products.filter((el) => {
+        const filteredListOfProduct = this.props.products.filter((el) => {
             if (el.kcal < this.props.calories && el.name.includes(this.state.searchPhrase.toLowerCase())) {
                 return true
             }
@@ -70,7 +72,9 @@ class ProductsSearchList extends React.Component {
 
         this.setState({
             filteredListOfProduct,
-            numberOfPages
+            numberOfPages,
+            optionDropMenu: this.props.category
+
         })
     }
 
@@ -107,14 +111,18 @@ class ProductsSearchList extends React.Component {
                                 justifyContent: "space-between"
                             }}>
                                 <span>0 kcal</span>
-                                <span> {this.maxSliderValue()} kcal</span>
+                                <span> {this.state.maxSliderValue} kcal</span>
                             </div>
                             <Slider
                                 min={0}
-                                max={this.props.products.length ? this.maxSliderValue() : 1000}
+                                max={699}
                                 step={1}
                                 value={this.props.products.length ? this.props.calories : this.maxSliderValue()}
-                                onChange={(event, value) => this.props.setSearchCalories(value)}
+                                onChange={(event, value) => {
+                                    this.props.setSearchCalories(value)
+                                   this.filteredListOfProduct()
+                                }
+                            }
                             />
                             <p>
                                 <span>{'Value of calories: '}</span>
@@ -123,7 +131,10 @@ class ProductsSearchList extends React.Component {
 
                             <DropDownMenu
                                 value={this.props.category}
-                                onChange={(obj, e, newVal) => { this.props.setSearchCategory(newVal) }}
+                                onChange={(obj, e, newVal) => { {
+                                    this.props.setSearchCategory(newVal)
+                                    this.filteredListOfProduct()
+                                } }}
                                 openImmediately={false}>
 
                                 <MenuItem value={'every'} primaryText="Every" />
@@ -158,22 +169,13 @@ class ProductsSearchList extends React.Component {
                                                     return (
                                                         <ListElement
                                                             key={el.key}
-                                                            productName={upper(el.name)}
-                                                            productKey={el.key}
-                                                            isProductFavorite={el.isFavorite}
-                                                            productPicture={el.picture}
-                                                        />
+                                                            product={el}
+                                                       />
                                                     )
                                                 }
                                             )
                                     }
-                                    <DialogFavorites
-                                        openToggler={this.isDialogOpenToggler}
-                                        favoriteToggler={this.toggleFavorite}
-                                        isOpen={this.state.isDialogOpen}
-                                        productIsFavorite={this.state.productIsFavorite}
-                                        productName={this.state.productName}
-                                    />
+                                    <DialogFavorites/>
 
                                 </List>
                         }
