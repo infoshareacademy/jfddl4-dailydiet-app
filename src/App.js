@@ -9,11 +9,10 @@ import AppBar from 'material-ui/AppBar'
 import Snackbar from 'material-ui/Snackbar'
 import { orange500 } from 'material-ui/styles/colors'
 // Components
-import readFromDatabase from './logic'
 import Sidebar from './Sidebar'
 import Dashboard from './Components/Dashboard'
-import Products from './Components/Products'
 import SingleProductSite from './Components/SingleProductSite'
+import ProductsSearchList from './Components/ProductsSearchList';
 import SingleSiteButtonForMealPlan from './Components/SingleSiteButtonForMealPlan'
 import FavoriteProducts from './Components/Favorites'
 import AddProduct from './Components/AddProduct'
@@ -70,7 +69,8 @@ class App extends React.Component {
 
                         <Route
                             path={'/library'}
-                            component={Products}
+                            component={() => (
+                                <ProductsSearchList />)}
                         />
                         <Route
                             path={'/product/:product'}

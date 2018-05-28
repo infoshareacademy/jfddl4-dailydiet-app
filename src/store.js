@@ -1,5 +1,6 @@
-import {createStore, combineReducers, compose, applyMiddleware} from 'redux'
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
+import productSearchList from './state/productSearchList'
 import products, {initProductSync} from './state/products'
 import auth, {initAuthUserSync} from './state/auth'
 import loginsLogs from './state/loginLogs'
@@ -16,9 +17,9 @@ export const reducer = combineReducers({
     products,
     auth,
     favorites,
-    alerts
+    alerts,
+    productSearchList
 })
-
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
@@ -30,5 +31,4 @@ export const store = createStore(
 )
 
 store.dispatch(initAuthUserSync())
-
 store.dispatch(initProductSync())

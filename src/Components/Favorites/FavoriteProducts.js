@@ -6,7 +6,7 @@ import { List } from 'material-ui/List'
 // Components
 import DialogFavorites from './DialogFavorites'
 import ListElement from '../ListElement'
-import ShareButtonFacebook from '../../ShareButtonFacebook'
+import ShareButtonFacebook from '../ShareButtonFacebook'
 import Container from '../../UI/Container'
 
 class FavoriteProducts extends React.Component {
