@@ -28,7 +28,7 @@ export const closeDialog = () => ({
 export const getFavorites = () => (dispatch, getState) => {
   const userUid = getState().auth.user.uid
   db.ref(`/users/${userUid}/favorites`)
-    .once(
+    .on(
       'value',
       snapshot => {
         const favoritesKeys = JSON.parse(snapshot.val())
@@ -48,7 +48,6 @@ export const addFavorite = () => (dispatch, getState) => {
   db.ref(`/users/${userUid}/favorites`)
     .set(newFavoritesSrtingified)
     .then(() => dispatch(closeDialog()))
-    .then(() => dispatch(getFavorites()))
     .then(() => dispatch(handleSuccess(`${upper(productName)} was succesfully added!`)))
     .catch(error => dispatch(handleExternalError(error)))
 }
@@ -62,7 +61,6 @@ export const removeFavorite = () => (dispatch, getState) => {
   db.ref(`/users/${userUid}/favorites`)
     .set(newFavoritesSrtingified)
     .then(() => dispatch(closeDialog()))
-    .then(() => dispatch(getFavorites()))
     .then(() => dispatch(handleSuccess(`${upper(productName)} was succesfully removed!`)))
     .catch(error => dispatch(handleExternalError(error)))
 }
